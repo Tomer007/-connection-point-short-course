@@ -1,106 +1,59 @@
-# נקודת חיבור · מפחד לאהבה בארבעה רבדים
+# Connection Point Course
 
-קורס דיגיטלי בעברית (RTL) של המותג **נקודת חיבור**, שנבנה ב-React + Vite ומיועד
-לפריסה כאתר סטטי ב-Render. ללא backend; כל ההתקדמות ונתוני התרגול נשמרים
-ב-`localStorage` במכשיר של הלומדת בלבד.
+Digital course app for "נקודת חיבור" (Connection Point) — a guided journey through body, emotion, thought, and energy to shift from fear to love.
 
-## מבנה הקורס
+## About
 
-שישה שיעורים: מבוא וארבעת הרבדים, מפת הדרכים (מבריחה לבחירה), החיבור בין הלב
-לראש (קוהרנטיות), הגוף כמצפן, פרוטוקול עצירה וחיבור ללב, ותדר של אהבה (תרגול
-יומי). לצידם מסך "התרגול שלי" לכתיבה אינטואיטיבית ומסך סיום.
+"מפחד לאהבה בארבעה רבדים" (From Fear to Love in Four Layers) is a Hebrew digital course by Anna Ben Yehuda and Yael Rapaport. Six short lessons with audio guidance, interactive exercises, and daily practice tools.
 
-## הרצה מקומית
+## Tech Stack
 
-דרוש Node.js 18 ומעלה.
+- React 18
+- Vite 5
+- Static site (no backend)
+- localStorage for progress tracking
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
 
-האתר יעלה בכתובת שמודפסת בטרמינל (בדרך כלל http://localhost:5173).
+Open http://localhost:5173
 
-## בנייה ל-production
+## Build & Deploy
 
 ```bash
-npm run build      # יוצר את התיקייה dist/
-npm run preview    # תצוגה מקדימה מקומית של הבנייה
+npm run build
 ```
 
-## פריסה ב-Render
+The `dist/` folder is ready for static hosting. Configured for Render via `render.yaml`.
 
-האתר מוגדר כ-Static Site. שתי דרכים:
-
-**א. דרך קובץ ה-Blueprint (`render.yaml`):**
-
-1. דחפו את הפרויקט ל-GitHub / GitLab.
-2. ב-Render: **New → Blueprint**, בחרו את ה-repository. Render יקרא את
-   `render.yaml` אוטומטית.
-
-**ב. הגדרה ידנית:**
-
-1. ב-Render: **New → Static Site**, חברו את ה-repository.
-2. הגדרות:
-   - **Build Command:** `npm install && npm run build`
-   - **Publish Directory:** `dist`
-3. הוסיפו Rewrite Rule כדי שהניווט הפנימי יעבוד:
-   `Source: /*` → `Destination: /index.html`.
-
-## עדכון סרטונים ואודיו
-
-כל המדיה מנוהלת מקובץ אחד: [`public/data/videos.json`](public/data/videos.json).
-האפליקציה טוענת אותו בעת עליית האתר, ולכל שיעור שולפת את הפריט לפי `sectionId`.
-
-כל פריט כולל:
-
-| שדה | פירוט |
-|------|-------|
-| `sectionId` | מזהה השיעור: `intro`, `roadmap`, `coherence`, `body-compass`, `heart-protocol`, `love-frequency` |
-| `mediaKey` | אופציונלי. מבדיל בין שלושת כרטיסי התרגול היומי בשיעור 6: `breath-types`, `coherent-breath`, `love-meditation` |
-| `title` | כותרת המדיה |
-| `type` | `video` או `audio` |
-| `provider` | `youtube`, `local` או `external` |
-| `url` | כתובת המדיה (ראו למטה) |
-| `description` | תיאור קצר |
-
-### איפה מדביקים את הקישורים
-
-ערכו את שדה ה-`url` של הפריט הרצוי:
-
-- **YouTube** (`provider: "youtube"`): הדביקו קישור צפייה רגיל, למשל
-  `https://www.youtube.com/watch?v=XXXX` או `https://youtu.be/XXXX`. ההמרה
-  להטמעה נעשית אוטומטית.
-- **אודיו / וידאו מקומי** (`provider: "local"`): שימו את הקובץ בתיקייה
-  `public/` (למשל `public/audio/coherent-breath.mp3`) והדביקו נתיב מהשורש:
-  `/audio/coherent-breath.mp3`.
-- **קישור חיצוני** (`provider: "external"`): הדביקו כתובת מלאה לקובץ `.mp4`/`.mp3`.
-
-כל עוד `url` ריק או לא תקין, השיעור יציג placeholder עדין ("הסרטון לשיעור זה
-יתווסף בקרוב") ולא יישבר. אין צורך למלא הכל בבת אחת.
-
-> אין צורך לבנות מחדש בעת שינוי הקישורים בסביבת פיתוח. ב-production הריצו שוב
-> `npm run build` (או deploy ב-Render) כדי שהקובץ המעודכן יישלח.
-
-## מבנה קבצים
+## Project Structure
 
 ```
-public/
-  brand/            סמלי המותג (icon/logo, חום/לבן)
-  data/videos.json  ניהול המדיה לכל שיעור
 src/
-  main.jsx          נקודת הכניסה
-  App.jsx           ניווט, מצב, טעינת המדיה, localStorage
-  styles.css        מערכת העיצוב של המותג (RTL, נגישות, רספונסיביות)
-  data/course.js    כל תוכן הקורס
-  hooks/            useLocalStorage
-  components/       Sidebar, ProgressBar, Home, Lesson, Practice, Completion,
-                    MediaPlayer, exercises/
-  assets/fonts/     גופן המותג RAGSans (מוטמע מקומית)
-render.yaml         הגדרת הפריסה ב-Render
+├── App.jsx              # Main app with routing and auth
+├── components/
+│   ├── Login.jsx        # Email + code login gate
+│   ├── Home.jsx         # Landing page with team bios
+│   ├── Lesson.jsx       # Lesson view with content + audio
+│   ├── MediaPlayer.jsx  # Audio/video player
+│   ├── Sidebar.jsx      # Navigation sidebar
+│   ├── Practice.jsx     # Personal practice journal
+│   ├── Completion.jsx   # Course completion screen
+│   └── exercises/       # Interactive lesson exercises
+├── data/course.js       # Course content and structure
+├── hooks/               # Custom React hooks
+└── styles.css           # All styles
+public/
+├── media/               # Audio lessons + video
+├── team/                # Team photos
+├── brand/               # Logo and icons
+└── data/videos.json     # Media configuration
 ```
 
-## הערות
+## License
 
-- הקורס הוא חומר עזר לתרגול ואינו מחליף ייעוץ או טיפול אישי.
-- הגופן RAGSans מוטמע מקומית ואינו נטען מ-CDN.
+Private — All rights reserved. Anna & Yael, Connection Point.

@@ -58,14 +58,14 @@ export default function Login({ onLogin }) {
             כניסה
           </button>
         </form>
-      </div>
 
-      <footer className="footer login-footer">
-        <a href="https://annayael.com/" target="_blank" rel="noopener noreferrer" className="footer-brand">
-          <img src="/brand/icon-brown.png" alt="" width="24" height="24" />
-          <span>annayael</span>
-        </a>
-      </footer>
+        <div className="login-card-footer">
+          <a href="https://annayael.com/" target="_blank" rel="noopener noreferrer" className="footer-brand">
+            <img src="/brand/icon-brown.png" alt="" width="20" height="20" />
+            <span>annayael</span>
+          </a>
+        </div>
+      </div>
     </main>
   )
 }

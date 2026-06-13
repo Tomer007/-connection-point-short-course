@@ -394,10 +394,11 @@ button,
   text-align: center;
 }
 .team-photo {
-  width: 140px;
-  height: 140px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: top center;
   border: 3px solid var(--line);
   margin-bottom: 14px;
 }
@@ -1006,6 +1007,14 @@ textarea:focus {
   margin-top: auto;
   padding-top: 40px;
   border-top: none;
+}
+.login-card-footer {
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.login-card-footer .footer-brand {
+  font-size: 0.82rem;
 }
 
 /* ============================================================
