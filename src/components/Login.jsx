@@ -1,9 +1,7 @@
 import { useState } from 'react'
 import { courseMeta } from '../data/course.js'
 
-const COUPON_API = window.location.hostname === 'localhost'
-  ? '/api/coupon/validate'
-  : 'https://connection-point-api.onrender.com/api/coupon/validate'
+const COUPON_API = '/api/coupon/validate'
 
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('')

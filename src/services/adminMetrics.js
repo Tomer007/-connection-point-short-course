@@ -5,9 +5,7 @@ import { lessons } from '../data/course.js'
 
 const TOTAL_LESSONS = lessons.length
 
-const ADMIN_API = window.location.hostname === 'localhost'
-  ? '/api/admin'
-  : 'https://connection-point-api.onrender.com/api/admin'
+const ADMIN_API = '/api/admin'
 
 // ─────────────────────────────────────────────────────────────
 // Server-based data fetching (disk storage)

@@ -1,27 +1,12 @@
-# Render Blueprint — course platform with admin server and persistent disk.
+# Render Blueprint — single Node service serving both frontend and API.
 # https://render.com/docs/blueprint-spec
 services:
-  # Static frontend (course app)
   - type: web
     name: connection-point-course
-    runtime: static
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    headers:
-      - path: /*
-        name: X-Content-Type-Options
-        value: nosniff
-
-  # API server (admin + user data sync)
-  - type: web
-    name: connection-point-api
     runtime: node
-    buildCommand: npm install
+    buildCommand: npm install && npm run build
     startCommand: node server/index.js
+    rootDir: course-app
     envVars:
       - key: NODE_ENV
         value: production
@@ -32,6 +17,8 @@ services:
       - key: ADMIN_USERNAME
         sync: false
       - key: ADMIN_PASSWORD
+        sync: false
+      - key: COURSE_COUPON
         sync: false
     disk:
       name: course-data

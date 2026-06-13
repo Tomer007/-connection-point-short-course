@@ -1,9 +1,7 @@
 // Admin authentication service - communicates with server-side API
 // Credentials are validated server-side only, never exposed to frontend.
 
-const API_BASE = window.location.hostname === 'localhost'
-  ? '/api/admin'
-  : 'https://connection-point-api.onrender.com/api/admin'
+const API_BASE = '/api/admin'
 
 export async function adminLogin(username, password) {
   const res = await fetch(`${API_BASE}/login`, {

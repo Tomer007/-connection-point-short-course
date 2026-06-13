@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 import path from 'path'
+import { fileURLToPath } from 'url'
 
 import { initDataDir, getUsersDir, getUserDir, sanitizeId } from './storage/dataDir.js'
 import { readJson, listSubdirs } from './storage/jsonStore.js'
@@ -472,16 +473,27 @@ app.get('/api/admin/metrics', requireAdmin, (req, res) => {
 })
 
 // ─────────────────────────────────────────────────────────────
-// Health check
 // ─────────────────────────────────────────────────────────────
-app.get('/', (req, res) => {
-  res.json({ status: 'ok', service: 'connection-point-api' })
+// Serve static frontend (built dist/ folder)
+// In production, this single server handles both API and frontend.
+// ─────────────────────────────────────────────────────────────
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const distPath = path.join(__dirname, '..', 'dist')
+
+app.use(express.static(distPath))
+
+// SPA fallback: any non-API route serves index.html
+app.get('/{*splat}', (req, res) => {
+  if (req.path.startsWith('/api')) {
+    return res.status(404).json({ error: 'Not found' })
+  }
+  res.sendFile(path.join(distPath, 'index.html'))
 })
 
 // ─────────────────────────────────────────────────────────────
 // Start server
 // ─────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`Admin API server running on http://localhost:${PORT}`)
+  console.log(`Server running on http://localhost:${PORT}`)
   console.log(`Data directory: ${process.env.DATA_DIR || './data'}`)
 })
