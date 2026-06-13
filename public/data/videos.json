@@ -1,0 +1,77 @@
+[
+  {
+    "sectionId": "intro",
+    "title": "ארבעת הרבדים וציר האמצע",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/03_focusing-body-heart.mp3",
+    "description": "הסבר על ארבעת הרבדים וציר האמצע"
+  },
+  {
+    "sectionId": "roadmap",
+    "title": "מפת הדרכים - מבריחה לבחירה",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/01_affirmations-frequency.mp3",
+    "description": "איך לזהות אוטומט ולעבור לבחירה"
+  },
+  {
+    "sectionId": "coherence",
+    "title": "החיבור בין הלב לראש",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/05_coherent-breathing-explained.mp3",
+    "description": "הסבר על סנכרון בין לב, מוח ומערכת העצבים"
+  },
+  {
+    "sectionId": "body-compass",
+    "title": "הגוף הוא המצפן",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/02_affirmations-21-days.mp3",
+    "description": "הסימנים הגופניים ליציאה מאיזון"
+  },
+  {
+    "sectionId": "heart-protocol",
+    "title": "פרוטוקול עצירה וחיבור ללב",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/04_manifestation-meditation.mp3",
+    "description": "ארבעת שלבי הפרוטוקול לחיבור ללב"
+  },
+  {
+    "sectionId": "love-frequency",
+    "title": "תדר של אהבה - תרגול יומי",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/01_affirmations-frequency.mp3",
+    "description": "אודיו לתרגול נשימה, מדיטציה ואפרמציות הודיה"
+  },
+  {
+    "sectionId": "love-frequency",
+    "mediaKey": "breath-types",
+    "title": "סרטון הסבר - סוגי נשימות",
+    "type": "video",
+    "provider": "local",
+    "url": "/media/07_breath-types.mp4",
+    "description": "סרטון קצר שמסביר ומדגים איך לנשום נכון"
+  },
+  {
+    "sectionId": "love-frequency",
+    "mediaKey": "coherent-breath",
+    "title": "תרגול נשימה קוהרנטית - אודיו",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/06_coherent-breathing-practice.mp3",
+    "description": "נשימה בקצב קבוע ומסונכרן בין הלב למוח"
+  },
+  {
+    "sectionId": "love-frequency",
+    "mediaKey": "love-meditation",
+    "title": "מדיטציית תדר אהבה ואפרמציות הודיה - אודיו",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/04_manifestation-meditation.mp3",
+    "description": "האזנה קצרה שמכוונת לתדר של הערכה, חופש והתרחבות"
+  }
+]
