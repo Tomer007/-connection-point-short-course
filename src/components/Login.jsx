@@ -15,6 +15,11 @@ export default function Login({ onLogin }) {
       return
     }
 
+    if (code.trim() !== '19_6') {
+      setError('קוד הגישה שגוי')
+      return
+    }
+
     onLogin({ email: email.trim(), code: code.trim() })
   }
 

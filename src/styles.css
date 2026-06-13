@@ -287,6 +287,25 @@ button,
   color: var(--plum);
   font-weight: 500;
 }
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.btn-logout {
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 450;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.btn-logout:hover {
+  color: var(--rose);
+  border-color: var(--rose);
+}
 
 /* ============================================================
    כפתורים

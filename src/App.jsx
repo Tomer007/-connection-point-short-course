@@ -17,11 +17,15 @@ const DEFAULT_PRACTICE = {
 }
 
 export default function App() {
-  // אימות משתמש - נשמר ב-localStorage.
-  const [auth, setAuth, resetAuth] = useLocalStorage('cp_auth', null)
+  // אימות משתמש - נשמר רק בזיכרון הסשן (לא ב-localStorage).
+  const [auth, setAuth] = useState(null)
 
   function handleLogin({ email, code }) {
     setAuth({ email, code })
+  }
+
+  function handleLogout() {
+    setAuth(null)
   }
 
   // אם המשתמש לא מחובר, מציגים מסך כניסה.
@@ -36,7 +40,7 @@ export default function App() {
     )
   }
 
-  return <CourseApp onLogout={resetAuth} />
+  return <CourseApp onLogout={handleLogout} />
 }
 
 function CourseApp({ onLogout }) {
@@ -129,14 +133,19 @@ function CourseApp({ onLogout }) {
           <img src="/brand/icon-brown.png" alt="" width="32" height="32" />
           <span className="brand-name">נקודת חיבור</span>
         </button>
-        <button
-          className="menu-btn"
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-expanded={menuOpen}
-          aria-controls="sidebar"
-        >
-          {menuOpen ? 'סגירה' : 'תפריט'}
-        </button>
+        <div className="topbar-actions">
+          <button className="btn-logout" onClick={onLogout}>
+            יציאה
+          </button>
+          <button
+            className="menu-btn"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-expanded={menuOpen}
+            aria-controls="sidebar"
+          >
+            {menuOpen ? 'סגירה' : 'תפריט'}
+          </button>
+        </div>
       </div>
 
       <div className="app-shell">
