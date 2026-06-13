@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { lessons, heartSteps } from '../data/course.js'
 import MediaPlayer from './MediaPlayer.jsx'
+import BreathingCircle from './BreathingCircle.jsx'
 import LayerRating from './exercises/LayerRating.jsx'
 import SignsChecklist from './exercises/SignsChecklist.jsx'
 import HeartProtocol from './exercises/HeartProtocol.jsx'
@@ -79,11 +81,20 @@ export default function Lesson({
   onToggleComplete,
   onNavigate,
 }) {
+  const [celebrating, setCelebrating] = useState(false)
   const idx = lessons.findIndex((l) => l.id === lesson.id)
   const prev = lessons[idx - 1]
   const next = lessons[idx + 1]
   const isDone = completed.includes(lesson.id)
   const media = getMedia(lesson.sectionId)
+
+  function handleComplete() {
+    if (!isDone) {
+      setCelebrating(true)
+      setTimeout(() => setCelebrating(false), 1200)
+    }
+    onToggleComplete(lesson.id)
+  }
 
   return (
     <main className="content" id="main">
@@ -91,6 +102,11 @@ export default function Lesson({
         <p className="eyebrow">{lesson.eyebrow}</p>
         <h1>{lesson.title}</h1>
         <p className="lesson-summary">{lesson.summary}</p>
+        {lesson.duration && (
+          <p className="lesson-duration">
+            {lesson.duration.listen} דק׳ האזנה · {lesson.duration.practice} דק׳ תרגול
+          </p>
+        )}
       </header>
 
       <article className="card">
@@ -105,10 +121,17 @@ export default function Lesson({
       </section>
 
       <section aria-label="תרגול השיעור">
+        <BreathingCircle />
         <Exercise lesson={lesson} data={data} setData={setData} getMedia={getMedia} />
       </section>
 
       <div className="complete-bar">
+        {celebrating && (
+          <div className="celebration" aria-live="polite">
+            <span className="celebration-check">✓</span>
+            <span className="celebration-particles" aria-hidden="true" />
+          </div>
+        )}
         {isDone ? (
           <>
             <span className="complete-flag">
@@ -119,7 +142,7 @@ export default function Lesson({
             </button>
           </>
         ) : (
-          <button className="btn btn-sage" onClick={() => onToggleComplete(lesson.id)}>
+          <button className="btn btn-sage" onClick={handleComplete}>
             סימון שיעור כהושלם
           </button>
         )}

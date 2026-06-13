@@ -1,6 +1,12 @@
 import { lessons } from '../data/course.js'
 import ProgressBar from './ProgressBar.jsx'
 
+// בדיקה אם שיעור פתוח (שיעור 1 תמיד פתוח, או שהשיעור הקודם הושלם).
+function isLessonUnlocked(lessonId, completed) {
+  if (lessonId === 1) return true
+  return completed.includes(lessonId - 1)
+}
+
 // סרגל ניווט עם ששת השיעורים, מד התקדמות, והמסכים הנוספים.
 export default function Sidebar({ view, onNavigate, completed, open }) {
   const total = lessons.length
@@ -27,15 +33,18 @@ export default function Sidebar({ view, onNavigate, completed, open }) {
         {lessons.map((l) => {
           const isDone = completed.includes(l.id)
           const active = view.name === 'lesson' && view.id === l.id
+          const unlocked = isLessonUnlocked(l.id, completed)
           return (
             <li key={l.id}>
               <button
-                className="nav-item"
+                className={`nav-item ${!unlocked ? 'nav-item-locked' : ''}`}
                 aria-current={active ? 'page' : undefined}
-                onClick={() => go({ name: 'lesson', id: l.id })}
+                aria-disabled={!unlocked}
+                onClick={() => unlocked && go({ name: 'lesson', id: l.id })}
+                tabIndex={unlocked ? 0 : -1}
               >
                 <span className={`nav-num ${isDone ? 'done' : ''}`} aria-hidden="true">
-                  {isDone ? '✓' : l.id}
+                  {isDone ? '✓' : !unlocked ? '🔒' : l.id}
                 </span>
                 <span>{l.title}</span>
               </button>

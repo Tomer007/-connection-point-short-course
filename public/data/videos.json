@@ -5,6 +5,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/03_focusing-body-heart.mp3",
+    "thumbnail": "/media/03_focusing-body-heart.jpg",
     "description": "הסבר על ארבעת הרבדים וציר האמצע"
   },
   {
@@ -13,6 +14,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/01_affirmations-frequency.mp3",
+    "thumbnail": "/media/01_affirmations-frequency.jpg",
     "description": "איך לזהות אוטומט ולעבור לבחירה"
   },
   {
@@ -21,6 +23,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/05_coherent-breathing-explained.mp3",
+    "thumbnail": "/media/05_coherent-breathing-explained.jpg",
     "description": "הסבר על סנכרון בין לב, מוח ומערכת העצבים"
   },
   {
@@ -29,6 +32,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/02_affirmations-21-days.mp3",
+    "thumbnail": "/media/02_affirmations-21-days.jpg",
     "description": "הסימנים הגופניים ליציאה מאיזון"
   },
   {
@@ -37,6 +41,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/04_manifestation-meditation.mp3",
+    "thumbnail": "/media/04_manifestation-meditation.jpg",
     "description": "ארבעת שלבי הפרוטוקול לחיבור ללב"
   },
   {
@@ -45,6 +50,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/01_affirmations-frequency.mp3",
+    "thumbnail": "/media/01_affirmations-frequency.jpg",
     "description": "אודיו לתרגול נשימה, מדיטציה ואפרמציות הודיה"
   },
   {
@@ -63,6 +69,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/06_coherent-breathing-practice.mp3",
+    "thumbnail": "/media/06_coherent-breathing-practice.jpg",
     "description": "נשימה בקצב קבוע ומסונכרן בין הלב למוח"
   },
   {
@@ -72,6 +79,7 @@
     "type": "audio",
     "provider": "local",
     "url": "/media/04_manifestation-meditation.mp3",
+    "thumbnail": "/media/04_manifestation-meditation.jpg",
     "description": "האזנה קצרה שמכוונת לתדר של הערכה, חופש והתרחבות"
   }
 ]

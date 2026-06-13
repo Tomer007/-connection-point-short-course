@@ -1,12 +1,12 @@
-# פריסת אתר סטטי ב-Render.
+# Render Blueprint — course platform with admin server and persistent disk.
 # https://render.com/docs/blueprint-spec
 services:
+  # Static frontend (course app)
   - type: web
     name: connection-point-course
     runtime: static
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    # ניתוב SPA: כל בקשה מוגשת מ-index.html כדי שהניווט הפנימי יעבוד.
     routes:
       - type: rewrite
         source: /*
@@ -15,3 +15,25 @@ services:
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
+
+  # API server (admin + user data sync)
+  - type: web
+    name: connection-point-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATA_DIR
+        value: /var/data/course
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+    disk:
+      name: course-data
+      mountPath: /var/data/course
+      sizeGB: 1

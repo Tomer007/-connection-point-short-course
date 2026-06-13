@@ -76,6 +76,7 @@ export const lessons = [
   {
     id: 1,
     sectionId: 'intro',
+    duration: { listen: 7, practice: 3 },
     eyebrow: 'שיעור 1 · מבוא',
     title: 'לאזן את המערכת ולהחזיר את האנרגיה לציר האמצע',
     summary: 'ארבעת הרבדים שמרכיבים אותנו, והצורך לסנכרן ביניהם כדי לחזור לציר האמצע.',
@@ -94,6 +95,7 @@ export const lessons = [
   {
     id: 2,
     sectionId: 'roadmap',
+    duration: { listen: 5, practice: 2 },
     eyebrow: 'שיעור 2 · מפת הדרכים',
     title: 'להפסיק לרוץ על אוטומט',
     summary: 'מעבר מבריחה לבחירה: ברגע שמזהים את מצב ההישרדות, האוטומט נעצר.',
@@ -108,6 +110,7 @@ export const lessons = [
   {
     id: 3,
     sectionId: 'coherence',
+    duration: { listen: 6, practice: 2 },
     eyebrow: 'שיעור 3 · המפתח המעשי',
     title: 'החיבור בין הלב לראש',
     summary: 'קוהרנטיות: מה קורה במצב של פחד וסטרס, ומה קורה במצב מאוזן ומסונכרן.',
@@ -137,6 +140,7 @@ export const lessons = [
   {
     id: 4,
     sectionId: 'body-compass',
+    duration: { listen: 4, practice: 3 },
     eyebrow: 'שיעור 4 · זיהוי האוטומט',
     title: 'הגוף הוא המצפן',
     summary: 'הגוף הוא הראשון שמסמן שיצאנו מאיזון. ללמוד לזהות את הסימנים הגופניים.',
@@ -159,6 +163,7 @@ export const lessons = [
   {
     id: 5,
     sectionId: 'heart-protocol',
+    duration: { listen: 5, practice: 5 },
     eyebrow: 'שיעור 5 · פרוטוקול',
     title: 'עצירה וחיבור ללב',
     summary: 'ברגע שמזהים סימן בגוף, עוצרים ומבצעים ארבעה שלבים פשוטים.',
@@ -173,6 +178,7 @@ export const lessons = [
   {
     id: 6,
     sectionId: 'love-frequency',
+    duration: { listen: 3, practice: 10 },
     eyebrow: 'שיעור 6 · תדר של אהבה',
     title: 'תרגול דיגיטלי יומי',
     summary: 'לאחר האיוורור הראשוני, מטעינים את הגוף והתודעה בתדר החדש עם ערכת הכלים.',

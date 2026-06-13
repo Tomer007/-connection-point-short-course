@@ -1,5 +1,6 @@
+import { useState, useRef, useEffect } from 'react'
+
 // נגן מדיה בטוח: וידאו / אודיו לפי הנתונים ב-videos.json.
-// אם אין url או שהוא לא תקין - מציג placeholder יפה ולא שובר את הקורס.
 
 function isValidUrl(url) {
   if (!url || typeof url !== 'string' || url.trim() === '') return false
@@ -11,7 +12,6 @@ function isValidUrl(url) {
   }
 }
 
-// המרת קישור יוטיוב רגיל לקישור הטמעה. לא ממציאים קישור - רק ממירים את מה שניתן.
 function toYouTubeEmbed(url) {
   try {
     const u = new URL(url)
@@ -29,22 +29,125 @@ function toYouTubeEmbed(url) {
   }
 }
 
-function Placeholder() {
-  return null
+function useAudioResume(audioRef, media) {
+  const storageKey = `cp_audio_pos_${media.url}`
+  const intervalRef = useRef(null)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    // שחזור מיקום שמור בעת טעינה
+    const saved = localStorage.getItem(storageKey)
+    if (saved) {
+      const pos = parseFloat(saved)
+      if (pos > 0 && isFinite(pos)) {
+        audio.currentTime = pos
+      }
+    }
+
+    function handlePlay() {
+      // שמירת מיקום כל 5 שניות
+      intervalRef.current = setInterval(() => {
+        if (audio && !audio.paused) {
+          localStorage.setItem(storageKey, String(audio.currentTime))
+        }
+      }, 5000)
+    }
+
+    function handlePause() {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+      if (audio) {
+        localStorage.setItem(storageKey, String(audio.currentTime))
+      }
+    }
+
+    function handleEnded() {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+      localStorage.removeItem(storageKey)
+    }
+
+    audio.addEventListener('play', handlePlay)
+    audio.addEventListener('pause', handlePause)
+    audio.addEventListener('ended', handleEnded)
+
+    return () => {
+      audio.removeEventListener('play', handlePlay)
+      audio.removeEventListener('pause', handlePause)
+      audio.removeEventListener('ended', handleEnded)
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+      }
+    }
+  }, [audioRef, storageKey])
+}
+
+function AudioWithThumbnail({ media }) {
+  const [playing, setPlaying] = useState(false)
+  const audioRef = useRef(null)
+
+  useAudioResume(audioRef, media)
+
+  function handlePlay() {
+    setPlaying(true)
+    setTimeout(() => {
+      if (audioRef.current) {
+        // שחזור מיקום שמור לפני הפעלה
+        const saved = localStorage.getItem(`cp_audio_pos_${media.url}`)
+        if (saved) {
+          const pos = parseFloat(saved)
+          if (pos > 0 && isFinite(pos)) {
+            audioRef.current.currentTime = pos
+          }
+        }
+        audioRef.current.play()
+      }
+    }, 100)
+  }
+
+  if (!playing) {
+    return (
+      <div className="media media-audio-thumb" onClick={handlePlay} role="button" tabIndex={0}
+        aria-label={`להפעלת ${media.title || 'אודיו'}`}
+        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handlePlay() }}
+      >
+        <img className="media-thumb-img" src={media.thumbnail} alt={media.title || ''} />
+        <div className="media-play-overlay">
+          <div className="media-play-btn" aria-hidden="true">▶</div>
+        </div>
+        {media.title && <div className="media-thumb-title">{media.title}</div>}
+      </div>
+    )
+  }
+
+  return (
+    <div className="media media-audio">
+      {media.thumbnail && <img className="media-audio-banner" src={media.thumbnail} alt="" />}
+      {media.title && <div className="media-title">{media.title}</div>}
+      <audio ref={audioRef} controls preload="auto" src={media.url}>
+        הדפדפן שלך אינו תומך בנגן האודיו.
+      </audio>
+    </div>
+  )
 }
 
 export default function MediaPlayer({ media }) {
   if (!media || !isValidUrl(media.url)) {
-    return (
-      <div className="media">
-        <Placeholder />
-      </div>
-    )
+    return null
   }
 
   const { type, provider, url, title } = media
 
   if (type === 'audio') {
+    if (media.thumbnail) {
+      return <AudioWithThumbnail media={media} />
+    }
     return (
       <div className="media media-audio">
         {title && <div className="media-title">{title}</div>}
@@ -58,13 +161,7 @@ export default function MediaPlayer({ media }) {
   // וידאו
   if (provider === 'youtube') {
     const embed = toYouTubeEmbed(url)
-    if (!embed) {
-      return (
-        <div className="media">
-          <Placeholder />
-        </div>
-      )
-    }
+    if (!embed) return null
     return (
       <div className="media">
         <div className="media-frame">
@@ -80,7 +177,7 @@ export default function MediaPlayer({ media }) {
     )
   }
 
-  // וידאו מקומי או חיצוני (קובץ mp4 וכו')
+  // וידאו מקומי
   return (
     <div className="media">
       <div className="media-frame">

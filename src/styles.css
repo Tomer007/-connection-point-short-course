@@ -560,6 +560,63 @@ button,
   margin-top: 12px;
   border-radius: 8px;
 }
+.media-audio-banner {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  object-fit: cover;
+  max-height: 200px;
+}
+.media-audio-thumb {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.media-audio-thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58, 43, 60, 0.12);
+}
+.media-thumb-img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+.media-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(58, 43, 60, 0.3);
+  transition: background 0.15s ease;
+}
+.media-audio-thumb:hover .media-play-overlay {
+  background: rgba(58, 43, 60, 0.45);
+}
+.media-play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  color: var(--plum);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+.media-thumb-title {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  padding: 14px 18px;
+  background: linear-gradient(transparent, rgba(58, 43, 60, 0.8));
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
 .media-title {
   font-weight: 550;
   font-size: 1.05rem;
@@ -1083,4 +1140,326 @@ textarea:focus {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* ============================================================
+   אנימציות ושיפורי UX
+   ============================================================ */
+
+/* --- מעבר בין תצוגות (fade-in) --- */
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.view-transition {
+  animation: viewFadeIn 200ms ease-out both;
+}
+
+/* --- חגיגה קטנה בסימון שיעור --- */
+@keyframes celebrationPulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes celebrationParticles {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(67, 112, 91, 0.4),
+      0 0 0 0 rgba(67, 112, 91, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 0 12px rgba(67, 112, 91, 0),
+      0 0 0 24px rgba(67, 112, 91, 0);
+  }
+  100% {
+    box-shadow:
+      0 0 0 12px rgba(67, 112, 91, 0),
+      0 0 0 24px rgba(67, 112, 91, 0);
+  }
+}
+.celebration {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.celebration-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sage-deep);
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+  animation: celebrationPulse 600ms ease-out both;
+}
+.celebration-particles {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: celebrationParticles 1000ms ease-out both;
+  pointer-events: none;
+}
+
+/* --- עיגול נשימה --- */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+.breathing-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 12px;
+}
+.breathing-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #8bab96, #5b3a5e);
+  animation: breathe 10s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+/* --- תגית זמן השיעור --- */
+.lesson-duration {
+  display: inline-block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  background: var(--sage-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin-top: 2px;
+}
+
+
+/* ============================================================
+   שיעורים נעולים בסרגל הצד
+   ============================================================ */
+.nav-item-locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.nav-item-locked:hover {
+  background: transparent;
+}
+.nav-item-locked .nav-num {
+  font-size: 0.75rem;
+}
+
+/* ============================================================
+   סרגל ניווט תחתון למובייל
+   ============================================================ */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  z-index: 50;
+  background: var(--card);
+  border-top: 1px solid var(--line);
+  padding: 6px 8px calc(env(safe-area-inset-bottom, 8px) + 6px);
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 12px rgba(58, 43, 60, 0.06);
+}
+
+@media (max-width: 900px) {
+  .bottom-nav {
+    display: flex;
+  }
+  /* מרווח תחתון לתוכן כדי שהסרגל לא יכסה */
+  .main {
+    padding-bottom: 72px;
+  }
+}
+
+.bottom-nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 450;
+  transition: color 0.15s ease, background 0.15s ease;
+  min-height: 44px;
+  justify-content: center;
+}
+.bottom-nav-btn:hover,
+.bottom-nav-btn.active {
+  color: var(--plum);
+  background: var(--plum-soft);
+}
+.bottom-nav-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.bottom-nav-label {
+  font-family: inherit;
+}
+
+/* ============================================================
+   תעודת סיום
+   ============================================================ */
+.certificate {
+  background: linear-gradient(135deg, #fff 0%, var(--plum-soft) 50%, var(--gold-soft) 100%);
+  border: 2px solid var(--plum);
+  border-radius: var(--radius);
+  padding: 36px 28px;
+  margin: 32px auto;
+  max-width: 440px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(91, 58, 94, 0.1);
+}
+.certificate-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0 auto 12px;
+  display: block;
+}
+.certificate-brand {
+  color: var(--gold-deep);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.certificate-title {
+  color: var(--plum);
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+.certificate-course {
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.certificate-divider {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rose), var(--plum));
+  margin: 0 auto 16px;
+  border-radius: 999px;
+}
+.certificate-congrats {
+  color: var(--sage-deep);
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+.certificate-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* כפתור WhatsApp */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 12px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #25d366;
+  color: #fff;
+  cursor: pointer;
+  min-height: 44px;
+  font-family: inherit;
+  transition: transform 0.12s ease, background 0.15s ease;
+}
+.btn-whatsapp:hover {
+  background: #1da851;
+}
+.btn-whatsapp:active {
+  transform: translateY(1px);
+}
+
+/* ============================================================
+   עיגול התקדמות בדף הבית
+   ============================================================ */
+.progress-ring {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px auto;
+  width: 120px;
+  height: 120px;
+}
+.progress-ring svg {
+  position: absolute;
+  inset: 0;
+}
+.progress-ring-fill {
+  transition: stroke-dashoffset 0.6s ease;
+}
+.progress-ring-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.progress-ring-count {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--plum);
+  line-height: 1;
+}
+.progress-ring-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ============================================================
+   ברכה אישית בכותרת העליונה
+   ============================================================ */
+.topbar-greeting {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 450;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
 }

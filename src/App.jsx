@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { lessons } from './data/course.js'
 import { useLocalStorage } from './hooks/useLocalStorage.js'
+import { syncUserData, syncProgress, syncPhaseComplete } from './services/dataSyncService.js'
 import Login from './components/Login.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import Home from './components/Home.jsx'
 import Lesson from './components/Lesson.jsx'
 import Practice from './components/Practice.jsx'
 import Completion from './components/Completion.jsx'
+import BottomNav from './components/BottomNav.jsx'
 
 const DEFAULT_PRACTICE = {
   layers: { body: 5, emotion: 5, thought: 5, energy: 5 },
@@ -40,10 +42,10 @@ export default function App() {
     )
   }
 
-  return <CourseApp onLogout={handleLogout} />
+  return <CourseApp onLogout={handleLogout} email={auth.email} />
 }
 
-function CourseApp({ onLogout }) {
+function CourseApp({ onLogout, email }) {
   // מצב הניווט. ברירת מחדל: מסך פתיחה.
   const [view, setView] = useState({ name: 'home' })
   const [menuOpen, setMenuOpen] = useState(false)
@@ -51,6 +53,11 @@ function CourseApp({ onLogout }) {
   // התקדמות ונתוני תרגול נשמרים ב-localStorage בלבד.
   const [completed, setCompleted, resetCompleted] = useLocalStorage('cp_completed', [])
   const [practice, setPractice, resetPractice] = useLocalStorage('cp_practice', DEFAULT_PRACTICE)
+
+  // Sync user data to disk on initial load
+  useEffect(() => {
+    syncUserData(email, { completed, practice })
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // טעינת רשימת המדיה מ-/data/videos.json בעת טעינת האתר.
   const [videos, setVideos] = useState([])
@@ -90,9 +97,15 @@ function CourseApp({ onLogout }) {
   }, [])
 
   function toggleComplete(id) {
-    setCompleted((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-    )
+    setCompleted((prev) => {
+      const next = prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+      // Sync to disk in background
+      if (!prev.includes(id)) {
+        syncPhaseComplete(email, id)
+      }
+      syncProgress(email, next, id)
+      return next
+    })
   }
 
   function startCourse() {
@@ -107,6 +120,9 @@ function CourseApp({ onLogout }) {
     navigate({ name: 'home' })
   }
 
+  // חילוץ שם המשתמש מהאימייל
+  const userName = email ? email.split('@')[0] : ''
+
   // מסך הפתיחה הוא מסך מלא, ללא סרגל צד.
   if (view.name === 'home') {
     return (
@@ -114,7 +130,7 @@ function CourseApp({ onLogout }) {
         <a href="#main" className="skip-link">
           דילוג לתוכן
         </a>
-        <Home onStart={startCourse} hasProgress={completed.length > 0} />
+        <Home onStart={startCourse} hasProgress={completed.length > 0} completed={completed} />
       </>
     )
   }
@@ -134,6 +150,7 @@ function CourseApp({ onLogout }) {
           <span className="brand-name">נקודת חיבור</span>
         </button>
         <div className="topbar-actions">
+          {userName && <span className="topbar-greeting">שלום {userName} 👋</span>}
           <button className="btn-logout" onClick={onLogout}>
             יציאה
           </button>
@@ -150,6 +167,7 @@ function CourseApp({ onLogout }) {
 
       <div className="app-shell">
         <main className="main">
+          <div className="view-transition" key={view.name === 'lesson' ? `lesson-${view.id}` : view.name}>
           {currentLesson && (
             <Lesson
               lesson={currentLesson}
@@ -165,6 +183,7 @@ function CourseApp({ onLogout }) {
           {view.name === 'completion' && (
             <Completion completed={completed} onNavigate={navigate} onRestart={restart} />
           )}
+          </div>
 
           <footer className="footer">
             <a href="https://annayael.com/" target="_blank" rel="noopener noreferrer" className="footer-brand">
@@ -182,6 +201,13 @@ function CourseApp({ onLogout }) {
         />
         <Sidebar view={view} onNavigate={navigate} completed={completed} open={menuOpen} />
       </div>
+
+      <BottomNav
+        view={view}
+        onNavigate={navigate}
+        onMenuToggle={() => setMenuOpen((o) => !o)}
+        completed={completed}
+      />
     </>
   )
 }

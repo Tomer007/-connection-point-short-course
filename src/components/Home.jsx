@@ -1,4 +1,4 @@
-import { courseMeta } from '../data/course.js'
+import { courseMeta, lessons } from '../data/course.js'
 
 const team = [
   {
@@ -13,8 +13,53 @@ const team = [
   },
 ]
 
+// עיגול התקדמות SVG
+function ProgressRing({ completed }) {
+  const total = lessons.length
+  const done = completed.length
+  const size = 120
+  const strokeWidth = 10
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const progress = done / total
+  const dashOffset = circumference * (1 - progress)
+
+  return (
+    <div className="progress-ring" aria-label={`השלמת ${done} מתוך ${total} שיעורים`}>
+      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+        <circle
+          className="progress-ring-bg"
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="var(--line)"
+          strokeWidth={strokeWidth}
+        />
+        <circle
+          className="progress-ring-fill"
+          cx={size / 2}
+          cy={size / 2}
+          r={radius}
+          fill="none"
+          stroke="var(--plum)"
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={dashOffset}
+          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+        />
+      </svg>
+      <div className="progress-ring-text">
+        <span className="progress-ring-count">{done}/{total}</span>
+        <span className="progress-ring-label">שיעורים</span>
+      </div>
+    </div>
+  )
+}
+
 // מסך פתיחה: שם הקורס, תיאור קצר, צוות וכפתור התחלה.
-export default function Home({ onStart, hasProgress }) {
+export default function Home({ onStart, hasProgress, completed = [] }) {
   return (
     <main className="home" id="main">
       <div className="home-card">
@@ -23,6 +68,8 @@ export default function Home({ onStart, hasProgress }) {
         <h1>{courseMeta.title}</h1>
         <p className="subtitle">{courseMeta.subtitle}</p>
         <p className="intro">{courseMeta.intro}</p>
+
+        {hasProgress && <ProgressRing completed={completed} />}
 
         <section className="team" aria-label="מי אנחנו">
           {team.map((person) => (
