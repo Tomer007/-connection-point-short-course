@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3001
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback-secret-change-me'
 const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'tomer'
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'tomer'
+const COURSE_COUPON = process.env.COURSE_COUPON || 'annayael'
 
 // Hash the password at startup for secure comparison
 const passwordHash = bcrypt.hashSync(ADMIN_PASSWORD, 10)
@@ -89,6 +90,18 @@ app.post('/api/admin/logout', (req, res) => {
 
 app.get('/api/admin/verify', requireAdmin, (req, res) => {
   res.json({ authenticated: true, username: req.admin.username })
+})
+
+// ─────────────────────────────────────────────────────────────
+// Course Access (coupon validation)
+// ─────────────────────────────────────────────────────────────
+app.post('/api/coupon/validate', (req, res) => {
+  const { code } = req.body
+  if (!code) return res.status(400).json({ error: 'Code is required' })
+  if (code.trim().toLowerCase() !== COURSE_COUPON.toLowerCase()) {
+    return res.status(401).json({ error: 'Invalid coupon code' })
+  }
+  res.json({ valid: true })
 })
 
 // ─────────────────────────────────────────────────────────────
