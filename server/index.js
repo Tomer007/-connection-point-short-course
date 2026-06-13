@@ -24,7 +24,15 @@ const passwordHash = bcrypt.hashSync(ADMIN_PASSWORD, 10)
 // Initialize data directory
 initDataDir()
 
-app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174'], credentials: true }))
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://connection-point-course.onrender.com',
+    'https://connection-point-short-course.onrender.com',
+  ],
+  credentials: true,
+}))
 app.use(express.json({ limit: '5mb' }))
 app.use(cookieParser())
 

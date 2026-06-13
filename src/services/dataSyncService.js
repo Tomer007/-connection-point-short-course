@@ -1,7 +1,9 @@
 // Data sync service — sends user data from localStorage to the server for disk persistence.
 // This runs in the background and does not block the user experience.
 
-const API_BASE = '/api/users'
+const API_BASE = window.location.hostname === 'localhost'
+  ? '/api/users'
+  : 'https://connection-point-api.onrender.com/api/users'
 
 // Sync user profile and current state to disk
 export async function syncUserData(email, { completed, practice } = {}) {

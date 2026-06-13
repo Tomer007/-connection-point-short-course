@@ -5,6 +5,10 @@ import { lessons } from '../data/course.js'
 
 const TOTAL_LESSONS = lessons.length
 
+const ADMIN_API = window.location.hostname === 'localhost'
+  ? '/api/admin'
+  : 'https://connection-point-api.onrender.com/api/admin'
+
 // ─────────────────────────────────────────────────────────────
 // Server-based data fetching (disk storage)
 // ─────────────────────────────────────────────────────────────
@@ -12,7 +16,7 @@ const TOTAL_LESSONS = lessons.length
 // Fetch all users from disk via admin API
 export async function fetchUsersFromDisk() {
   try {
-    const res = await fetch('/api/admin/users', { credentials: 'include' })
+    const res = await fetch(`${ADMIN_API}/users`, { credentials: 'include' })
     if (!res.ok) return null
     const data = await res.json()
     return data.users || []
@@ -24,7 +28,7 @@ export async function fetchUsersFromDisk() {
 // Fetch metrics from disk via admin API
 export async function fetchMetricsFromDisk() {
   try {
-    const res = await fetch('/api/admin/metrics', { credentials: 'include' })
+    const res = await fetch(`${ADMIN_API}/metrics`, { credentials: 'include' })
     if (!res.ok) return null
     return await res.json()
   } catch {
@@ -35,7 +39,7 @@ export async function fetchMetricsFromDisk() {
 // Fetch single user detail from disk via admin API
 export async function fetchUserDetail(userId) {
   try {
-    const res = await fetch(`/api/admin/users/${userId}`, { credentials: 'include' })
+    const res = await fetch(`${ADMIN_API}/users/${userId}`, { credentials: 'include' })
     if (!res.ok) return null
     return await res.json()
   } catch {
