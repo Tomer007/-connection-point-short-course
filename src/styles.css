@@ -1392,11 +1392,11 @@ textarea:focus {
   margin-bottom: 28px;
 }
 .certificate-follow-title {
-  font-size: 0.85rem;
-  color: var(--muted);
-  font-weight: 400;
+  font-size: 0.88rem;
+  color: var(--plum);
+  font-weight: 500;
   margin-bottom: 14px;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .certificate .social-links {
   gap: 8px;
@@ -1404,7 +1404,7 @@ textarea:focus {
   margin: 0 auto;
 }
 .certificate .social-link {
-  padding: 12px 16px;
+  padding: 14px 18px;
   font-size: 0.88rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.8);
@@ -1417,6 +1417,25 @@ textarea:focus {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(91, 58, 94, 0.1);
   border-color: var(--plum);
+}
+
+.social-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.social-title {
+  font-weight: 550;
+  font-size: 0.9rem;
+  color: var(--ink);
+}
+
+.social-sub {
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 400;
 }
 
 /* כפתור WhatsApp */
