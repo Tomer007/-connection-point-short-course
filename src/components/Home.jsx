@@ -84,7 +84,7 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
         <button className="btn btn-primary" onClick={onStart}>
           {hasProgress ? 'המשך מהמקום שעצרת' : 'התחלת הקורס'}
         </button>
-        <p className="home-meta">שישה שיעורים קצרים. ההתקדמות והתרגולים נשמרים רק במכשיר שלך.</p>
+        <p className="home-meta">שישה שיעורים קצרים.</p>
       </div>
     </main>
   )
