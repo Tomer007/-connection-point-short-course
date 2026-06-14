@@ -66,7 +66,7 @@ export default function Completion({ completed, onNavigate, onRestart }) {
       {allDone && (
         <section className="completion-gift" aria-label="מתנת סיום">
           <div className="gift-card">
-            <img className="gift-gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5APm0/giphy.gif" alt="אנרגיה של אהבה" />
+            <div className="gift-visual">✨🎶✨</div>
             <h3>תדר 528Hz — תדר האהבה</h3>
             <p>המשיכי לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>
             <a

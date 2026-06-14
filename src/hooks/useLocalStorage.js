@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 
 // Data version — increment this to force a reset of stored data for all users.
-const DATA_VERSION = 2
+const DATA_VERSION = 3
 const VERSION_KEY = 'cp_data_version'
 
 // One-time global version check on load

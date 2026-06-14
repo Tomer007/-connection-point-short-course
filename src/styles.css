@@ -1420,22 +1420,22 @@ textarea:focus {
 }
 
 .gift-card {
-  background: var(--card);
+  background: linear-gradient(135deg, var(--plum-soft) 0%, var(--sage-soft) 100%);
   border-radius: var(--radius);
-  padding: 28px 24px;
+  padding: 32px 24px;
   text-align: center;
   box-shadow: var(--shadow);
 }
 
-.gift-gif {
-  width: 100%;
-  max-width: 300px;
-  border-radius: var(--radius-sm);
+.gift-visual {
+  font-size: 3rem;
   margin-bottom: 16px;
+  line-height: 1;
 }
 
 .gift-card h3 {
   margin-bottom: 8px;
+  color: var(--plum);
 }
 
 .gift-card p {
