@@ -1389,24 +1389,34 @@ textarea:focus {
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 .certificate-follow-title {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--muted);
-  font-weight: 450;
-  margin-bottom: 12px;
+  font-weight: 400;
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
 }
 .certificate .social-links {
   gap: 8px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 .certificate .social-link {
-  padding: 11px 16px;
+  padding: 12px 16px;
   font-size: 0.88rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(4px);
-  box-shadow: 0 1px 4px rgba(58, 43, 60, 0.05);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(58, 43, 60, 0.05);
+  border: 1px solid rgba(235, 223, 224, 0.6);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
+}
+.certificate .social-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91, 58, 94, 0.1);
+  border-color: var(--plum);
 }
 
 /* כפתור WhatsApp */
@@ -1415,20 +1425,21 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border: 1px solid transparent;
+  border: 1.5px solid #25d366;
   border-radius: 24px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
+  padding: 9px 18px;
+  font-size: 0.85rem;
   font-weight: 500;
-  background: #25d366;
-  color: #fff;
+  background: transparent;
+  color: #1da851;
   cursor: pointer;
-  min-height: 40px;
+  min-height: 36px;
   font-family: inherit;
-  transition: transform 0.12s ease, background 0.15s ease;
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
 }
 .btn-whatsapp:hover {
-  background: #1da851;
+  background: #25d366;
+  color: #fff;
 }
 .btn-whatsapp:active {
   transform: translateY(1px);
