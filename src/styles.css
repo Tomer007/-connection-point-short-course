@@ -1382,6 +1382,12 @@ textarea:focus {
   color: var(--sage-deep);
   font-size: 0.95rem;
   font-weight: 450;
+  margin-bottom: 8px;
+}
+.certificate-message {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
   margin-bottom: 24px;
 }
 .certificate-actions {

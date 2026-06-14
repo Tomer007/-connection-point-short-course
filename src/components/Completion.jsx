@@ -61,14 +61,16 @@ export default function Completion({ completed, onNavigate, onRestart }) {
 
   return (
     <main className="content completion" id="main">
-      <img className="seal" src="/brand/icon-brown.png" alt="סמל נקודת חיבור" />
-      <h1>{completion.title}</h1>
-      <p className="msg">{completion.text}</p>
 
       {!allDone && (
-        <p className="lesson-summary">
-          השלמת {doneCount} מתוך {lessons.length} שיעורים. אפשר לחזור ולסמן את מה שנותר בכל עת.
-        </p>
+        <>
+          <img className="seal" src="/brand/icon-brown.png" alt="סמל נקודת חיבור" />
+          <h1>{completion.title}</h1>
+          <p className="msg">{completion.text}</p>
+          <p className="lesson-summary">
+            השלמת {doneCount} מתוך {lessons.length} שיעורים. אפשר לחזור ולסמן את מה שנותר בכל עת.
+          </p>
+        </>
       )}
 
       {/* תעודת סיום */}
@@ -80,6 +82,7 @@ export default function Completion({ completed, onNavigate, onRestart }) {
           <p className="certificate-course">מפחד לאהבה בארבעה רבדים</p>
           <div className="certificate-divider" aria-hidden="true" />
           <p className="certificate-congrats">כל הכבוד! השלמת את כל ששת השיעורים</p>
+          <p className="certificate-message">עכשיו יש לך דרך פשוטה לחזור לציר האמצע, לזהות את האוטומט, ולבחור מחדש בחיבור.</p>
 
           <div className="certificate-actions">
             <button className="btn btn-whatsapp" onClick={handleWhatsApp}>
