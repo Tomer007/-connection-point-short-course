@@ -31,7 +31,6 @@ export default function AdminLogin({ onLoginSuccess }) {
     <main className="admin-login" id="main">
       <div className="admin-login-card">
         <div className="admin-login-header">
-          <div className="admin-icon">🔐</div>
           <h1>Admin Login</h1>
           <p>Connection Point Course Admin</p>
         </div>
