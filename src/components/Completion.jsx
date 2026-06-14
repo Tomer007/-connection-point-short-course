@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import confetti from 'canvas-confetti'
 import { completion, lessons } from '../data/course.js'
 
 const SHARE_TEXT = 'סיימתי את הקורס ״מפחד לאהבה בארבעה רבדים״ של נקודת חיבור! https://annayael.com/'
@@ -7,6 +8,35 @@ export default function Completion({ completed, onNavigate, onRestart }) {
   const [copied, setCopied] = useState(false)
   const doneCount = lessons.filter((l) => completed.includes(l.id)).length
   const allDone = doneCount === lessons.length
+
+  // Confetti burst on mount
+  useEffect(() => {
+    if (!allDone) return
+    const duration = 2500
+    const end = Date.now() + duration
+
+    const colors = ['#5b3a5e', '#a34d62', '#7e9b8a', '#f4e8cf', '#ffffff']
+
+    function frame() {
+      confetti({
+        particleCount: 3,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.6 },
+        colors,
+      })
+      confetti({
+        particleCount: 3,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.6 },
+        colors,
+      })
+      if (Date.now() < end) requestAnimationFrame(frame)
+    }
+
+    frame()
+  }, [allDone])
 
   async function handleShare() {
     if (navigator.share) {
