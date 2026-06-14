@@ -41,7 +41,6 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
       <div className="home-card">
         {/* Hero */}
         <header className="home-hero">
-          <img className="home-cover" src="/brand/fear_to _love.png" alt="מפחד לאהבה בארבעה רבדים" />
           <img className="home-icon" src="/brand/icon-brown.png" alt="סמל נקודת חיבור" />
           <p className="home-brand">{courseMeta.brand}</p>
           <h1 className="home-title">{courseMeta.title}</h1>
@@ -81,6 +80,8 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
             ))}
           </div>
         </section>
+
+        <img className="home-cover" src="/brand/fear_to _love.png" alt="מפחד לאהבה בארבעה רבדים" />
       </div>
     </main>
   )
