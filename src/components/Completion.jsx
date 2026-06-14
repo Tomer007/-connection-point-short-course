@@ -108,7 +108,7 @@ export default function Completion({ completed, onNavigate, onRestart }) {
             <button className="gift-popup-close" onClick={() => setShowGiftPopup(false)} aria-label="סגירה">✕</button>
             <div className="gift-popup-visual">✨🎶✨</div>
             <h3>תדר 528Hz — תדר האהבה</h3>
-            <p>המשיכי לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>
+            <p>המשיכו לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>
             <button className="btn btn-primary gift-popup-btn" onClick={handleGiftGo}>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
               פתיחה ב-Spotify
