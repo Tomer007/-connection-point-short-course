@@ -50,7 +50,6 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
         {/* Progress or intro */}
         {hasProgress ? (
           <div className="home-progress-section">
-            <ProgressRing completed={completed} />
             <p className="home-progress-label">{completed.length === lessons.length ? 'סיימת את כל השיעורים' : 'בואו נמשיך מאיפה שעצרנו'}</p>
           </div>
         ) : (
