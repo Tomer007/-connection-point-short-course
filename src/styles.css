@@ -372,14 +372,33 @@ button,
 /* Hero */
 .home-hero {
   margin-bottom: 28px;
+  animation: heroFadeIn 0.8s ease-out both;
 }
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .home-icon {
   width: 72px;
   height: 72px;
   object-fit: contain;
   margin: 0 auto 16px;
   display: block;
+  animation: iconFloat 3s ease-in-out infinite, iconReveal 0.6s ease-out both;
 }
+
+@keyframes iconReveal {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
 .home-brand {
   color: var(--gold-deep);
   font-weight: 500;
@@ -387,18 +406,38 @@ button,
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 10px;
+  animation: heroFadeIn 0.8s ease-out 0.15s both;
 }
 .home-title {
   font-size: clamp(1.8rem, 5.5vw, 2.6rem);
   color: var(--plum);
   margin-bottom: 8px;
+  animation: titleReveal 0.9s ease-out 0.25s both;
+  background: linear-gradient(135deg, var(--plum) 0%, var(--rose) 50%, var(--plum) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleReveal 0.9s ease-out 0.25s both, shimmer 4s ease-in-out 1.5s infinite;
 }
+
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(16px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 200% center; }
+}
+
 .home-subtitle {
   font-size: 1rem;
   color: var(--muted);
   margin-bottom: 0;
   max-width: 440px;
   margin-inline: auto;
+  animation: heroFadeIn 0.8s ease-out 0.45s both;
 }
 
 /* Intro text */
@@ -408,6 +447,7 @@ button,
   color: var(--ink);
   max-width: 460px;
   margin: 0 auto 28px;
+  animation: heroFadeIn 0.8s ease-out 0.55s both;
 }
 
 /* Progress section */
@@ -417,6 +457,7 @@ button,
   align-items: center;
   gap: 8px;
   margin-bottom: 24px;
+  animation: heroFadeIn 0.8s ease-out 0.5s both;
 }
 .home-progress-label {
   font-size: 0.88rem;
@@ -430,6 +471,31 @@ button,
   font-size: 1.05rem;
   border-radius: 28px;
   margin-bottom: 16px;
+  animation: ctaPulseIn 0.7s ease-out 0.7s both;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-cta::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--plum), var(--rose), var(--sage));
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s;
+  filter: blur(8px);
+}
+
+.home-cta:hover::after {
+  opacity: 0.4;
+}
+
+@keyframes ctaPulseIn {
+  0% { opacity: 0; transform: scale(0.9); }
+  60% { transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
 /* Info pills */
@@ -439,6 +505,7 @@ button,
   gap: 8px;
   flex-wrap: wrap;
   margin-bottom: 36px;
+  animation: heroFadeIn 0.8s ease-out 0.85s both;
 }
 .home-pill {
   padding: 6px 14px;
@@ -453,6 +520,7 @@ button,
 /* צוות */
 .team {
   margin-top: 8px;
+  animation: heroFadeIn 0.8s ease-out 1s both;
 }
 .team-row {
   display: flex;
