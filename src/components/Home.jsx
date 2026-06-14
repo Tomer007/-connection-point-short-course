@@ -71,19 +71,13 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
         {/* Team */}
         <section className="team" aria-label="מי אנחנו">
           <div className="team-row">
-            <div className="team-member" key={team[0].name}>
-              <img className="team-photo" src={team[0].photo} alt={team[0].name} />
-              <h3 className="team-name">{team[0].name}</h3>
-              <p className="team-bio">{team[0].bio}</p>
-            </div>
-
-            <img className="home-cover" src="/brand/fear_to _love.png" alt="מפחד לאהבה בארבעה רבדים" />
-
-            <div className="team-member" key={team[1].name}>
-              <img className="team-photo" src={team[1].photo} alt={team[1].name} />
-              <h3 className="team-name">{team[1].name}</h3>
-              <p className="team-bio">{team[1].bio}</p>
-            </div>
+            {team.map((person) => (
+              <div className="team-member" key={person.name}>
+                <img className="team-photo" src={person.photo} alt={person.name} />
+                <h3 className="team-name">{person.name}</h3>
+                <p className="team-bio">{person.bio}</p>
+              </div>
+            ))}
           </div>
         </section>
       </div>
