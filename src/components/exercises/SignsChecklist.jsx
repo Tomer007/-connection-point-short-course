@@ -29,9 +29,6 @@ export default function SignsChecklist({ data, setData }) {
           </li>
         ))}
       </ul>
-      <p className="privacy">
-        הסימון נשמר רק במכשיר שלך.
-      </p>
     </div>
   )
 }

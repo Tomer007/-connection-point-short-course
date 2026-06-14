@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// מסך "התרגול שלי": כתיבה אינטואיטיבית סביב השאלה ללב, עם שמירה מקומית בלבד.
+// מסך "התרגול שלי": כתיבה אינטואיטיבית סביב השאלה ללב.
 export default function Practice({ data, setData }) {
   const [draft, setDraft] = useState('')
   const [justSaved, setJustSaved] = useState(false)
@@ -54,13 +54,10 @@ export default function Practice({ data, setData }) {
         />
         <div className="save-row">
           <button className="btn btn-primary" onClick={save} disabled={!draft.trim()}>
-            שמירה מקומית
+            שמירה
           </button>
-          {justSaved && <span className="saved-note" role="status">נשמר במכשיר שלך</span>}
+          {justSaved && <span className="saved-note" role="status">נשמר ✓</span>}
         </div>
-        <p className="privacy">
-          כל מה שתכתבי נשמר רק במכשיר שלך, ואף אחד אחר לא רואה אותו.
-        </p>
       </div>
 
       {entries.length > 0 && (

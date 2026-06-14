@@ -92,9 +92,6 @@ export default function HeartProtocol({ data, setData }) {
         value={data.heartWriting}
         onChange={(e) => setData((prev) => ({ ...prev, heartWriting: e.target.value }))}
       />
-      <p className="privacy">
-        מה שכתבת נשאר אצלך, נשמר רק במכשיר שלך.
-      </p>
     </div>
   )
 }

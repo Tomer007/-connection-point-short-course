@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { completion, lessons } from '../data/course.js'
 
-const SHARE_TEXT = 'סיימתי את הקורס ״מפחד לאהבה בארבעה רבדים״ של נקודת חיבור! 🌿 https://annayael.com/'
+const SHARE_TEXT = 'סיימתי את הקורס ״מפחד לאהבה בארבעה רבדים״ של נקודת חיבור! https://annayael.com/'
 
-// מסך סיום הקורס עם תעודת סיום, כפתור שיתוף וכפתור WhatsApp.
 export default function Completion({ completed, onNavigate, onRestart }) {
   const [copied, setCopied] = useState(false)
   const doneCount = lessons.filter((l) => completed.includes(l.id)).length
@@ -13,16 +12,13 @@ export default function Completion({ completed, onNavigate, onRestart }) {
     if (navigator.share) {
       try {
         await navigator.share({ text: SHARE_TEXT })
-      } catch {
-        // משתמש ביטל את השיתוף - לא צריך לעשות כלום
-      }
+      } catch { /* user cancelled */ }
     } else {
       try {
         await navigator.clipboard.writeText(SHARE_TEXT)
         setCopied(true)
         setTimeout(() => setCopied(false), 2500)
       } catch {
-        // fallback: prompt
         window.prompt('העתיקי את הטקסט:', SHARE_TEXT)
       }
     }
@@ -65,6 +61,59 @@ export default function Completion({ completed, onNavigate, onRestart }) {
           </div>
         </section>
       )}
+
+      {/* 528Hz — המשך תרגול */}
+      {allDone && (
+        <section className="completion-gift" aria-label="מתנת סיום">
+          <div className="gift-card">
+            <img className="gift-gif" src="https://media.giphy.com/media/l0MYt5jPR6QX5APm0/giphy.gif" alt="אנרגיה של אהבה" />
+            <h3>תדר 528Hz — תדר האהבה</h3>
+            <p>המשיכי לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>
+            <a
+              href="https://open.spotify.com/album/3M8ujVP1QVn6DT3fORDfbi?si=HOlvu6_IRumyE-1Q0w8Shg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary gift-btn"
+            >
+              🎵 האזנה ב-Spotify
+            </a>
+          </div>
+        </section>
+      )}
+
+      {/* קישורים לתוכן נוסף */}
+      <section className="completion-links">
+        <h3>עקבו אחרינו</h3>
+        <div className="social-links">
+          <a
+            href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=845f66d9ef7a47d0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link spotify"
+          >
+            <span className="social-icon">🎙️</span>
+            <span>הפודקסט שלנו ב-Spotify</span>
+          </a>
+          <a
+            href="https://www.youtube.com/playlist?list=PL0YKtIIUMNqL1nbGv8owFfZIIflaBnlyA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link youtube"
+          >
+            <span className="social-icon">▶️</span>
+            <span>הפלייליסט שלנו ב-YouTube</span>
+          </a>
+          <a
+            href="https://www.instagram.com/anna_and_yael/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-link instagram"
+          >
+            <span className="social-icon">📷</span>
+            <span>anna_and_yael באינסטגרם</span>
+          </a>
+        </div>
+      </section>
 
       <div className="save-row" style={{ justifyContent: 'center' }}>
         <button className="btn btn-primary" onClick={() => onNavigate({ name: 'practice' })}>

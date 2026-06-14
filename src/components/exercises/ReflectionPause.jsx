@@ -29,9 +29,6 @@ export default function ReflectionPause({ lessonId, data, setData }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <p className="privacy">
-        נשמר רק במכשיר שלך.
-      </p>
     </div>
   )
 }
