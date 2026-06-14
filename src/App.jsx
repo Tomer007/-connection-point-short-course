@@ -19,8 +19,13 @@ const DEFAULT_PRACTICE = {
 }
 
 export default function App() {
-  // אימות משתמש - נשמר רק בזיכרון הסשן (לא ב-localStorage).
-  const [auth, setAuth] = useState(null)
+  const [auth, setAuth] = useState(() => {
+    // In development, skip login for faster testing
+    if (import.meta.env.DEV) {
+      return { email: 'dev@test.com', code: 'dev' }
+    }
+    return null
+  })
 
   function handleLogin({ email, code }) {
     setAuth({ email, code })
