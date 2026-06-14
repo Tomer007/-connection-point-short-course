@@ -13,7 +13,7 @@ export default function AdminLogin({ onLoginSuccess }) {
     setError('')
 
     if (!username.trim() || !password.trim()) {
-      setError('Please enter username and password')
+      setError('נא למלא את כל השדות')
       return
     }
 
@@ -22,63 +22,70 @@ export default function AdminLogin({ onLoginSuccess }) {
       const result = await adminLogin(username.trim(), password.trim())
       onLoginSuccess(result.username)
     } catch (err) {
-      setError(err.message || 'Login failed')
+      setError(err.message || 'שגיאה בהתחברות')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <main className="admin-login" id="main">
-      <div className="admin-login-card">
-        <div className="admin-login-header">
-          <h1>Admin Login</h1>
-          <p>Connection Point Course Admin</p>
-        </div>
+    <main className="login" id="main">
+      <div className="login-card">
+        <img className="login-icon" src="/brand/icon-brown.png" alt="סמל נקודת חיבור" />
+        <p className="login-brand">נקודת חיבור</p>
+        <h1 className="login-title">כניסת מנהלים</h1>
+        <p className="login-subtitle">הזינו שם משתמש וסיסמה</p>
 
-        <form className="admin-login-form" onSubmit={handleSubmit}>
-          <div className="admin-field">
-            <label htmlFor="admin-username">Username</label>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label htmlFor="admin-username">שם משתמש</label>
             <input
               id="admin-username"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
+              placeholder="שם משתמש"
               autoComplete="username"
               disabled={loading}
             />
           </div>
 
-          <div className="admin-field">
-            <label htmlFor="admin-password">Password</label>
-            <div className="admin-password-wrap">
+          <div className="form-field">
+            <label htmlFor="admin-password">סיסמה</label>
+            <div className="field-password-wrap">
               <input
                 id="admin-password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
+                placeholder="סיסמה"
                 autoComplete="current-password"
                 disabled={loading}
               />
               <button
                 type="button"
-                className="admin-password-toggle"
+                className="field-password-toggle"
                 onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
+                aria-label={showPassword ? 'הסתר סיסמה' : 'הצג סיסמה'}
               >
                 {showPassword ? '🙈' : '👁️'}
               </button>
             </div>
           </div>
 
-          {error && <p className="admin-error">{error}</p>}
+          {error && <p className="login-error">{error}</p>}
 
-          <button type="submit" className="admin-btn-primary" disabled={loading}>
-            {loading ? 'Logging in...' : 'Log In'}
+          <button type="submit" className="btn btn-primary login-btn" disabled={loading}>
+            {loading ? 'מתחבר...' : 'כניסה'}
           </button>
         </form>
+
+        <div className="login-card-footer">
+          <a href="https://annayael.com/" target="_blank" rel="noopener noreferrer" className="footer-brand">
+            <img src="/brand/icon-brown.png" alt="" width="20" height="20" />
+            <span>annayael</span>
+          </a>
+        </div>
       </div>
     </main>
   )
