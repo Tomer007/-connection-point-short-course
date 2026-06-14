@@ -59,10 +59,11 @@ export default function Completion({ completed, onNavigate, onRestart }) {
         </section>
       )}
 
-      {/* 528Hz — המשך תרגול */}
+      {/* 528Hz — מתנה מאנה ויעל */}
       {allDone && (
         <section className="completion-gift" aria-label="מתנת סיום">
           <div className="gift-card">
+            <p className="gift-from">מתנה מאנה ויעל 🎁</p>
             <div className="gift-visual">✨🎶✨</div>
             <h3>תדר 528Hz — תדר האהבה</h3>
             <p>המשיכי לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>

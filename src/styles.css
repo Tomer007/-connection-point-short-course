@@ -1425,6 +1425,14 @@ textarea:focus {
   padding: 32px 24px;
   text-align: center;
   box-shadow: var(--shadow);
+  border: 1.5px solid var(--line);
+}
+
+.gift-from {
+  font-size: 0.9rem;
+  color: var(--plum);
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
 .gift-visual {
