@@ -1336,57 +1336,77 @@ textarea:focus {
    תעודת סיום
    ============================================================ */
 .certificate {
-  background: linear-gradient(135deg, #fff 0%, var(--plum-soft) 50%, var(--gold-soft) 100%);
-  border: 2px solid var(--plum);
+  background: linear-gradient(160deg, #fff 0%, var(--plum-soft) 60%, var(--gold-soft) 100%);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius);
-  padding: 36px 28px;
+  padding: 40px 28px 32px;
   margin: 32px auto;
-  max-width: 440px;
+  max-width: 460px;
   text-align: center;
-  box-shadow: 0 4px 24px rgba(91, 58, 94, 0.1);
+  box-shadow: 0 8px 32px rgba(91, 58, 94, 0.08);
 }
 .certificate-logo {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  margin: 0 auto 12px;
+  margin: 0 auto 14px;
   display: block;
 }
 .certificate-brand {
   color: var(--gold-deep);
   font-weight: 500;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  margin-bottom: 6px;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
 }
 .certificate-title {
   color: var(--plum);
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 4px;
 }
 .certificate-course {
   color: var(--ink);
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.05rem;
+  font-weight: 450;
   margin-bottom: 16px;
 }
 .certificate-divider {
-  width: 60px;
+  width: 48px;
   height: 2px;
-  background: linear-gradient(90deg, var(--rose), var(--plum));
+  background: linear-gradient(90deg, var(--sage), var(--plum));
   margin: 0 auto 16px;
   border-radius: 999px;
 }
 .certificate-congrats {
   color: var(--sage-deep);
-  font-size: 1rem;
-  margin-bottom: 20px;
+  font-size: 0.95rem;
+  font-weight: 450;
+  margin-bottom: 24px;
 }
 .certificate-actions {
   display: flex;
   gap: 10px;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.certificate-follow-title {
+  font-size: 0.9rem;
+  color: var(--muted);
+  font-weight: 450;
+  margin-bottom: 12px;
+}
+.certificate .social-links {
+  gap: 8px;
+}
+.certificate .social-link {
+  padding: 11px 16px;
+  font-size: 0.88rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 1px 4px rgba(58, 43, 60, 0.05);
 }
 
 /* כפתור WhatsApp */
@@ -1396,14 +1416,14 @@ textarea:focus {
   justify-content: center;
   gap: 8px;
   border: 1px solid transparent;
-  border-radius: var(--radius-sm);
-  padding: 12px 22px;
-  font-size: 1rem;
+  border-radius: 24px;
+  padding: 10px 20px;
+  font-size: 0.9rem;
   font-weight: 500;
   background: #25d366;
   color: #fff;
   cursor: pointer;
-  min-height: 44px;
+  min-height: 40px;
   font-family: inherit;
   transition: transform 0.12s ease, background 0.15s ease;
 }
