@@ -386,17 +386,7 @@ button,
   object-fit: contain;
   margin: 0 auto 16px;
   display: block;
-  animation: iconFloat 3s ease-in-out infinite, iconReveal 0.6s ease-out both;
-}
-
-@keyframes iconReveal {
-  from { opacity: 0; transform: scale(0.7); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes iconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  animation: heroFadeIn 0.6s ease-out 0.1s both;
 }
 
 .home-brand {
@@ -438,37 +428,6 @@ button,
   max-width: 440px;
   margin-inline: auto;
   animation: heroFadeIn 0.8s ease-out 0.45s both;
-}
-
-/* Four layers visual */
-.home-layers {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  margin-top: 24px;
-}
-.home-layer-dot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: var(--color);
-  border: 1.5px solid rgba(91, 58, 94, 0.08);
-  animation: layerPop 0.5s ease-out var(--delay) both;
-  position: relative;
-}
-.home-layer-dot span {
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-@keyframes layerPop {
-  0% { opacity: 0; transform: scale(0) translateY(10px); }
-  60% { transform: scale(1.15) translateY(-2px); }
-  100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Intro text */

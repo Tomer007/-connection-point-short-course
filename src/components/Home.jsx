@@ -45,22 +45,6 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
           <p className="home-brand">{courseMeta.brand}</p>
           <h1 className="home-title">{courseMeta.title}</h1>
           <p className="home-subtitle">{courseMeta.subtitle}</p>
-
-          {/* Four layers visual */}
-          <div className="home-layers">
-            <div className="home-layer-dot" style={{'--delay': '0.6s', '--color': 'var(--rose-soft)'}}>
-              <span>גוף</span>
-            </div>
-            <div className="home-layer-dot" style={{'--delay': '0.75s', '--color': 'var(--gold-soft)'}}>
-              <span>רגש</span>
-            </div>
-            <div className="home-layer-dot" style={{'--delay': '0.9s', '--color': 'var(--sage-soft)'}}>
-              <span>מחשבה</span>
-            </div>
-            <div className="home-layer-dot" style={{'--delay': '1.05s', '--color': 'var(--plum-soft)'}}>
-              <span>אנרגיה</span>
-            </div>
-          </div>
         </header>
 
         {/* Progress or intro */}
