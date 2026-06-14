@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { courseMeta, lessons } from '../data/course.js'
 
 const team = [
@@ -36,9 +37,25 @@ function ProgressRing({ completed }) {
 }
 
 export default function Home({ onStart, hasProgress, completed = [] }) {
+  const [showSplash, setShowSplash] = useState(true)
+  const [splashFading, setSplashFading] = useState(false)
+
+  useEffect(() => {
+    const fadeTimer = setTimeout(() => setSplashFading(true), 2000)
+    const hideTimer = setTimeout(() => setShowSplash(false), 3000)
+    return () => { clearTimeout(fadeTimer); clearTimeout(hideTimer) }
+  }, [])
+
   return (
     <main className="home" id="main">
-      <div className="home-card">
+      {/* Splash overlay */}
+      {showSplash && (
+        <div className={`home-splash ${splashFading ? 'fading' : ''}`}>
+          <img src="/brand/fear_to _love.png" alt="מפחד לאהבה בארבעה רבדים" className="home-splash-img" />
+        </div>
+      )}
+
+      <div className={`home-card ${showSplash ? 'hidden' : 'revealed'}`}>
         {/* Hero */}
         <header className="home-hero">
           <img className="home-icon" src="/brand/icon-brown.png" alt="סמל נקודת חיבור" />
