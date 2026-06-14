@@ -11,7 +11,7 @@ import Completion from './components/Completion.jsx'
 import BottomNav from './components/BottomNav.jsx'
 
 const DEFAULT_PRACTICE = {
-  layers: { body: 5, emotion: 5, thought: 5, energy: 5 },
+  layers: { body: null, emotion: null, thought: null, energy: null },
   signs: { chest: false, breath: false, pulse: false, restless: false },
   heartWriting: '',
   reflections: {},
