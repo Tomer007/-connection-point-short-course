@@ -52,9 +52,6 @@ export default function Completion({ completed, onNavigate, onRestart }) {
           <p className="certificate-congrats">כל הכבוד! השלמת את כל ששת השיעורים</p>
 
           <div className="certificate-actions">
-            <button className="btn btn-primary" onClick={handleShare}>
-              {copied ? '✓ הועתק!' : '🔗 שיתוף'}
-            </button>
             <button className="btn btn-whatsapp" onClick={handleWhatsApp}>
               💬 שיתוף בוואטסאפ
             </button>
