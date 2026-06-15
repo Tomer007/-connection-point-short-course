@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PrivacyNote from './PrivacyNote.jsx'
+import MeditationHub from './MeditationHub.jsx'
 
 // מסך "התרגול שלי": כתיבה אינטואיטיבית סביב השאלה ללב.
 export default function Practice({ data, setData }) {
@@ -78,6 +79,8 @@ export default function Practice({ data, setData }) {
           </ul>
         </section>
       )}
+
+      <MeditationHub />
     </main>
   )
 }
