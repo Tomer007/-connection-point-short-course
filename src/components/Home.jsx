@@ -90,7 +90,13 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
           <div className="team-row">
             {team.map((person) => (
               <div className="team-member" key={person.name}>
-                <img className="team-photo" src={person.photo} alt={person.name} />
+                <img
+                  className="team-photo"
+                  src={person.photo}
+                  alt={person.name}
+                  onClick={(e) => e.currentTarget.classList.add('pulse')}
+                  onAnimationEnd={(e) => e.currentTarget.classList.remove('pulse')}
+                />
                 <h3 className="team-name">{person.name}</h3>
                 <p className="team-bio">{person.bio}</p>
               </div>
