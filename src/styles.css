@@ -1945,6 +1945,19 @@ textarea:focus {
 }
 
 /* Footer legal links */
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 10px 0;
+}
+.footer-socials a {
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.footer-socials a:hover {
+  color: var(--plum);
+}
 .footer-legal {
   display: flex;
   justify-content: center;
