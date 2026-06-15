@@ -1843,10 +1843,13 @@ textarea:focus {
   font-size: 0.85rem;
   color: var(--muted);
   font-weight: 450;
+  font-family: var(--font);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 140px;
+  max-width: 180px;
+  direction: rtl;
+  unicode-bidi: plaintext;
 }
 
 /* ============================================================
