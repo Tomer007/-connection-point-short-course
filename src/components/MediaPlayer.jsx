@@ -128,7 +128,7 @@ function AudioWithThumbnail({ media }) {
 
   return (
     <div className="media media-audio">
-      {media.thumbnail && <img className="media-audio-banner" src={media.thumbnail} alt="" />}
+      {media.thumbnail && <img className="media-audio-banner" src={media.thumbnail} alt={media.description || media.title || 'תמונת שיעור'} />}
       {media.title && <div className="media-title">{media.title}</div>}
       <audio ref={audioRef} controls preload="auto" src={media.url}>
         הדפדפן שלך אינו תומך בנגן האודיו.
