@@ -1989,3 +1989,51 @@ textarea:focus {
   color: var(--plum);
   font-weight: 500;
 }
+
+/* ============================================================
+   Meditation Hub
+   ============================================================ */
+.meditation-hub {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.hub-section {
+  margin-bottom: 32px;
+}
+.hub-section-title {
+  font-size: 1.1rem;
+  color: var(--plum);
+  margin-bottom: 16px;
+}
+.hub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hub-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+.hub-card-type {
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+.hub-card-title {
+  font-size: 1rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.hub-card-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+/* Invite trigger style */
+.invite-trigger {
+  background: linear-gradient(135deg, var(--sage-soft), var(--plum-soft));
+}

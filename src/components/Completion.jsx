@@ -3,6 +3,7 @@ import confetti from 'canvas-confetti'
 import { completion, lessons } from '../data/course.js'
 
 const SHARE_TEXT = 'סיימתי את הקורס ״מפחד לאהבה בארבעה רבדים״ של נקודת חיבור! https://annayael.com/'
+const INVITE_TEXT = 'היי! הקורס ״מפחד לאהבה בארבעה רבדים״ של נקודת חיבור פתוח בחינם 🎁\nקוד גישה: annayael\nכניסה: https://connection-point.onrender.com'
 const SPOTIFY_528 = 'https://open.spotify.com/album/3M8ujVP1QVn6DT3fORDfbi?si=HOlvu6_IRumyE-1Q0w8Shg'
 
 export default function Completion({ completed, onNavigate, onRestart }) {
@@ -24,6 +25,10 @@ export default function Completion({ completed, onNavigate, onRestart }) {
 
   function handleWhatsApp() {
     window.open(`https://wa.me/?text=${encodeURIComponent(SHARE_TEXT)}`, '_blank', 'noopener,noreferrer')
+  }
+
+  function handleInvite() {
+    window.open(`https://wa.me/?text=${encodeURIComponent(INVITE_TEXT)}`, '_blank', 'noopener,noreferrer')
   }
 
   function handleGiftClick() {
@@ -63,7 +68,14 @@ export default function Completion({ completed, onNavigate, onRestart }) {
           {/* מתנה */}
           <button className="gift-trigger" onClick={handleGiftClick} type="button">
             <span className="gift-trigger-icon">🎁</span>
-            <span className="gift-trigger-text">מתנה מאנה ויעל</span>
+            <span className="gift-trigger-text">מתנה מנקודת חיבור</span>
+            <span className="gift-trigger-arrow">←</span>
+          </button>
+
+          {/* הזמנת חבר/ה */}
+          <button className="gift-trigger invite-trigger" onClick={handleInvite} type="button">
+            <span className="gift-trigger-icon">💌</span>
+            <span className="gift-trigger-text">שלחו את הקורס לחבר/ה</span>
             <span className="gift-trigger-arrow">←</span>
           </button>
 

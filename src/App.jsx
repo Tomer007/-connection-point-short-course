@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar.jsx'
 import Home from './components/Home.jsx'
 import Lesson from './components/Lesson.jsx'
 import Practice from './components/Practice.jsx'
+import MeditationHub from './components/MeditationHub.jsx'
 import Completion from './components/Completion.jsx'
 import BottomNav from './components/BottomNav.jsx'
 
@@ -184,7 +185,12 @@ function CourseApp({ onLogout, email }) {
               onNavigate={navigate}
             />
           )}
-          {view.name === 'practice' && <Practice data={safePractice} setData={setPractice} />}
+          {view.name === 'practice' && (
+            <>
+              <Practice data={safePractice} setData={setPractice} />
+              <MeditationHub />
+            </>
+          )}
           {view.name === 'completion' && (
             <Completion completed={completed} onNavigate={navigate} onRestart={restart} />
           )}
