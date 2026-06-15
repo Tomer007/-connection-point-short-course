@@ -1812,3 +1812,115 @@ textarea:focus {
   text-overflow: ellipsis;
   max-width: 140px;
 }
+
+/* ============================================================
+   עמודים משפטיים
+   ============================================================ */
+.legal-page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+}
+.legal-content {
+  max-width: 680px;
+  width: 100%;
+}
+.legal-back {
+  display: inline-block;
+  font-size: 0.88rem;
+  color: var(--plum);
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+.legal-back:hover {
+  text-decoration: underline;
+}
+.legal-page h1 {
+  font-size: 1.8rem;
+  color: var(--plum);
+  margin-bottom: 24px;
+}
+.legal-body {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+.legal-body h3 {
+  color: var(--plum);
+  font-size: 1.1rem;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+.legal-body h3:first-child {
+  margin-top: 0;
+}
+.legal-body p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+.legal-body ul {
+  padding-inline-start: 20px;
+  margin: 8px 0 16px;
+}
+.legal-body li {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.legal-body a {
+  color: var(--plum);
+}
+.legal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.legal-nav-link {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  text-decoration: none;
+  background: var(--card);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  transition: all 0.15s;
+}
+.legal-nav-link:hover {
+  border-color: var(--plum);
+  color: var(--plum);
+}
+.legal-nav-link.active {
+  background: var(--plum);
+  color: #fff;
+  border-color: var(--plum);
+}
+
+@media (max-width: 600px) {
+  .legal-body {
+    padding: 24px 18px;
+  }
+}
+
+/* Footer legal links */
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.footer-legal a {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.footer-legal a:hover {
+  color: var(--plum);
+  text-decoration: underline;
+}
