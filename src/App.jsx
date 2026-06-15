@@ -136,7 +136,7 @@ function CourseApp({ onLogout, email }) {
         <a href="#main" className="skip-link">
           דילוג לתוכן
         </a>
-        <Home onStart={startCourse} hasProgress={completed.length > 0} completed={completed} />
+        <Home onStart={startCourse} hasProgress={completed.length > 0} completed={completed} onLogout={onLogout} />
       </>
     )
   }

@@ -36,7 +36,7 @@ function ProgressRing({ completed }) {
   )
 }
 
-export default function Home({ onStart, hasProgress, completed = [] }) {
+export default function Home({ onStart, hasProgress, completed = [], onLogout }) {
   const [showSplash, setShowSplash] = useState(true)
   const [splashFading, setSplashFading] = useState(false)
 
@@ -48,6 +48,9 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
 
   return (
     <main className="home" id="main">
+      {onLogout && (
+        <button className="home-logout" onClick={onLogout}>יציאה</button>
+      )}
       {/* Splash overlay */}
       {showSplash && (
         <div className={`home-splash ${splashFading ? 'fading' : ''}`}>

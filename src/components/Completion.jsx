@@ -67,14 +67,14 @@ export default function Completion({ completed, onNavigate, onRestart }) {
 
           {/* מתנה */}
           <button className="gift-trigger" onClick={handleGiftClick} type="button">
-            <span className="gift-trigger-icon">🎁</span>
+            <img src="/brand/icon-brown.png" alt="" width="24" height="24" className="gift-trigger-icon" />
             <span className="gift-trigger-text">מתנה מנקודת חיבור</span>
             <span className="gift-trigger-arrow">←</span>
           </button>
 
           {/* הזמנת חבר/ה */}
           <button className="gift-trigger invite-trigger" onClick={handleInvite} type="button">
-            <span className="gift-trigger-icon">💌</span>
+            <svg className="gift-trigger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--plum)" strokeWidth="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
             <span className="gift-trigger-text">שלחו את הקורס לחבר/ה</span>
             <span className="gift-trigger-arrow">←</span>
           </button>
@@ -118,7 +118,9 @@ export default function Completion({ completed, onNavigate, onRestart }) {
         <div className="gift-overlay" onClick={() => setShowGiftPopup(false)}>
           <div className="gift-popup" onClick={(e) => e.stopPropagation()}>
             <button className="gift-popup-close" onClick={() => setShowGiftPopup(false)} aria-label="סגירה">✕</button>
-            <div className="gift-popup-visual">✨🎶✨</div>
+            <div className="gift-popup-visual">
+              <img src="/brand/icon-brown.png" alt="" width="48" height="48" />
+            </div>
             <h3>תדר 528Hz — תדר האהבה</h3>
             <p>המשיכו לתרגל עם מוזיקה בתדר 528Hz, התדר של ריפוי, אהבה והתחדשות.</p>
             <button className="btn btn-primary gift-popup-btn" onClick={handleGiftGo}>
