@@ -261,6 +261,7 @@ button,
   margin: 0 auto;
   padding: 40px 24px 80px;
   flex: 1;
+  overflow-x: hidden;
 }
 
 /* --- כותרת עליונה למובייל --- */
@@ -744,6 +745,8 @@ button,
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 24px;
+  max-width: 100%;
+  overflow: hidden;
 }
 .media-audio audio {
   width: 100%;
@@ -2016,6 +2019,8 @@ textarea:focus {
   margin-top: 40px;
   padding-top: 32px;
   border-top: 1px solid var(--line);
+  width: 100%;
+  overflow: hidden;
 }
 .hub-header {
   margin-bottom: 24px;
@@ -2024,6 +2029,7 @@ textarea:focus {
   font-size: 1.3rem;
   color: var(--plum);
   margin-bottom: 6px;
+  word-wrap: break-word;
 }
 .hub-subtitle {
   font-size: 0.9rem;
@@ -2049,16 +2055,19 @@ textarea:focus {
   border-radius: var(--radius);
   padding: 18px;
   box-shadow: var(--shadow);
+  overflow: hidden;
 }
 .hub-card-title {
   font-size: 0.95rem;
   color: var(--ink);
   margin-bottom: 4px;
+  word-wrap: break-word;
 }
 .hub-card-desc {
   font-size: 0.82rem;
   color: var(--muted);
   margin-bottom: 12px;
+  word-wrap: break-word;
 }
 
 /* Invite trigger style */
