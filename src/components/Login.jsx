@@ -6,6 +6,7 @@ const COUPON_API = '/api/coupon/validate'
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('')
   const [code, setCode] = useState('')
+  const [showCode, setShowCode] = useState(false)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
@@ -61,14 +62,24 @@ export default function Login({ onLogin }) {
 
           <div className="form-field">
             <label htmlFor="code">קוד גישה</label>
-            <input
-              id="code"
-              type="text"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder="הקוד שקיבלת"
-              autoComplete="off"
-            />
+            <div className="field-password-wrap">
+              <input
+                id="code"
+                type={showCode ? 'text' : 'password'}
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                placeholder="הקוד שקיבלת"
+                autoComplete="off"
+              />
+              <button
+                type="button"
+                className="field-password-toggle"
+                onClick={() => setShowCode((v) => !v)}
+                aria-label={showCode ? 'הסתר קוד' : 'הצג קוד'}
+              >
+                {showCode ? '🙈' : '👁️'}
+              </button>
+            </div>
           </div>
 
           {error && <p className="login-error">{error}</p>}
