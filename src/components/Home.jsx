@@ -97,6 +97,12 @@ export default function Home({ onStart, hasProgress, completed = [] }) {
             ))}
           </div>
         </section>
+
+        <nav className="footer-legal">
+          <a href="/legal/terms">תנאי שימוש</a>
+          <a href="/legal/privacy">פרטיות</a>
+          <a href="/legal/accessibility">נגישות</a>
+        </nav>
       </div>
     </main>
   )

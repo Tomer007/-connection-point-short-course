@@ -83,6 +83,11 @@ export default function Login({ onLogin }) {
             <img src="/brand/icon-brown.png" alt="" width="20" height="20" />
             <span>annayael</span>
           </a>
+          <nav className="footer-legal">
+            <a href="/legal/terms">תנאי שימוש</a>
+            <a href="/legal/privacy">פרטיות</a>
+            <a href="/legal/accessibility">נגישות</a>
+          </nav>
         </div>
       </div>
     </main>
