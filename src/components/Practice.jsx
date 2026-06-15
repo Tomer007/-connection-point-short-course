@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PrivacyNote from './PrivacyNote.jsx'
 
 // מסך "התרגול שלי": כתיבה אינטואיטיבית סביב השאלה ללב.
 export default function Practice({ data, setData }) {
@@ -58,6 +59,7 @@ export default function Practice({ data, setData }) {
           </button>
           {justSaved && <span className="saved-note" role="status">נשמר ✓</span>}
         </div>
+        <PrivacyNote />
       </div>
 
       {entries.length > 0 && (

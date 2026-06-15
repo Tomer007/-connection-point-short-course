@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { heartSteps } from '../../data/course.js'
+import PrivacyNote from '../PrivacyNote.jsx'
 
 const WRITE_SECONDS = 5 * 60 // טיימר כתיבה של 5 דקות
 
@@ -92,6 +93,7 @@ export default function HeartProtocol({ data, setData }) {
         value={data.heartWriting}
         onChange={(e) => setData((prev) => ({ ...prev, heartWriting: e.target.value }))}
       />
+      <PrivacyNote />
     </div>
   )
 }

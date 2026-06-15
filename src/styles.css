@@ -1938,3 +1938,54 @@ textarea:focus {
   color: var(--plum);
   text-decoration: underline;
 }
+
+/* ============================================================
+   Privacy info note (expandable)
+   ============================================================ */
+.privacy-note {
+  margin-top: 12px;
+}
+.privacy-note-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  color: var(--muted);
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+.privacy-note-trigger:hover {
+  color: var(--plum);
+}
+.privacy-note-icon {
+  opacity: 0.7;
+}
+.privacy-note-content {
+  margin-top: 8px;
+  padding: 14px 16px;
+  background: var(--plum-soft);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  animation: fadeSlideDown 0.2s ease-out;
+}
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.privacy-note-content p {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 6px;
+}
+.privacy-note-content p:last-child {
+  margin-bottom: 0;
+}
+.privacy-note-content a {
+  color: var(--plum);
+  font-weight: 500;
+}

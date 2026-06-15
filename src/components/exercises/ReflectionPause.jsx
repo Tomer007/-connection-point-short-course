@@ -1,3 +1,5 @@
+import PrivacyNote from '../PrivacyNote.jsx'
+
 // תרגול קצר לשיעורים 2 ו-3: רגע של עצירה וכתיבה חופשית.
 // ההנחיה מנוסחת מתוך תוכן השיעור עצמו, ללא הוספת שיטות חדשות.
 const PROMPTS = {
@@ -29,6 +31,7 @@ export default function ReflectionPause({ lessonId, data, setData }) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
+      <PrivacyNote />
     </div>
   )
 }
