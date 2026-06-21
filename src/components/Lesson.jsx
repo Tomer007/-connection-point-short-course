@@ -34,6 +34,13 @@ function ContentBlock({ block }) {
       </div>
     )
   }
+  if (block.type === 'note') {
+    return (
+      <div className="content-note">
+        <p>{block.text}</p>
+      </div>
+    )
+  }
   if (block.type === 'steps-overview') {
     return (
       <div className="steps">
@@ -117,7 +124,7 @@ export default function Lesson({
       </article>
 
       <section aria-label="האזנה לשיעור">
-        <MediaPlayer media={media} />
+        {!lesson.noMedia && <MediaPlayer media={media} />}
       </section>
 
       <section aria-label="תרגול השיעור">

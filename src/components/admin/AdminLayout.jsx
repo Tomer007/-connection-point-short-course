@@ -3,6 +3,7 @@ import { verifyAdmin, adminLogout } from '../../services/adminAuth.js'
 import AdminLogin from './AdminLogin.jsx'
 import AdminDashboard from './AdminDashboard.jsx'
 import AdminParticipants from './AdminParticipants.jsx'
+import AdminCoupons from './AdminCoupons.jsx'
 
 export default function AdminLayout() {
   const [admin, setAdmin] = useState(null)
@@ -68,6 +69,12 @@ export default function AdminLayout() {
             >
               Participants
             </button>
+            <button
+              className={`admin-nav-btn ${activeTab === 'coupons' ? 'active' : ''}`}
+              onClick={() => setActiveTab('coupons')}
+            >
+              Coupons
+            </button>
           </nav>
         </div>
         <div className="admin-header-right">
@@ -85,6 +92,9 @@ export default function AdminLayout() {
         )}
         {activeTab === 'participants' && (
           <AdminParticipants initialFilter={participantsFilter} />
+        )}
+        {activeTab === 'coupons' && (
+          <AdminCoupons />
         )}
       </div>
     </div>

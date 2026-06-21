@@ -8,7 +8,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 
 import { initDataDir, getUsersDir, getUserDir, sanitizeId } from './storage/dataDir.js'
-import { readJson, listSubdirs } from './storage/jsonStore.js'
+import { readJson, writeJson, listSubdirs } from './storage/jsonStore.js'
 import { userStore, courseStatusStore, contentStore, activityLogStore } from './storage/index.js'
 
 dotenv.config()
@@ -99,10 +99,77 @@ app.get('/api/admin/verify', requireAdmin, (req, res) => {
 app.post('/api/coupon/validate', (req, res) => {
   const { code } = req.body
   if (!code) return res.status(400).json({ error: 'Code is required' })
-  if (code.trim().toLowerCase() !== COURSE_COUPON.toLowerCase()) {
-    return res.status(401).json({ error: 'Invalid coupon code' })
+
+  // Check master coupon
+  if (code.trim().toLowerCase() === COURSE_COUPON.toLowerCase()) {
+    return res.json({ valid: true })
   }
-  res.json({ valid: true })
+
+  // Check personal coupons
+  const couponsFile = path.join(getUsersDir(), '..', 'coupons.json')
+  const coupons = readJson(couponsFile) || []
+  const coupon = coupons.find(c => c.code.toLowerCase() === code.trim().toLowerCase() && c.status === 'active')
+  if (coupon) {
+    // Mark as used
+    coupon.status = 'used'
+    coupon.usedAt = new Date().toISOString()
+    writeJson(couponsFile, coupons)
+    return res.json({ valid: true, coupon: coupon.code })
+  }
+
+  return res.status(401).json({ error: 'Invalid coupon code' })
+})
+
+// ─────────────────────────────────────────────────────────────
+// Coupon Management
+// ─────────────────────────────────────────────────────────────
+
+// POST /api/coupons/generate — generate a personal coupon after Bit payment
+app.post('/api/coupons/generate', (req, res) => {
+  try {
+    const { name, phone, email } = req.body
+    if (!name || !phone) {
+      return res.status(400).json({ error: 'Name and phone are required' })
+    }
+
+    // Generate unique coupon code
+    const prefix = 'CP'
+    const random = Math.random().toString(36).substring(2, 8).toUpperCase()
+    const code = `${prefix}-${random}`
+
+    const couponsFile = path.join(getUsersDir(), '..', 'coupons.json')
+    const coupons = readJson(couponsFile) || []
+
+    const newCoupon = {
+      code,
+      name,
+      phone,
+      email: email || null,
+      status: 'active',
+      createdAt: new Date().toISOString(),
+      usedAt: null,
+    }
+
+    coupons.push(newCoupon)
+    writeJson(couponsFile, coupons)
+
+    res.json({ success: true, coupon: code })
+  } catch (err) {
+    console.error('Coupon generate error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// GET /api/admin/coupons — list all coupons (admin only)
+app.get('/api/admin/coupons', requireAdmin, (req, res) => {
+  try {
+    const couponsFile = path.join(getUsersDir(), '..', 'coupons.json')
+    const coupons = readJson(couponsFile) || []
+    res.json({ coupons, total: coupons.length })
+  } catch (err) {
+    console.error('Admin coupons error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
 })
 
 // ─────────────────────────────────────────────────────────────

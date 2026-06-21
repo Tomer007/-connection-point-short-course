@@ -901,6 +901,22 @@ button,
   color: #fff;
 }
 
+.rating-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rating-endpoints {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+  max-width: calc(5 * 36px + 4 * 6px);
+}
+.endpoint-label {
+  font-size: 0.75rem;
+  color: var(--ink-light, #888);
+}
+
 /* checklist */
 .check-list {
   list-style: none;
@@ -1060,6 +1076,84 @@ textarea:focus {
 .kit-tag.audio {
   background: var(--gold-soft);
   color: var(--gold-deep);
+}
+.kit-gender-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--sage-soft, #e8f0ea);
+  color: var(--sage-deep, #3d6b4f);
+  margin-inline-start: 6px;
+  margin-bottom: 10px;
+}
+.kit-card-text {
+  font-size: 0.85rem;
+  color: var(--ink-light, #666);
+  margin-top: 6px;
+}
+.content-note {
+  background: var(--gold-soft, #fdf6e8);
+  border-right: 4px solid var(--gold-deep, #b8860b);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.content-note p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.gratitude-section {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.gratitude-list {
+  list-style: none;
+  counter-reset: gratitude;
+  padding: 0;
+  margin: 16px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.gratitude-list li {
+  counter-increment: gratitude;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.gratitude-list li::before {
+  content: counter(gratitude) ".";
+  font-weight: 600;
+  color: var(--sage-deep);
+  min-width: 20px;
+}
+.gratitude-input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.15s;
+}
+.gratitude-input:focus {
+  outline: none;
+  border-color: var(--sage-deep);
+}
+.gift-section {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--plum-soft, #f5f0f7);
+  border-radius: 12px;
+  text-align: center;
+}
+.gift-link {
+  display: inline-block;
+  margin-top: 12px;
+  text-decoration: none;
 }
 
 /* סימון שיעור כהושלם */
@@ -1313,6 +1407,50 @@ textarea:focus {
 }
 .login-card-footer .footer-brand {
   font-size: 0.82rem;
+}
+
+/* Purchase flow */
+.purchase-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0 16px;
+}
+.purchase-divider::before,
+.purchase-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.purchase-divider span {
+  font-size: 0.85rem;
+  color: var(--ink-light, #888);
+}
+.purchase-btn {
+  font-size: 1rem;
+}
+.purchase-note {
+  font-size: 0.85rem;
+  color: var(--ink-light, #666);
+  margin-top: 12px;
+  text-align: center;
+}
+.coupon-display {
+  background: var(--sage-soft, #e8f0ea);
+  border: 2px dashed var(--sage-deep, #3d6b4f);
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: center;
+  margin: 16px 0;
+}
+.coupon-code {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--sage-deep, #3d6b4f);
+  direction: ltr;
+  display: inline-block;
 }
 
 /* ============================================================

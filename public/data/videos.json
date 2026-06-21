@@ -4,44 +4,26 @@
     "title": "ארבעת הרבדים וציר האמצע",
     "type": "audio",
     "provider": "local",
-    "url": "/media/03_focusing-body-heart.mp3",
-    "thumbnail": "/media/03_focusing-body-heart.jpg",
+    "url": "/media/01_focusing-body-heart.mp3",
+    "thumbnail": "/media/01_focusing-body-heart.jpg",
     "description": "הסבר על ארבעת הרבדים וציר האמצע"
-  },
-  {
-    "sectionId": "roadmap",
-    "title": "מפת הדרכים - מבריחה לבחירה",
-    "type": "audio",
-    "provider": "local",
-    "url": "/media/01_affirmations-frequency.mp3",
-    "thumbnail": "/media/01_affirmations-frequency.jpg",
-    "description": "איך לזהות אוטומט ולעבור לבחירה"
   },
   {
     "sectionId": "coherence",
     "title": "החיבור בין הלב לראש",
     "type": "audio",
     "provider": "local",
-    "url": "/media/05_coherent-breathing-explained.mp3",
-    "thumbnail": "/media/05_coherent-breathing-explained.jpg",
+    "url": "/media/03_coherent-breathing.mp3",
+    "thumbnail": "/media/03_coherent-breathing.jpg",
     "description": "הסבר על סנכרון בין לב, מוח ומערכת העצבים"
-  },
-  {
-    "sectionId": "body-compass",
-    "title": "הגוף הוא המצפן",
-    "type": "audio",
-    "provider": "local",
-    "url": "/media/02_affirmations-21-days.mp3",
-    "thumbnail": "/media/02_affirmations-21-days.jpg",
-    "description": "הסימנים הגופניים ליציאה מאיזון"
   },
   {
     "sectionId": "heart-protocol",
     "title": "פרוטוקול עצירה וחיבור ללב",
     "type": "audio",
     "provider": "local",
-    "url": "/media/04_manifestation-meditation.mp3",
-    "thumbnail": "/media/04_manifestation-meditation.jpg",
+    "url": "/media/05_heart-protocol.mp3",
+    "thumbnail": "/media/05_heart-protocol.jpg",
     "description": "ארבעת שלבי הפרוטוקול לחיבור ללב"
   },
   {
@@ -49,8 +31,8 @@
     "title": "תדר של אהבה - תרגול יומי",
     "type": "audio",
     "provider": "local",
-    "url": "/media/01_affirmations-frequency.mp3",
-    "thumbnail": "/media/01_affirmations-frequency.jpg",
+    "url": "/media/06_affirmations-women.mp3",
+    "thumbnail": "/media/06_affirmations-women.jpg",
     "description": "אודיו לתרגול נשימה, מדיטציה ואפרמציות הודיה"
   },
   {
@@ -59,7 +41,7 @@
     "title": "סרטון הסבר - סוגי נשימות",
     "type": "video",
     "provider": "local",
-    "url": "/media/07_breath-types.mp4",
+    "url": "/media/06_breath-types.mp4",
     "description": "סרטון קצר שמסביר ומדגים איך לנשום נכון"
   },
   {
@@ -68,8 +50,8 @@
     "title": "תרגול נשימה קוהרנטית - אודיו",
     "type": "audio",
     "provider": "local",
-    "url": "/media/06_coherent-breathing-practice.mp3",
-    "thumbnail": "/media/06_coherent-breathing-practice.jpg",
+    "url": "/media/06_coherent-breathing.mp3",
+    "thumbnail": "/media/06_coherent-breathing.jpg",
     "description": "נשימה בקצב קבוע ומסונכרן בין הלב למוח"
   },
   {
@@ -78,8 +60,28 @@
     "title": "מדיטציית תדר אהבה ואפרמציות הודיה - אודיו",
     "type": "audio",
     "provider": "local",
-    "url": "/media/04_manifestation-meditation.mp3",
-    "thumbnail": "/media/04_manifestation-meditation.jpg",
+    "url": "/media/06_meditation.mp3",
+    "thumbnail": "/media/06_meditation.jpg",
     "description": "האזנה קצרה שמכוונת לתדר של הערכה, חופש והתרחבות"
+  },
+  {
+    "sectionId": "love-frequency",
+    "mediaKey": "affirmations-women",
+    "title": "אפרמציות חיוביות - לנשים",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/06_affirmations-women.mp3",
+    "thumbnail": "/media/06_affirmations-women.jpg",
+    "description": "אפרמציות חיוביות מותאמות לנשים"
+  },
+  {
+    "sectionId": "love-frequency",
+    "mediaKey": "affirmations-men",
+    "title": "אפרמציות חיוביות - לגברים",
+    "type": "audio",
+    "provider": "local",
+    "url": "/media/06_affirmations-men.mp3",
+    "thumbnail": "/media/06_affirmations-women.jpg",
+    "description": "אפרמציות חיוביות מותאמות לגברים"
   }
 ]
