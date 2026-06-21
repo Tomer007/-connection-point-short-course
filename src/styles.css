@@ -1109,6 +1109,32 @@ textarea:focus {
   padding-top: 20px;
   border-top: 1px solid var(--line);
 }
+.body-awareness-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+.body-awareness-item label {
+  display: block;
+  font-weight: 550;
+  font-size: 0.95rem;
+  margin-bottom: 6px;
+}
+.body-awareness-item textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.15s;
+}
+.body-awareness-item textarea:focus {
+  outline: none;
+  border-color: var(--sage-deep);
+}
 .gratitude-list {
   list-style: none;
   counter-reset: gratitude;

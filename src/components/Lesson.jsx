@@ -7,6 +7,7 @@ import SignsChecklist from './exercises/SignsChecklist.jsx'
 import HeartProtocol from './exercises/HeartProtocol.jsx'
 import DailyKit from './exercises/DailyKit.jsx'
 import ReflectionPause from './exercises/ReflectionPause.jsx'
+import BodyAwareness from './exercises/BodyAwareness.jsx'
 
 // בלוק תוכן בודד מתוך נתוני השיעור.
 function ContentBlock({ block }) {
@@ -72,6 +73,8 @@ function Exercise({ lesson, data, setData, getMedia }) {
       return <HeartProtocol data={data} setData={setData} />
     case 'daily-kit':
       return <DailyKit getMedia={getMedia} />
+    case 'body-awareness':
+      return <BodyAwareness data={data} setData={setData} />
     case 'reflection-pause':
       return <ReflectionPause lessonId={lesson.id} data={data} setData={setData} />
     default:
@@ -111,7 +114,9 @@ export default function Lesson({
         <p className="lesson-summary">{lesson.summary}</p>
         {lesson.duration && (
           <p className="lesson-duration">
-            {lesson.duration.listen} דק׳ האזנה · {lesson.duration.practice} דק׳ תרגול
+            {lesson.duration.listen > 0 && `${lesson.duration.listen} דק׳ האזנה`}
+            {lesson.duration.listen > 0 && lesson.duration.practice > 0 && ' · '}
+            {lesson.duration.practice > 0 && `${lesson.duration.practice} דק׳ תרגול`}
           </p>
         )}
       </header>
