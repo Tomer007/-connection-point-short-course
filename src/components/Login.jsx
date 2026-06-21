@@ -82,8 +82,7 @@ export default function Login({ onLogin }) {
   }
 
   function openBitPayment() {
-    // Open Bit payment link
-    window.open('https://www.paybit.me/p/0547784404', '_blank')
+    // Show instructions to send Bit payment
     setPurchaseStep(2)
   }
 
@@ -135,11 +134,11 @@ export default function Login({ onLogin }) {
                 {purchaseError && <p className="login-error">{purchaseError}</p>}
 
                 <button type="button" className="btn btn-primary login-btn" onClick={openBitPayment}>
-                  💳 שליחת תשלום ב-Bit ל-0547784404
+                  💳 המשך לתשלום
                 </button>
 
                 <p className="purchase-note">
-                  לאחר התשלום, לחצו על הכפתור למטה לקבלת קוד גישה אישי
+                  לאחר מילוי הפרטים תקבלו הנחיות לשליחת תשלום ב-Bit
                 </p>
               </div>
             </>
@@ -147,8 +146,12 @@ export default function Login({ onLogin }) {
 
           {purchaseStep === 2 && (
             <>
-              <p className="login-subtitle">שלחתם את התשלום? מעולה!</p>
-              <p className="purchase-note">לחצו כאן לקבלת קוד הגישה האישי שלכם:</p>
+              <p className="login-subtitle">שלחו תשלום ב-Bit</p>
+              <div className="bit-instructions">
+                <p><strong>פתחו את אפליקציית Bit ושלחו תשלום למספר:</strong></p>
+                <p className="bit-phone">054-7784404</p>
+                <p>לאחר שהתשלום נשלח, לחצו על הכפתור למטה לקבלת קוד הגישה:</p>
+              </div>
 
               {purchaseError && <p className="login-error">{purchaseError}</p>}
 
@@ -158,7 +161,7 @@ export default function Login({ onLogin }) {
                 onClick={handleGenerateCoupon}
                 disabled={purchaseLoading}
               >
-                {purchaseLoading ? 'מייצר קוד...' : '✓ קיבלתי את הקוד שלי'}
+                {purchaseLoading ? 'מייצר קוד...' : '✓ שלחתי את התשלום — קבלת קוד גישה'}
               </button>
             </>
           )}

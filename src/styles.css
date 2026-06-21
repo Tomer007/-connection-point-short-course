@@ -1452,6 +1452,25 @@ textarea:focus {
   direction: ltr;
   display: inline-block;
 }
+.bit-instructions {
+  background: var(--gold-soft, #fdf6e8);
+  border-radius: 12px;
+  padding: 20px;
+  margin: 16px 0;
+  text-align: center;
+}
+.bit-instructions p {
+  margin: 8px 0;
+  font-size: 0.95rem;
+}
+.bit-phone {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--plum, #6b3a5d);
+  direction: ltr;
+  letter-spacing: 1px;
+  margin: 12px 0 !important;
+}
 
 /* ============================================================
    רספונסיביות
