@@ -4,5 +4,3 @@ dist
 .vite
 .env
 data/
-public/media/*.mp3
-public/media/*.mp4
