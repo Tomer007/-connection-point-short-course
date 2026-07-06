@@ -4,6 +4,7 @@ import AdminLogin from './AdminLogin.jsx'
 import AdminDashboard from './AdminDashboard.jsx'
 import AdminParticipants from './AdminParticipants.jsx'
 import AdminCoupons from './AdminCoupons.jsx'
+import AdminReport from './AdminReport.jsx'
 
 export default function AdminLayout() {
   const [admin, setAdmin] = useState(null)
@@ -75,6 +76,12 @@ export default function AdminLayout() {
             >
               Coupons
             </button>
+            <button
+              className={`admin-nav-btn ${activeTab === 'report' ? 'active' : ''}`}
+              onClick={() => setActiveTab('report')}
+            >
+              Report
+            </button>
           </nav>
         </div>
         <div className="admin-header-right">
@@ -95,6 +102,9 @@ export default function AdminLayout() {
         )}
         {activeTab === 'coupons' && (
           <AdminCoupons />
+        )}
+        {activeTab === 'report' && (
+          <AdminReport />
         )}
       </div>
     </div>
