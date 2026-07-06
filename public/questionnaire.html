@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שאלון היכרות · נקודת חיבור</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --card: #ffffff;
+      --text: #2d2926;
+      --text-light: #6b5e54;
+      --accent: #7a5c47;
+      --accent-hover: #5e4536;
+      --sage: #6b8f71;
+      --sage-hover: #537a59;
+      --border: #e8e0d8;
+      --input-bg: #fdfcfa;
+      --shadow: 0 2px 12px rgba(45, 41, 38, 0.06);
+      --radius: 12px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+    }
+
+    .container { max-width: 680px; margin: 0 auto; }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+      padding: 32px 20px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--accent);
+    }
+    .header-brand { font-size: 0.85rem; color: var(--text-light); margin-bottom: 4px; }
+    .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
+    .header p { font-size: 0.92rem; color: var(--text-light); max-width: 480px; margin: 0 auto; }
+    .tags { display: flex; justify-content: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .tag { font-size: 0.78rem; background: var(--bg); color: var(--text-light); padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); }
+
+    .instructions {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    .instructions strong { color: var(--text); }
+    .instructions ul { margin: 10px 0 0 20px; }
+    .instructions li { margin-bottom: 4px; }
+
+    .section-title {
+      background: var(--accent);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: var(--radius) var(--radius) 0 0;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .section-subtitle {
+      font-size: 0.82rem;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+    .section-card {
+      background: var(--card);
+      border-radius: 0 0 var(--radius) var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+
+    .question { margin-bottom: 20px; }
+    .question:last-child { margin-bottom: 0; }
+    .question label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; }
+    .question .q-hint { font-size: 0.8rem; color: var(--text-light); margin-bottom: 8px; }
+
+    .scale-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .scale-group .scale-label { font-size: 0.75rem; color: var(--text-light); }
+    .scale-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: #fff;
+      font-size: 0.9rem; font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: grid; place-items: center;
+    }
+    .scale-btn:hover { border-color: var(--accent); background: #f5f0eb; }
+    .scale-btn.active { background: var(--sage); border-color: var(--sage); color: #fff; }
+
+    .question textarea {
+      width: 100%;
+      min-height: 80px;
+      padding: 12px 14px;
+      font-size: 0.92rem;
+      font-family: inherit;
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--input-bg);
+      color: var(--text);
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    .question textarea:focus { outline: none; border-color: var(--accent); }
+
+    .name-field {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+    }
+    .name-field label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .name-field input {
+      width: 100%; padding: 12px 14px; font-size: 1rem; font-family: inherit;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg);
+    }
+    .name-field input:focus { outline: none; border-color: var(--accent); }
+
+    .actions {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      margin-top: 24px;
+      text-align: center;
+    }
+    .actions p { font-size: 0.88rem; color: var(--text-light); margin-bottom: 16px; }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; font-size: 1rem; font-family: inherit; font-weight: 600;
+      border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: background 0.2s, transform 0.1s; min-width: 200px; justify-content: center;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-email { background: var(--accent); color: #fff; }
+    .btn-email:hover { background: var(--accent-hover); }
+    .btn-whatsapp { background: #25d366; color: #fff; }
+    .btn-whatsapp:hover { background: #1fb855; }
+
+    .error-msg { display: none; background: #fde8e8; color: #b91c1c; padding: 12px 16px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 16px; text-align: center; }
+    .error-msg.visible { display: block; }
+
+    .privacy {
+      text-align: center; margin-top: 24px; font-size: 0.82rem; color: var(--text-light);
+      background: var(--card); padding: 16px; border-radius: var(--radius);
+    }
+
+    .footer {
+      text-align: center; margin-top: 32px; padding-top: 20px;
+      border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-light);
+    }
+    .footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      body { padding: 16px 12px 40px; }
+      .header h1 { font-size: 1.3rem; }
+      .btn { width: 100%; min-width: unset; }
+      .btn-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="header">
+    <div class="header-brand">נקודת חיבור · מרחבי ריפוי</div>
+    <h1>שאלון היכרות</h1>
+    <p>לפני שנפגשים — רגע של עצירה והקשבה פנימית.<br>ענ/י בכנות, בקצב שלך. אין תשובות נכונות או שגויות.</p>
+    <div class="tags">
+      <span class="tag">גוף</span>
+      <span class="tag">רגש</span>
+      <span class="tag">תודעה</span>
+      <span class="tag">אנרגיה</span>
+    </div>
+  </header>
+
+  <div class="instructions">
+    <strong>איך ממלאים:</strong>
+    <ul>
+      <li>חלק מהשאלות הן בסולם 1 עד 5, חלק פתוחות.</li>
+      <li>1 = לא נכון לגביי כלל</li>
+      <li>5 = נכון מאוד ומתרחש לעיתים קרובות</li>
+      <li>המידע נשמר בסודיות מלאה</li>
+    </ul>
+  </div>
+
+  <!-- Name -->
+  <div class="name-field">
+    <label for="user-name">שם מלא</label>
+    <input type="text" id="user-name" placeholder="השם שלך">
+  </div>
+
+  <!-- Section 1: גוף -->
+  <div class="section-title">רובד ראשון <span class="section-subtitle">· גוף · אנרגיה והרגלים</span></div>
+  <div class="section-card">
+    <div class="question" data-type="scale" data-id="body1">
+      <label>1. האם את/ה מרגיש/ה מלא/ת אנרגיה במהלך רוב שעות היום?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="body2">
+      <label>2. האם את/ה נוהג/ת לזוז, להתאמן או לעסוק בפעילות גופנית בקביעות?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="body3">
+      <label>3. האם את/ה מזהה את הסימנים שהגוף שולח כשהוא בעומס?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="body4">
+      <label>4. תזונה, שינה, מעקבים שגרתיים — עד כמה הם נוכחים בחיי היומיום שלך?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+  </div>
+
+  <!-- Section 2: רגש -->
+  <div class="section-title">רובד שני <span class="section-subtitle">· רגש · תחושות, יחסים ואיזון פנימי</span></div>
+  <div class="section-card">
+    <div class="question" data-type="scale" data-id="emotion1">
+      <label>1. האם את/ה מצליח/ה לזהות רגשות ברגע שהם מופיעים, עוד לפני שהם מציפים?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="emotion2">
+      <label>2. האם יש בחייך אנשים שאת/ה מרגיש/ה לידם קרבה ותמיכה אמיתית?</label>
+      <p class="q-hint">סולם 1–5 · 1 = כלל לא · 5 = תמיד</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="text" data-id="emotion3">
+      <label>3. מה עוזר לך לחזור לשקט ואיזון אחרי סערה רגשית?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 3: תודעה -->
+  <div class="section-title">רובד שלישי <span class="section-subtitle">· תודעה · דפוסי חשיבה ואמונות</span></div>
+  <div class="section-card">
+    <div class="question" data-type="text" data-id="mind1">
+      <label>1. אילו מחשבות חוזרות אינך רוצה לשאת עוד?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+    <div class="question" data-type="text" data-id="mind2">
+      <label>2. מהי אמונה חיובית שמניעה אותך קדימה?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+    <div class="question" data-type="text" data-id="mind3">
+      <label>3. כיצד את/ה מתמודד/ת עם לחץ וכישלון?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+    <div class="question" data-type="text" data-id="mind4">
+      <label>4. האם יש אמונה ישנה שברצונך לשחרר?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+  </div>
+
+  <!-- Section 4: אנרגיה -->
+  <div class="section-title">רובד רביעי <span class="section-subtitle">· אנרגיה · משמעות, ערכים וחיבור פנימי</span></div>
+  <div class="section-card">
+    <div class="question" data-type="scale" data-id="energy1">
+      <label>1. האם את/ה חש/ה תחושת כיוון ומטרה בחייך?</label>
+      <p class="q-hint">סולם 1–5</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="energy2">
+      <label>2. האם הפעולות שלך ביומיום מתואמות עם הערכים שחשובים לך?</label>
+      <p class="q-hint">סולם 1–5</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="energy3">
+      <label>3. האם את/ה מקדיש/ה זמן להקשבה פנימית — בכל צורה שמתאימה לך?</label>
+      <p class="q-hint">סולם 1–5</p>
+      <div class="scale-group"></div>
+    </div>
+    <div class="question" data-type="scale" data-id="energy4">
+      <label>4. האם את/ה חווה רגעים של הרמוניה ושלווה עם מי שאת/ה?</label>
+      <p class="q-hint">סולם 1–5</p>
+      <div class="scale-group"></div>
+    </div>
+  </div>
+
+  <!-- Section 5: סיכום -->
+  <div class="section-title">שאלות סיכום</div>
+  <div class="section-card">
+    <div class="question" data-type="text" data-id="summary1">
+      <label>1. באילו תחומים בחיים שלך את/ה מרגיש/ה צורך בשינוי כרגע?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+    <div class="question" data-type="text" data-id="summary2">
+      <label>2. אם היית צריך/ה לסכם במשפט אחד — על מה היית רוצה שנעבוד יחד?</label>
+      <textarea placeholder="כתבו כאן..."></textarea>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions">
+    <div id="error-msg" class="error-msg">נא למלא לפחות שדה אחד לפני השליחה.</div>
+    <p>סיימת? שלח/י את השאלון:</p>
+    <div class="btn-row">
+      <button class="btn btn-email" onclick="sendEmail()">
+        ✉️ שליחה באימייל
+      </button>
+      <button class="btn btn-whatsapp" onclick="sendWhatsApp()">
+        💬 שליחה ב-WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <div class="privacy">
+    🔒 המידע שתשתף/י בשאלון נשמר בסודיות מלאה ומשמש אך ורק לצורך ההכנה לפגישה הראשונה.
+  </div>
+
+  <div class="footer">
+    <p><strong>נקודת חיבור</strong> · אנה ויעל</p>
+    <p>דוא"ל: <a href="mailto:info@nkhibur.com">info@nkhibur.com</a> · טלפון: 054-909-4466</p>
+    <p>אתר: <a href="https://annayael.com" target="_blank">annayael.com</a> · אינסטגרם: @anna_and_yael</p>
+  </div>
+
+</div>
+
+<script>
+  // Initialize scale buttons
+  document.querySelectorAll('.question[data-type="scale"]').forEach(q => {
+    const group = q.querySelector('.scale-group');
+    const id = q.dataset.id;
+    group.innerHTML = '<span class="scale-label">כלל לא</span>';
+    for (let i = 1; i <= 5; i++) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'scale-btn';
+      btn.textContent = i;
+      btn.dataset.value = i;
+      btn.dataset.qid = id;
+      btn.onclick = function() {
+        group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+      group.appendChild(btn);
+    }
+    group.innerHTML += '<span class="scale-label">תמיד</span>';
+    // Re-bind after innerHTML change
+    group.querySelectorAll('.scale-btn').forEach(btn => {
+      btn.onclick = function() {
+        group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      };
+    });
+  });
+
+  function collectAnswers() {
+    const answers = [];
+    const name = document.getElementById('user-name').value.trim();
+
+    document.querySelectorAll('.question').forEach(q => {
+      const label = q.querySelector('label').textContent.trim();
+      const type = q.dataset.type;
+      let value = '';
+
+      if (type === 'scale') {
+        const active = q.querySelector('.scale-btn.active');
+        if (active) value = active.dataset.value;
+      } else {
+        value = q.querySelector('textarea').value.trim();
+      }
+
+      if (value) {
+        answers.push({ label, value });
+      }
+    });
+
+    return { name, answers };
+  }
+
+  function buildMessage() {
+    const { name, answers } = collectAnswers();
+    if (answers.length === 0) return null;
+
+    let msg = 'שאלון היכרות — נקודת חיבור\n';
+    if (name) msg += 'שם: ' + name + '\n';
+    msg += '─────────────────────\n\n';
+
+    answers.forEach(a => {
+      msg += a.label + '\n' + a.value + '\n\n';
+    });
+
+    return msg;
+  }
+
+  function showError() { document.getElementById('error-msg').classList.add('visible'); }
+  function hideError() { document.getElementById('error-msg').classList.remove('visible'); }
+
+  function sendEmail() {
+    hideError();
+    const msg = buildMessage();
+    if (!msg) { showError(); return; }
+    const subject = encodeURIComponent('שאלון היכרות — נקודת חיבור');
+    const body = encodeURIComponent(msg);
+    window.location.href = 'mailto:info@nkhibur.com?subject=' + subject + '&body=' + body;
+  }
+
+  function sendWhatsApp() {
+    hideError();
+    const msg = buildMessage();
+    if (!msg) { showError(); return; }
+    const encoded = encodeURIComponent(msg);
+    window.open('https://wa.me/972549094466?text=' + encoded, '_blank');
+  }
+
+  // Hide error on input
+  document.querySelectorAll('textarea, input').forEach(el => {
+    el.addEventListener('input', hideError);
+  });
+</script>
+
+</body>
+</html>
