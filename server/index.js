@@ -547,9 +547,7 @@ app.get('/api/admin/metrics', requireAdmin, (req, res) => {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const distPath = path.join(__dirname, '..', 'dist')
 
-app.use(express.static(distPath))
-
-// Redirect root to hub
+// Redirect root to hub (must be before static middleware)
 app.get('/', (req, res) => {
   res.redirect('/hub.html')
 })
@@ -558,6 +556,8 @@ app.get('/', (req, res) => {
 app.get('/course', (req, res) => {
   res.sendFile(path.join(distPath, 'index.html'))
 })
+
+app.use(express.static(distPath))
 
 // SPA fallback: any non-API, non-static route serves the course app
 app.get('/{*splat}', (req, res) => {
