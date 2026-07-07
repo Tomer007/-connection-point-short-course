@@ -45,11 +45,22 @@
       box-shadow: var(--shadow);
       border-top: 4px solid var(--accent);
     }
+    .header-logo { margin-bottom: 16px; max-width: 160px; height: auto; }
     .header-brand { font-size: 0.85rem; color: var(--text-light); margin-bottom: 4px; }
     .header h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 8px; }
     .header p { font-size: 0.92rem; color: var(--text-light); max-width: 480px; margin: 0 auto; }
     .tags { display: flex; justify-content: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
     .tag { font-size: 0.78rem; background: var(--bg); color: var(--text-light); padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); }
+    .header-social {
+      display: flex; justify-content: center; gap: 14px; margin-top: 18px;
+    }
+    .header-social a {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--accent); transition: all 0.2s;
+    }
+    .header-social a:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .instructions {
       background: var(--card);
@@ -140,6 +151,22 @@
     }
     .name-field input:focus { outline: none; border-color: var(--accent); }
 
+    .reg-fields { display: flex; flex-direction: column; gap: 14px; }
+    .reg-row { display: flex; gap: 12px; }
+    .reg-field { flex: 1; }
+    .reg-field.full-width { flex: unset; width: 100%; }
+    .reg-field label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+    .reg-field input, .reg-field select {
+      width: 100%; padding: 12px 14px; font-size: 0.95rem; font-family: inherit;
+      border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg);
+      color: var(--text);
+    }
+    .reg-field input:focus, .reg-field select:focus { outline: none; border-color: var(--accent); }
+    .reg-field input.invalid, .reg-field select.invalid { border-color: #b91c1c; }
+    @media (max-width: 600px) {
+      .reg-row { flex-direction: column; }
+    }
+
     .actions {
       background: var(--card);
       border-radius: var(--radius);
@@ -171,9 +198,20 @@
     }
 
     .footer {
-      text-align: center; margin-top: 32px; padding-top: 20px;
-      border-top: 1px solid var(--border); font-size: 0.82rem; color: var(--text-light);
+      text-align: center; margin-top: 32px; padding: 28px 20px;
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
     }
+    .footer-brand-name { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+    .footer-subtitle { font-size: 0.85rem; color: var(--text-light); margin-bottom: 18px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; align-items: center; margin-bottom: 18px; }
+    .footer-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--accent); text-decoration: none; font-size: 0.9rem;
+      padding: 6px 14px; border-radius: 6px; transition: background 0.15s;
+    }
+    .footer-link:hover { background: var(--bg); }
+    .footer-link svg { flex-shrink: 0; }
+    .footer-tagline { font-size: 0.82rem; color: var(--text-light); margin-top: 8px; }
     .footer a { color: var(--accent); text-decoration: none; }
 
     @media (max-width: 600px) {
@@ -189,7 +227,7 @@
 <div class="container">
 
   <header class="header">
-    <div class="header-brand">נקודת חיבור · מרחבי ריפוי</div>
+    <img class="header-logo" src="/brand/logo-brown.png" alt="נקודת חיבור" width="160">
     <h1>שאלון היכרות</h1>
     <p>לפני שנפגשים — רגע של עצירה והקשבה פנימית.<br>ענ/י בכנות, בקצב שלך. אין תשובות נכונות או שגויות.</p>
     <div class="tags">
@@ -198,7 +236,65 @@
       <span class="tag">תודעה</span>
       <span class="tag">אנרגיה</span>
     </div>
+    <div class="header-social">
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" title="אינסטגרם">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/connectionpoint" target="_blank" rel="noopener noreferrer" title="ספוטיפיי">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" title="WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+    </div>
   </header>
+  <!-- Registration Info -->
+  <div class="section-title">פרטים אישיים <span class="section-subtitle">· שדות חובה</span></div>
+  <div class="section-card">
+    <div class="reg-fields">
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="first-name">שם פרטי *</label>
+          <input type="text" id="first-name" placeholder="שם פרטי" required>
+        </div>
+        <div class="reg-field">
+          <label for="last-name">שם משפחה *</label>
+          <input type="text" id="last-name" placeholder="שם משפחה" required>
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="user-phone">טלפון נייד *</label>
+          <input type="tel" id="user-phone" placeholder="050-1234567" dir="ltr" required>
+        </div>
+        <div class="reg-field">
+          <label for="user-email">אימייל *</label>
+          <input type="email" id="user-email" placeholder="your@email.com" dir="ltr" required>
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-field full-width">
+          <label for="user-address">כתובת מגורים *</label>
+          <input type="text" id="user-address" placeholder="עיר, רחוב" required>
+        </div>
+      </div>
+      <div class="reg-row">
+        <div class="reg-field">
+          <label for="user-age">גיל *</label>
+          <input type="number" id="user-age" placeholder="גיל" min="16" max="120" required>
+        </div>
+        <div class="reg-field">
+          <label for="user-gender">מגדר *</label>
+          <select id="user-gender" required>
+            <option value="">בחר/י</option>
+            <option value="אישה">אישה</option>
+            <option value="גבר">גבר</option>
+            <option value="אחר">אחר</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="instructions">
     <strong>איך ממלאים:</strong>
@@ -208,12 +304,6 @@
       <li>5 = נכון מאוד ומתרחש לעיתים קרובות</li>
       <li>המידע נשמר בסודיות מלאה</li>
     </ul>
-  </div>
-
-  <!-- Name -->
-  <div class="name-field">
-    <label for="user-name">שם מלא</label>
-    <input type="text" id="user-name" placeholder="השם שלך">
   </div>
 
   <!-- Section 1: גוף -->
@@ -338,9 +428,31 @@
   </div>
 
   <div class="footer">
-    <p><strong>נקודת חיבור</strong> · אנה ויעל</p>
-    <p>דוא"ל: <a href="mailto:info@nkhibur.com">info@nkhibur.com</a> · טלפון: 054-909-4466</p>
-    <p>אתר: <a href="https://annayael.com" target="_blank">annayael.com</a> · אינסטגרם: @anna_and_yael</p>
+    <div class="footer-brand-name">נקודת חיבור</div>
+    <div class="footer-subtitle">אנה ויעל · מרחבי ריפוי</div>
+    <div class="footer-links">
+      <a href="mailto:info@nkhibur.com" class="footer-link" title="אימייל">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>info@nkhibur.com</span>
+      </a>
+      <a href="tel:+972549094466" class="footer-link" title="טלפון">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>054-909-4466</span>
+      </a>
+      <a href="https://annayael.com" target="_blank" rel="noopener noreferrer" class="footer-link" title="אתר">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span>annayael.com</span>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="footer-link" title="אינסטגרם">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+        <span>@anna_and_yael</span>
+      </a>
+      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" class="footer-link" title="WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+    <div class="footer-tagline">גוף · רגש · תודעה · אנרגיה</div>
   </div>
 
 </div>
@@ -373,13 +485,54 @@
     });
   });
 
+  // Collect registration info
+  function getRegistration() {
+    return {
+      firstName: document.getElementById('first-name').value.trim(),
+      lastName: document.getElementById('last-name').value.trim(),
+      phone: document.getElementById('user-phone').value.trim(),
+      email: document.getElementById('user-email').value.trim(),
+      address: document.getElementById('user-address').value.trim(),
+      age: document.getElementById('user-age').value.trim(),
+      gender: document.getElementById('user-gender').value,
+    };
+  }
+
+  function validateRegistration() {
+    const reg = getRegistration();
+    const fields = [
+      { id: 'first-name', val: reg.firstName },
+      { id: 'last-name', val: reg.lastName },
+      { id: 'user-phone', val: reg.phone },
+      { id: 'user-email', val: reg.email },
+      { id: 'user-address', val: reg.address },
+      { id: 'user-age', val: reg.age },
+      { id: 'user-gender', val: reg.gender },
+    ];
+
+    let valid = true;
+    fields.forEach(f => {
+      const el = document.getElementById(f.id);
+      if (!f.val) {
+        el.classList.add('invalid');
+        valid = false;
+      } else {
+        el.classList.remove('invalid');
+      }
+    });
+
+    return valid;
+  }
+
   // Collect all questions with their section context
   function collectAllAnswers() {
-    const name = document.getElementById('user-name').value.trim();
+    const reg = getRegistration();
+    const name = reg.firstName + ' ' + reg.lastName;
     const sections = [];
 
     document.querySelectorAll('.section-title').forEach(titleEl => {
       const sectionName = titleEl.textContent.trim();
+      if (sectionName.includes('פרטים אישיים')) return; // skip registration section
       const card = titleEl.nextElementSibling;
       if (!card || !card.classList.contains('section-card')) return;
 
@@ -402,7 +555,7 @@
       sections.push({ name: sectionName, questions });
     });
 
-    return { name, sections };
+    return { name, reg, sections };
   }
 
   function hasAnyAnswer() {
