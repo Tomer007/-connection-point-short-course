@@ -3,24 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connection Point Hub · נקודת חיבור</title>
+  <title>נקודת חיבור · אנה ויעל</title>
   <meta name="description" content="נקודת חיבור - מרחבי ריפוי עם אנה ויעל. קורסים, סדנאות, ריטריטים וליווי אישי דרך גוף, רגש, תודעה ואנרגיה.">
   <meta property="og:title" content="נקודת חיבור · אנה ויעל">
-  <meta property="og:description" content="מרחב של ריפוי, חיבור פנימי וצמיחה">
-  <meta property="og:image" content="/brand/logo-brown.png">
-  <meta property="og:type" content="website">
-  <link rel="icon" href="/brand/icon-brown.png" type="image/png">
-  <link rel="apple-touch-icon" href="/brand/icon-brown.png">
-  <meta name="description" content="נקודת חיבור - מרחבי ריפוי עם אנה ויעל. קורסים, סדנאות, ריטריטים וליווי אישי דרך גוף, רגש, תודעה ואנרגיה.">
-  <meta property="og:title" content="נקודת חיבור · אנה ויעל">
-  <meta property="og:description" content="מרחב של ריפוי, חיבור פנימי וצמיחה">
+  <meta property="og:description" content="מרחב לריפוי, צמיחה וחיבור פנימי">
   <meta property="og:image" content="/brand/logo-brown.png">
   <meta property="og:type" content="website">
   <link rel="icon" href="/brand/icon-brown.png" type="image/png">
   <link rel="apple-touch-icon" href="/brand/icon-brown.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #faf8f5;
@@ -32,55 +25,122 @@
       --sage: #6b8f71;
       --sage-hover: #537a59;
       --plum: #6b3a5d;
+      --gold: #c8a45c;
       --border: #e8e0d8;
       --shadow: 0 4px 20px rgba(45, 41, 38, 0.08);
-      --radius: 16px;
+      --shadow-lg: 0 12px 40px rgba(45, 41, 38, 0.15);
+      --radius: 20px;
+      --radius-sm: 14px;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Heebo', sans-serif;
-      background: linear-gradient(160deg, #faf8f5 0%, #f0ebe5 30%, #e8e0d8 70%, #dfd5cb 100%);
+      background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(107, 143, 113, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(122, 92, 71, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 80%, rgba(107, 58, 93, 0.04) 0%, transparent 50%),
+        linear-gradient(160deg, #faf8f5 0%, #f5f0ea 30%, #efe8e0 60%, #e8e0d8 100%);
     }
 
     .container {
+      position: relative;
+      z-index: 1;
       max-width: 720px;
       margin: 0 auto;
-      padding: 32px 20px 60px;
+      padding: 24px 20px 60px;
     }
+
+    /* Fade-in animation */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .animate-in {
+      animation: fadeUp 0.6s ease-out both;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
 
     /* Hero */
     .hero {
       text-align: center;
-      padding: 40px 24px 32px;
+      padding: 48px 28px 40px;
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 28px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sage), var(--accent), var(--plum), var(--gold));
     }
 
     .hero-logo {
-      max-width: 180px;
+      max-width: 160px;
       height: auto;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    .hero-subtitle {
-      font-size: 0.9rem;
+    .hero-tagline {
+      font-size: 0.85rem;
       color: var(--text-light);
-      margin-bottom: 24px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
     }
 
     /* Team photos */
     .team {
       display: flex;
       justify-content: center;
-      gap: 16px;
-      margin-bottom: 24px;
+      gap: 20px;
+      margin-bottom: 28px;
     }
 
     .team-member {
@@ -88,20 +148,26 @@
     }
 
     .team-photo {
-      width: 90px;
-      height: 90px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--border);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 4px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .team-photo:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     }
 
     .team-name {
       display: block;
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-light);
-      margin-top: 8px;
-      font-weight: 500;
+      margin-top: 10px;
+      font-weight: 600;
     }
 
     .welcome-msg {
@@ -109,145 +175,563 @@
       color: var(--text);
       max-width: 520px;
       margin: 0 auto;
-      line-height: 1.8;
+      line-height: 1.9;
     }
 
     .welcome-msg strong {
       color: var(--accent);
     }
 
-    /* Links Section */
-    .links-title {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      text-align: center;
-      margin-bottom: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .links-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-
-    .link-card {
+    /* Questionnaire CTA */
+    .questionnaire-cta {
       display: flex;
       align-items: center;
-      gap: 16px;
-      padding: 18px 22px;
+      gap: 18px;
+      padding: 22px 26px;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       text-decoration: none;
       color: var(--text);
-      transition: transform 0.15s, box-shadow 0.15s;
-      border: 1px solid var(--border);
+      margin-bottom: 24px;
+      border: 2px solid var(--accent);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
 
-    .link-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(45, 41, 38, 0.12);
+    .questionnaire-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-hover);
     }
 
-    .link-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+    .questionnaire-cta-icon {
+      width: 52px;
+      height: 52px;
+      background: linear-gradient(135deg, #f5f0f7, #e8ddf0);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 1.4rem;
     }
 
-    .link-icon.course { background: linear-gradient(135deg, #e8f0ea, #d4e8d8); color: var(--sage); }
-    .link-icon.questionnaire { background: linear-gradient(135deg, #f5f0f7, #e8ddf0); color: var(--plum); }
-    .link-icon.website { background: linear-gradient(135deg, #fdf6e8, #f5ecd6); color: var(--accent); }
-    .link-icon.podcast { background: linear-gradient(135deg, #e8f4e8, #d0ebd0); color: #1DB954; }
-    .link-icon.instagram { background: linear-gradient(135deg, #fde8ef, #f5d0e0); color: #c2185b; }
-    .link-icon.whatsapp-group { background: linear-gradient(135deg, #e8f8e8, #d4f0d4); color: #25d366; }
+    .questionnaire-cta-content { flex: 1; }
 
-    .link-content { flex: 1; }
-
-    .link-title {
-      font-size: 1rem;
-      font-weight: 600;
+    .questionnaire-cta-title {
+      font-size: 1.1rem;
+      font-weight: 700;
       margin-bottom: 2px;
     }
 
-    .link-desc {
+    .questionnaire-cta-desc {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .questionnaire-cta-btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.88rem;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .questionnaire-cta:hover .questionnaire-cta-btn {
+      background: var(--accent-hover);
+      transform: scale(1.05);
+    }
+
+    /* Primary CTA - Course */
+    .cta-primary {
+      display: block;
+      margin-bottom: 24px;
+      padding: 28px;
+      background: linear-gradient(135deg, #2d2926 0%, #4a3d35 50%, #5e4536 100%);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      text-decoration: none;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-primary::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite;
+    }
+
+    .cta-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(45, 41, 38, 0.25);
+    }
+
+    .cta-primary-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #2d2926;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+
+    .cta-primary-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-primary-desc {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #2d2926;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      position: relative;
+      z-index: 1;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .cta-primary:hover .cta-primary-btn {
+      transform: scale(1.05);
+      background: #d4b068;
+    }
+
+    /* Secondary CTAs Grid */
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .cta-card {
+      padding: 22px 18px;
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+
+    .cta-card-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .cta-card-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .cta-card-desc {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
+
+    .cta-card-action {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: rgba(122, 92, 71, 0.08);
+    }
+
+    .cta-card-full {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    /* Full-width CTA card */
+    .cta-full {
+      grid-column: 1 / -1;
+    }
+
+    /* WhatsApp floating CTA */
+    .whatsapp-cta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      background: linear-gradient(135deg, #dcf8c6 0%, #c8f0a8 100%);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--text);
+      margin-bottom: 24px;
+      border: 2px solid #25d366;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .whatsapp-cta:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.25);
+      animation: none;
+    }
+
+    .whatsapp-cta-icon {
+      width: 48px;
+      height: 48px;
+      background: #25d366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .whatsapp-cta-content { flex: 1; }
+
+    .whatsapp-cta-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .whatsapp-cta-desc {
       font-size: 0.82rem;
       color: var(--text-light);
     }
 
-    .link-arrow {
-      font-size: 1.2rem;
-      color: var(--text-light);
-      transition: transform 0.15s;
+    .whatsapp-cta-arrow {
+      font-size: 1.4rem;
+      color: #25d366;
     }
 
-    .link-card:hover .link-arrow {
-      transform: translateX(-4px);
-    }
-
-    /* Social */
-    .social-section {
+    /* Content Sections */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
       text-align: center;
-      padding: 24px;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    /* Podcast Preview */
+    .podcast-preview {
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      margin-bottom: 28px;
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .podcast-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .podcast-preview-icon {
+      width: 44px;
+      height: 44px;
+      padding: 8px;
+      background: linear-gradient(135deg, #f5f0ea, #e8e0d8);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .podcast-preview-header .section-title {
+      text-align: right;
+      margin-bottom: 2px;
+    }
+
+    .podcast-preview-header .section-subtitle {
+      text-align: right;
+      margin-bottom: 0;
+    }
+
+    .podcast-episodes {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .podcast-episode-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--bg);
+      border-radius: 12px;
+      text-decoration: none;
+      color: var(--text);
+      transition: background 0.15s, transform 0.15s;
+      border: 1px solid var(--border);
+    }
+
+    .podcast-episode-card:hover {
+      background: #f0ebe5;
+      transform: translateX(-3px);
+    }
+
+    .podcast-ep-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5f0ea, #e8e0d8);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .podcast-ep-content { flex: 1; }
+
+    .podcast-ep-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .podcast-ep-meta {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .podcast-ep-play {
+      width: 32px;
+      height: 32px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .podcast-episode-card:hover .podcast-ep-play {
+      transform: scale(1.15);
+      background: var(--accent-hover);
+    }
+
+    .podcast-view-all {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: rgba(122, 92, 71, 0.06);
+      transition: background 0.15s;
+    }
+
+    .podcast-view-all:hover { background: rgba(122, 92, 71, 0.12); }
+
+    /* Instagram Preview */
+    .instagram-preview {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 24px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
+    }
+
+    .instagram-preview-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .instagram-preview-header img {
+      width: 44px;
+      height: 44px;
+      padding: 8px;
+      background: linear-gradient(135deg, #f5f0ea, #e8e0d8);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .instagram-preview-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .instagram-post {
+      position: relative;
+      aspect-ratio: 1;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--text);
+      background: linear-gradient(135deg, #f5f0ea, #e8e0d8);
+      border: 1px solid var(--border);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .instagram-post:hover {
+      transform: scale(1.04);
+      box-shadow: 0 4px 16px rgba(45, 41, 38, 0.12);
+    }
+
+    .instagram-post-inner {
+      padding: 10px;
+      text-align: center;
+      font-size: 0.74rem;
+      line-height: 1.4;
+      color: var(--text-light);
+      font-weight: 600;
+    }
+
+    .instagram-post-icon {
+      width: 28px;
+      height: 28px;
+      margin: 0 auto 6px;
+      display: block;
+      opacity: 0.6;
+    }
+
+    .instagram-follow {
+      display: block;
+      text-align: center;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 12px 24px;
+      border-radius: 25px;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .instagram-follow:hover {
+      transform: scale(1.03);
+      background: var(--accent-hover);
+    }
+
+    /* Contact */
+    .social-section {
+      text-align: center;
+      padding: 28px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      border: 1px solid var(--border);
     }
 
     .social-title {
-      font-size: 0.9rem;
-      color: var(--text-light);
+      font-size: 1rem;
+      font-weight: 700;
       margin-bottom: 16px;
-    }
-
-    .social-subtitle {
-      font-size: 0.8rem;
-      color: var(--text-light);
-      margin-top: 10px;
     }
 
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .social-btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 50px;
-      height: 50px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       text-decoration: none;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .social-btn:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transform: scale(1.15);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
     }
 
     .social-btn.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
     .social-btn.spotify { background: #1DB954; color: #fff; }
     .social-btn.whatsapp { background: #25d366; color: #fff; }
     .social-btn.email { background: var(--accent); color: #fff; }
-    .social-btn.website { background: var(--sage); color: #fff; }
+
+    .social-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-top: 12px;
+    }
 
     /* Footer */
     .footer {
       text-align: center;
-      padding-top: 20px;
+      padding-top: 16px;
       font-size: 0.8rem;
       color: var(--text-light);
     }
@@ -256,15 +740,16 @@
       display: flex;
       justify-content: center;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
     .footer-tag {
       font-size: 0.75rem;
       background: var(--card);
-      padding: 3px 10px;
+      padding: 4px 12px;
       border-radius: 12px;
       border: 1px solid var(--border);
+      font-weight: 500;
     }
 
     /* Focus-visible styles */
@@ -282,118 +767,211 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
     }
 
     @media (max-width: 600px) {
-      .container { padding: 20px 14px 40px; }
-      .hero { padding: 28px 18px 24px; }
-      .hero-logo { max-width: 140px; }
-      .team-photo { width: 72px; height: 72px; }
-      .link-card { padding: 14px 16px; }
+      .container { padding: 16px 14px 40px; }
+      .hero { padding: 32px 18px 28px; }
+      .hero-logo { max-width: 130px; }
+      .team-photo { width: 80px; height: 80px; }
+      .cta-grid { grid-template-columns: 1fr; }
+      .cta-primary-title { font-size: 1.15rem; }
+      .instagram-grid { gap: 6px; }
     }
   </style>
 </head>
 <body>
 
+<div class="bg-pattern" aria-hidden="true"></div>
+
 <div class="container">
 
   <!-- Hero -->
-  <header class="hero">
-    <img class="hero-logo" src="/brand/logo-brown.png" alt="נקודת חיבור" width="180" height="55">
-    <p class="hero-subtitle">מרחבי ריפוי · אנה ויעל</p>
+  <header class="hero animate-in">
+    <img class="hero-logo" src="/brand/logo-brown.png" alt="נקודת חיבור" width="160" height="49">
+    <p class="hero-tagline">גוף · רגש · תודעה · אנרגיה</p>
 
     <div class="team">
       <div class="team-member">
-        <img class="team-photo" src="/team/anna.jpg" alt="אנה" width="90" height="90">
+        <img class="team-photo" src="/team/anna.jpg" alt="אנה" width="100" height="100">
         <span class="team-name">אנה</span>
       </div>
       <div class="team-member">
-        <img class="team-photo" src="/team/yael.jpg" alt="יעל" width="90" height="90">
+        <img class="team-photo" src="/team/yael.jpg" alt="יעל" width="100" height="100">
         <span class="team-name">יעל</span>
       </div>
     </div>
 
     <p class="welcome-msg">
-      ברוכים הבאים<br>
-      אנחנו <strong>אנה ויעל</strong>, ויחד יצרנו את <strong>נקודת חיבור</strong> - מרחב של ריפוי, חיבור פנימי וצמיחה.<br>
-      כאן תמצאו את כל הכלים, הקורסים והתכנים שלנו - הכל במקום אחד.
+      אנחנו <strong>אנה ויעל</strong>, ויחד יצרנו את <strong>נקודת חיבור</strong> – מרחב לריפוי, צמיחה וחיבור פנימי.
+      מתוך גישה המשלבת גוף, רגש, תודעה ואנרגיה, ריכזנו כאן את כל הקורסים, הכלים והתכנים שלנו במקום אחד, כדי ללוות אתכם בדרך לחיבור עמוק יותר לעצמכם.
     </p>
   </header>
 
-  <!-- Links -->
-  <nav aria-label="קישורים ראשיים">
-    <div class="links-title">הקישורים שלנו</div>
-    <div class="links-grid">
-      <a href="/course" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon course"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">קורס: מפחד לאהבה בארבעה רבדים</div>
-          <div class="link-desc">קורס דיגיטלי לחזרה לציר האמצע דרך גוף, רגש, מחשבה ואנרגיה</div>
-        </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
-      </a>
+  <!-- Questionnaire CTA - First Widget -->
+  <a href="/questionnaire.html" target="_blank" rel="noopener noreferrer" class="questionnaire-cta animate-in delay-1">
+    <div class="questionnaire-cta-icon">
+      <img src="/brand/icon-brown.png" alt="" width="36" height="36">
+    </div>
+    <div class="questionnaire-cta-content">
+      <div class="questionnaire-cta-title">שאלון היכרות</div>
+      <div class="questionnaire-cta-desc">רגע של עצירה והקשבה פנימית לפני שנפגשים</div>
+    </div>
+    <span class="questionnaire-cta-btn">מלאו עכשיו →</span>
+  </a>
 
-      <a href="/questionnaire.html" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon questionnaire"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">שאלון היכרות</div>
-          <div class="link-desc">לפני שנפגשים - רגע של עצירה והקשבה פנימית</div>
-        </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
-      </a>
+  <!-- Primary CTA - Course -->
+  <a href="/course" class="cta-primary animate-in delay-2">
+    <span class="cta-primary-badge">קורס דיגיטלי</span>
+    <div class="cta-primary-title">מפחד לאהבה בארבעה רבדים</div>
+    <div class="cta-primary-desc">חזרה לציר האמצע דרך גוף, רגש, מחשבה ואנרגיה – בקצב שלכם, מכל מקום</div>
+    <span class="cta-primary-btn">
+      <span>התחילו את המסע</span>
+      <span aria-hidden="true">←</span>
+    </span>
+  </a>
 
-      <a href="https://annayael.com" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon website"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">האתר שלנו</div>
-          <div class="link-desc">annayael.com - כל המידע על ריטריטים, סדנאות וליווי אישי</div>
-        </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
-      </a>
+  <!-- Secondary CTAs -->
+  <a href="https://annayael.com" target="_blank" rel="noopener noreferrer" class="cta-card cta-card-full animate-in delay-3">
+    <span class="cta-card-icon"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></span>
+    <div class="cta-card-title">הריטריט הבא שלנו</div>
+    <div class="cta-card-desc">חוויה טרנספורמטיבית בקבוצה אינטימית</div>
+    <span class="cta-card-action">לפרטים →</span>
+  </a>
 
-      <a href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon podcast"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">הפודקסט שלנו</div>
-          <div class="link-desc">מדיטציות מודרכות, שיחות ותובנות על החיבור הפנימי</div>
-        </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
-      </a>
+  <a href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a" target="_blank" rel="noopener noreferrer" class="cta-card cta-card-full animate-in delay-3">
+    <span class="cta-card-icon"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></span>
+    <div class="cta-card-title">הפודקסט שלנו</div>
+    <div class="cta-card-desc">מדיטציות מודרכות, שיחות ותובנות</div>
+    <span class="cta-card-action">להאזנה →</span>
+  </a>
 
-      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon instagram"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">אינסטגרם</div>
-          <div class="link-desc">@anna_and_yael - תוכן, השראה ועדכונים</div>
-        </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
-      </a>
+  <!-- WhatsApp CTA -->
+  <a href="https://chat.whatsapp.com/Dv196PI16lcCHprusiq21p?mode=gi_t" target="_blank" rel="noopener noreferrer" class="whatsapp-cta animate-in delay-4">
+    <div class="whatsapp-cta-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    <div class="whatsapp-cta-content">
+      <div class="whatsapp-cta-title">הצטרפו לקבוצת העדכונים השקטה שלנו</div>
+      <div class="whatsapp-cta-desc">ריטריטים, סדנאות ותכנים חדשים – ישירות אליכם</div>
+    </div>
+    <span class="whatsapp-cta-arrow" aria-hidden="true">←</span>
+  </a>
 
-      <a href="https://chat.whatsapp.com/Dv196PI16lcCHprusiq21p?mode=gi_t" target="_blank" rel="noopener noreferrer" class="link-card">
-        <div class="link-icon whatsapp-group"><img src="/brand/icon-brown.png" alt="" width="28" height="28"></div>
-        <div class="link-content">
-          <div class="link-title">הצטרפו לקבוצת העדכונים השקטה</div>
-          <div class="link-desc">עדכונים על ריטריטים, סדנאות ותכנים חדשים</div>
+  <!-- Podcast Preview -->
+  <section class="podcast-preview animate-in delay-5" aria-label="טעימה מהפעילות שלנו">
+    <div class="podcast-preview-header">
+      <img src="/brand/icon-brown.png" alt="" width="28" height="28" class="podcast-preview-icon">
+      <div>
+        <div class="section-title">טעימה מהפעילות שלנו</div>
+        <div class="section-subtitle">זה כבר קרה – הפודקאסט שלנו</div>
+      </div>
+    </div>
+    <div class="podcast-episodes">
+      <a href="/podcast.html" class="podcast-episode-card">
+        <div class="podcast-ep-number">9</div>
+        <div class="podcast-ep-content">
+          <div class="podcast-ep-title">להקשיב לקול הפנימי - עם ניצן אלפסי</div>
+          <div class="podcast-ep-meta">53:54</div>
         </div>
-        <span class="link-arrow" aria-hidden="true">←</span>
+        <div class="podcast-ep-play">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </a>
+      <a href="/podcast.html" class="podcast-episode-card">
+        <div class="podcast-ep-number">8</div>
+        <div class="podcast-ep-content">
+          <div class="podcast-ep-title">מה זה הגוף הרגשי שלנו</div>
+          <div class="podcast-ep-meta">32:24</div>
+        </div>
+        <div class="podcast-ep-play">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </a>
+      <a href="/podcast.html" class="podcast-episode-card">
+        <div class="podcast-ep-number">7</div>
+        <div class="podcast-ep-content">
+          <div class="podcast-ep-title">החופש לטעות - עם שחר כספי</div>
+          <div class="podcast-ep-meta">51:46</div>
+        </div>
+        <div class="podcast-ep-play">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
       </a>
     </div>
-  </nav>
+    <a href="/podcast.html" class="podcast-view-all">לכל הפרקים ←</a>
+  </section>
+
+  <!-- Instagram Preview -->
+  <section class="instagram-preview animate-in delay-5" aria-label="אינסטגרם">
+    <div class="instagram-preview-header">
+      <img src="/brand/icon-brown.png" alt="" width="28" height="28">
+      <span class="instagram-preview-title">@anna_and_yael</span>
+    </div>
+    <div class="instagram-grid">
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          מדיטציה וחיבור פנימי
+        </div>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          תובנות על צמיחה
+        </div>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          ריטריטים וסדנאות
+        </div>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          גוף, רגש ותודעה
+        </div>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          השראה יומית
+        </div>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-post">
+        <div class="instagram-post-inner">
+          <img class="instagram-post-icon" src="/brand/icon-brown.png" alt="" width="28" height="28">
+          הקהילה שלנו
+        </div>
+      </a>
+    </div>
+    <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="instagram-follow">
+      עקבו אחרינו באינסטגרם
+    </a>
+  </section>
 
   <!-- Contact -->
-  <section aria-label="צרו קשר" class="social-section">
-    <div class="social-title">צרו איתנו קשר</div>
+  <section aria-label="צרו קשר" class="social-section animate-in">
+    <div class="social-title">רוצים לדבר? אנחנו כאן</div>
     <div class="social-icons">
-      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" aria-label="WhatsApp - לקביעת תורים">
+      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" aria-label="WhatsApp">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" class="social-btn instagram" aria-label="אינסטגרם">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a" target="_blank" rel="noopener noreferrer" class="social-btn spotify" aria-label="Spotify">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
       </a>
       <a href="mailto:info@nkhibur.com" class="social-btn email" aria-label="אימייל">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
       </a>
     </div>
-    <p class="social-subtitle">לקביעת תורים</p>
+    <p class="social-subtitle">לקביעת תורים וליווי אישי</p>
   </section>
 
   <!-- Footer -->

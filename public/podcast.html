@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>זה כבר קרה · הפודקאסט של נקודת חיבור</title>
+  <meta name="description" content="זה כבר קרה – הפודקאסט מבית נקודת חיבור עם אנה ויעל. שיחות על התפתחות אישית, ריפוי וחיבור פנימי.">
+  <link rel="icon" href="/brand/icon-brown.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --card: #ffffff;
+      --text: #2d2926;
+      --text-light: #5a4d44;
+      --accent: #7a5c47;
+      --accent-hover: #5e4536;
+      --border: #e8e0d8;
+      --shadow: 0 4px 20px rgba(45, 41, 38, 0.08);
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: linear-gradient(160deg, #faf8f5 0%, #f0ebe5 30%, #e8e0d8 70%, #dfd5cb 100%);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      transition: opacity 0.15s;
+    }
+
+    .back-link:hover { opacity: 0.7; }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .page-header p {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .episodes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .episode-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .episode-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 41, 38, 0.12);
+    }
+
+    .episode-video {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+    }
+
+    .episode-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .episode-info {
+      padding: 18px 22px;
+    }
+
+    .episode-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .episode-meta {
+      display: flex;
+      gap: 12px;
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+
+    .channel-link {
+      display: block;
+      text-align: center;
+      margin-top: 32px;
+      padding: 16px 24px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 1rem;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .channel-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(45, 41, 38, 0.12);
+    }
+
+    *:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 20px 14px 40px; }
+      .page-header h1 { font-size: 1.4rem; }
+      .episode-info { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <a href="/hub.html" class="back-link">→ חזרה לדף הראשי</a>
+
+  <header class="page-header">
+    <h1>🎙️ זה כבר קרה</h1>
+    <p>הפודקאסט מבית נקודת חיבור – שיחות על התפתחות אישית, ריפוי וחיבור פנימי עם אנה ויעל</p>
+  </header>
+
+  <div class="episodes-grid">
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/zoOXW6VnDJc" title="זה כבר קרה 9 | להקשיב לקול הפנימי - פרק מיוחד עם ניצן אלפסי" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 9 | להקשיב לקול הפנימי - פרק מיוחד עם ניצן אלפסי</h2>
+        <div class="episode-meta">
+          <span>53:54</span>
+          <span>5 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/G_o32p2kR-U" title="זה כבר קרה 8 | מה זה הגוף הרגשי שלנו" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 8 | מה זה הגוף הרגשי שלנו</h2>
+        <div class="episode-meta">
+          <span>32:24</span>
+          <span>63 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/RwuPfWgsD-4" title="זה כבר קרה 7 | החופש לטעות - פרק מיוחד עם שחר כספי על טעויות, פגיעות וצמיחה" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 7 | החופש לטעות - פרק מיוחד עם שחר כספי על טעויות, פגיעות וצמיחה</h2>
+        <div class="episode-meta">
+          <span>51:46</span>
+          <span>27 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/3Zu-iqxsW0Y" title="זה כבר קרה 6 | עד כמה זה מפחיד לשחרר שליטה?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 6 | עד כמה זה מפחיד לשחרר שליטה?</h2>
+        <div class="episode-meta">
+          <span>37:38</span>
+          <span>105 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/eqq9LBkg_ps" title="זה כבר קרה 5 | משבר מזוית אחרת - איך להפוך אתגרים להזדמנויות צמיחה" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 5 | משבר מזוית אחרת - איך להפוך אתגרים להזדמנויות צמיחה</h2>
+        <div class="episode-meta">
+          <span>43:51</span>
+          <span>42 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/lrbInGB3TaE" title="זה כבר קרה 4 | מה קורה כשפוגשים את הכאב? פרק מיוחד עם עמרי פלד" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 4 | מה קורה כשפוגשים את הכאב? פרק מיוחד עם עמרי פלד</h2>
+        <div class="episode-meta">
+          <span>47:48</span>
+          <span>52 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/hEZ-SZaXDR0" title="זה כבר קרה 3 | איך לגרום לדברים באמת להתגשם" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 3 | איך לגרום לדברים באמת להתגשם</h2>
+        <div class="episode-meta">
+          <span>44:12</span>
+          <span>92 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/CWhu39-oXZE" title="זה כבר קרה 2 | התפתחות אישית זה כואב" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 2 | התפתחות אישית זה כואב</h2>
+        <div class="episode-meta">
+          <span>40:05</span>
+          <span>97 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/I0h3LiQVjBY" title="זה כבר קרה 1 | למה לי להשתנות?" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">זה כבר קרה 1 | למה לי להשתנות?</h2>
+        <div class="episode-meta">
+          <span>39:05</span>
+          <span>110 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="episode-card">
+      <div class="episode-video">
+        <iframe src="https://www.youtube.com/embed/Zu81Avww5mY" title="סיפורים אמיתיים של שינוי | אנה ויעל - נקודת חיבור" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="episode-info">
+        <h2 class="episode-title">סיפורים אמיתיים של שינוי | אנה ויעל - נקודת חיבור</h2>
+        <div class="episode-meta">
+          <span>2:20</span>
+          <span>139 צפיות</span>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <a href="https://www.youtube.com/@infonkhibur" target="_blank" rel="noopener noreferrer" class="channel-link">
+    צפו בכל הפרקים בערוץ היוטיוב שלנו ←
+  </a>
+
+</div>
+
+</body>
+</html>
