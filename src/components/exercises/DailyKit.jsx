@@ -60,7 +60,7 @@ export default function DailyKit({ getMedia }) {
         <h3>🎁 מתנה עבורכם</h3>
         <p>חיבור לפודקסט שלנו עם מדיטציה מודרכת מיוחדת:</p>
         <a
-          href="https://open.spotify.com/episode/0KTc2iuuHiAh7AxzVN2and?si=87ea92819e4d4a66"
+          href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a"
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-sage gift-link"
