@@ -549,11 +549,22 @@ const distPath = path.join(__dirname, '..', 'dist')
 
 app.use(express.static(distPath))
 
-// SPA fallback: any non-API route serves index.html
+// Redirect root to hub
+app.get('/', (req, res) => {
+  res.redirect('/hub.html')
+})
+
+// Course app lives at /course
+app.get('/course', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'))
+})
+
+// SPA fallback: any non-API, non-static route serves the course app
 app.get('/{*splat}', (req, res) => {
   if (req.path.startsWith('/api')) {
     return res.status(404).json({ error: 'Not found' })
   }
+  // Static files (hub.html, questionnaire.html, etc.) are served by express.static above
   res.sendFile(path.join(distPath, 'index.html'))
 })
 
