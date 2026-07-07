@@ -344,8 +344,8 @@
           <input type="number" id="user-age" placeholder="גיל" min="16" max="120" inputmode="numeric">
         </div>
         <div class="reg-field">
-          <label for="user-occupation">עיסוק *</label>
-          <input type="text" id="user-occupation" placeholder="עיסוק / תחום עבודה" required>
+          <label for="user-occupation">עיסוק</label>
+          <input type="text" id="user-occupation" placeholder="עיסוק / תחום עבודה">
         </div>
         <div class="reg-field">
           <label for="user-gender">מגדר</label>
@@ -477,7 +477,6 @@
   <div class="actions">
     <div id="error-msg" class="error-msg">נא למלא לפחות שדה אחד לפני השליחה.</div>
     <div id="success-msg" class="success-msg">✓ השאלון נשלח בהצלחה! תודה שמילאת/ה 🙏</div>
-    <p>סיימת? שלח/י את השאלון:</p>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="sendEmail()">
         שליחה
@@ -560,7 +559,6 @@
       { id: 'user-phone', val: reg.phone },
       { id: 'user-email', val: reg.email },
       { id: 'user-address', val: reg.address },
-      { id: 'user-occupation', val: reg.occupation },
     ];
 
     let valid = true;
