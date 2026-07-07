@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>שאלון היכרות · נקודת חיבור</title>
+  <meta name="description" content="שאלון היכרות להכנה לפגישה ראשונה · נקודת חיבור · אנה ויעל · גוף, רגש, תודעה ואנרגיה">
+  <meta property="og:title" content="שאלון היכרות · נקודת חיבור">
+  <meta property="og:description" content="לפני שנפגשים — רגע של עצירה והקשבה פנימית">
+  <meta property="og:image" content="/brand/logo-brown.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/brand/icon-brown.png" type="image/png">
+  <link rel="apple-touch-icon" href="/brand/icon-brown.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +19,7 @@
       --bg: #faf8f5;
       --card: #ffffff;
       --text: #2d2926;
-      --text-light: #6b5e54;
+      --text-light: #5a4d44;
       --accent: #7a5c47;
       --accent-hover: #5e4536;
       --sage: #6b8f71;
@@ -72,7 +79,7 @@
       color: var(--text-light);
     }
     .instructions strong { color: var(--text); }
-    .instructions ul { margin: 10px 0 0 20px; }
+    .instructions ul { margin: 10px 20px 0 0; }
     .instructions li { margin-bottom: 4px; }
 
     .section-title {
@@ -106,10 +113,11 @@
       gap: 8px;
       flex-wrap: wrap;
       align-items: center;
+      min-height: 48px;
     }
     .scale-group .scale-label { font-size: 0.75rem; color: var(--text-light); }
     .scale-btn {
-      width: 38px; height: 38px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       border: 2px solid var(--border);
       background: #fff;
@@ -135,7 +143,7 @@
       resize: vertical;
       transition: border-color 0.2s;
     }
-    .question textarea:focus { outline: none; border-color: var(--accent); }
+    .question textarea:focus { border-color: var(--accent); }
 
     .name-field {
       background: var(--card);
@@ -161,7 +169,7 @@
       border: 1px solid var(--border); border-radius: 8px; background: var(--input-bg);
       color: var(--text);
     }
-    .reg-field input:focus, .reg-field select:focus { outline: none; border-color: var(--accent); }
+    .reg-field input:focus, .reg-field select:focus { border-color: var(--accent); }
     .reg-field input.invalid, .reg-field select.invalid { border-color: #b91c1c; }
     @media (max-width: 600px) {
       .reg-row { flex-direction: column; }
@@ -220,6 +228,44 @@
       .btn { width: 100%; min-width: unset; }
       .btn-row { flex-direction: column; }
     }
+
+    /* Focus visible */
+    *:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+    input:focus-visible, textarea:focus-visible, select:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(122, 92, 71, 0.15);
+    }
+    .header-social a:focus-visible, .footer-social-btn:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+      box-shadow: 0 0 0 6px var(--accent);
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Success message */
+    .success-msg {
+      display: none;
+      background: #e8f5e9;
+      color: #2e7d32;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      text-align: center;
+      font-weight: 500;
+    }
+    .success-msg.visible { display: block; }
   </style>
 </head>
 <body>
@@ -227,7 +273,7 @@
 <div class="container">
 
   <header class="header">
-    <img class="header-logo" src="/brand/logo-brown.png" alt="נקודת חיבור" width="160">
+    <img class="header-logo" src="/brand/logo-brown.png" alt="נקודת חיבור" width="160" height="50">
     <h1>שאלון היכרות</h1>
     <p>לפני שנפגשים — רגע של עצירה והקשבה פנימית.<br>ענ/י בכנות, בקצב שלך. אין תשובות נכונות או שגויות.</p>
     <div class="tags">
@@ -237,14 +283,14 @@
       <span class="tag">אנרגיה</span>
     </div>
     <div class="header-social">
-      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" title="אינסטגרם">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      <a href="https://www.instagram.com/anna_and_yael" target="_blank" rel="noopener noreferrer" aria-label="אינסטגרם">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
       </a>
-      <a href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a" target="_blank" rel="noopener noreferrer" title="ספוטיפיי">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      <a href="https://open.spotify.com/show/3jiGyoa1aJCxegYlfUWbsq?si=8afde44a6c7d407a" target="_blank" rel="noopener noreferrer" aria-label="ספוטיפיי">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
       </a>
-      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" title="WhatsApp">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <a href="https://wa.me/972549094466" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       </a>
     </div>
   </header>
@@ -255,33 +301,33 @@
       <div class="reg-row">
         <div class="reg-field">
           <label for="first-name">שם פרטי *</label>
-          <input type="text" id="first-name" placeholder="שם פרטי" required>
+          <input type="text" id="first-name" placeholder="שם פרטי" required autocomplete="given-name">
         </div>
         <div class="reg-field">
           <label for="last-name">שם משפחה *</label>
-          <input type="text" id="last-name" placeholder="שם משפחה" required>
+          <input type="text" id="last-name" placeholder="שם משפחה" required autocomplete="family-name">
         </div>
       </div>
       <div class="reg-row">
         <div class="reg-field">
           <label for="user-phone">טלפון נייד *</label>
-          <input type="tel" id="user-phone" placeholder="050-1234567" dir="ltr" required>
+          <input type="tel" id="user-phone" placeholder="050-1234567" dir="ltr" required autocomplete="tel" inputmode="tel">
         </div>
         <div class="reg-field">
           <label for="user-email">אימייל *</label>
-          <input type="email" id="user-email" placeholder="your@email.com" dir="ltr" required>
+          <input type="email" id="user-email" placeholder="your@email.com" dir="ltr" required autocomplete="email">
         </div>
       </div>
       <div class="reg-row">
         <div class="reg-field full-width">
           <label for="user-address">כתובת מגורים *</label>
-          <input type="text" id="user-address" placeholder="עיר, רחוב" required>
+          <input type="text" id="user-address" placeholder="עיר, רחוב" required autocomplete="street-address">
         </div>
       </div>
       <div class="reg-row">
         <div class="reg-field">
           <label for="user-age">גיל</label>
-          <input type="number" id="user-age" placeholder="גיל" min="16" max="120">
+          <input type="number" id="user-age" placeholder="גיל" min="16" max="120" inputmode="numeric">
         </div>
         <div class="reg-field">
           <label for="user-occupation">עיסוק *</label>
@@ -416,6 +462,7 @@
   <!-- Actions -->
   <div class="actions">
     <div id="error-msg" class="error-msg">נא למלא לפחות שדה אחד לפני השליחה.</div>
+    <div id="success-msg" class="success-msg">✓ השאלון נשלח בהצלחה! תודה שמילאת/ה 🙏</div>
     <p>סיימת? שלח/י את השאלון:</p>
     <div class="btn-row">
       <button class="btn btn-email" onclick="sendEmail()">
@@ -632,6 +679,7 @@
     const subject = encodeURIComponent(subjectText);
     const body = encodeURIComponent(msg);
     window.location.href = 'mailto:info@nkhibur.com?subject=' + subject + '&body=' + body;
+    showSuccess();
   }
 
   function sendWhatsApp() {
@@ -644,6 +692,7 @@
     if (!msg) { showError(); return; }
     const encoded = encodeURIComponent(msg);
     window.open('https://wa.me/972549094466?text=' + encoded, '_blank');
+    showSuccess();
   }
 
   // Hide error on input
@@ -651,6 +700,79 @@
     el.addEventListener('input', hideError);
     el.addEventListener('change', hideError);
   });
+
+  // Auto-save to localStorage
+  const DRAFT_KEY = 'cp_questionnaire_draft';
+
+  function saveDraft() {
+    const data = {
+      reg: getRegistration(),
+      scales: {},
+      texts: {},
+    };
+    document.querySelectorAll('.question[data-type="scale"]').forEach(q => {
+      const active = q.querySelector('.scale-btn.active');
+      if (active) data.scales[q.dataset.id] = active.dataset.value;
+    });
+    document.querySelectorAll('.question[data-type="text"]').forEach(q => {
+      const val = q.querySelector('textarea').value;
+      if (val) data.texts[q.dataset.id] = val;
+    });
+    localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+  }
+
+  function restoreDraft() {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
+      if (data.reg) {
+        if (data.reg.firstName) document.getElementById('first-name').value = data.reg.firstName;
+        if (data.reg.lastName) document.getElementById('last-name').value = data.reg.lastName;
+        if (data.reg.phone) document.getElementById('user-phone').value = data.reg.phone;
+        if (data.reg.email) document.getElementById('user-email').value = data.reg.email;
+        if (data.reg.address) document.getElementById('user-address').value = data.reg.address;
+        if (data.reg.age) document.getElementById('user-age').value = data.reg.age;
+        if (data.reg.occupation) document.getElementById('user-occupation').value = data.reg.occupation;
+        if (data.reg.gender) document.getElementById('user-gender').value = data.reg.gender;
+      }
+      if (data.scales) {
+        Object.entries(data.scales).forEach(([id, val]) => {
+          const q = document.querySelector(`.question[data-id="${id}"]`);
+          if (q) {
+            const btn = q.querySelector(`.scale-btn[data-value="${val}"]`);
+            if (btn) btn.classList.add('active');
+          }
+        });
+      }
+      if (data.texts) {
+        Object.entries(data.texts).forEach(([id, val]) => {
+          const q = document.querySelector(`.question[data-id="${id}"]`);
+          if (q) {
+            const ta = q.querySelector('textarea');
+            if (ta) ta.value = val;
+          }
+        });
+      }
+    } catch (e) { /* ignore */ }
+  }
+
+  // Save on every change
+  document.querySelectorAll('textarea, input, select').forEach(el => {
+    el.addEventListener('input', saveDraft);
+    el.addEventListener('change', saveDraft);
+  });
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('scale-btn')) setTimeout(saveDraft, 50);
+  });
+
+  // Restore on load
+  restoreDraft();
+
+  function showSuccess() {
+    document.getElementById('success-msg').classList.add('visible');
+    localStorage.removeItem(DRAFT_KEY);
+  }
 </script>
 
 </body>
