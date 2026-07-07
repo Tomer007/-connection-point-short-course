@@ -618,60 +618,55 @@
     .instagram-reels-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 18px;
     }
 
     .instagram-reel {
       position: relative;
-      aspect-ratio: 9/16;
-      border-radius: 14px;
+      border-radius: 12px;
       overflow: hidden;
       text-decoration: none;
-      color: #fff;
-      display: block;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border: 1px solid var(--border);
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .instagram-reel:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 20px rgba(45, 41, 38, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(45, 41, 38, 0.15);
     }
 
     .instagram-reel-img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1;
       object-fit: cover;
       display: block;
     }
 
     .instagram-reel-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 12px 10px;
-      background: linear-gradient(to top, rgba(45, 41, 38, 0.85) 0%, transparent 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      padding: 8px 10px;
+      text-align: center;
     }
 
     .instagram-reel-label {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 600;
+      color: var(--text-light);
       line-height: 1.3;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
     }
 
     .instagram-reel-play {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 28px;
-      height: 28px;
-      background: rgba(255,255,255,0.2);
+      transform: translate(-50%, -60%);
+      width: 30px;
+      height: 30px;
+      background: rgba(122, 92, 71, 0.6);
       backdrop-filter: blur(4px);
       border-radius: 50%;
       display: flex;
