@@ -365,7 +365,6 @@
       group.appendChild(btn);
     }
     group.innerHTML += '<span class="scale-label">תמיד</span>';
-    // Re-bind after innerHTML change
     group.querySelectorAll('.scale-btn').forEach(btn => {
       btn.onclick = function() {
         group.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('active'));
@@ -374,41 +373,83 @@
     });
   });
 
-  function collectAnswers() {
-    const answers = [];
+  // Collect all questions with their section context
+  function collectAllAnswers() {
     const name = document.getElementById('user-name').value.trim();
+    const sections = [];
 
-    document.querySelectorAll('.question').forEach(q => {
-      const label = q.querySelector('label').textContent.trim();
-      const type = q.dataset.type;
-      let value = '';
+    document.querySelectorAll('.section-title').forEach(titleEl => {
+      const sectionName = titleEl.textContent.trim();
+      const card = titleEl.nextElementSibling;
+      if (!card || !card.classList.contains('section-card')) return;
 
-      if (type === 'scale') {
-        const active = q.querySelector('.scale-btn.active');
-        if (active) value = active.dataset.value;
-      } else {
-        value = q.querySelector('textarea').value.trim();
-      }
+      const questions = [];
+      card.querySelectorAll('.question').forEach(q => {
+        const label = q.querySelector('label').textContent.trim();
+        const type = q.dataset.type;
+        let value = '';
 
-      if (value) {
-        answers.push({ label, value });
-      }
+        if (type === 'scale') {
+          const active = q.querySelector('.scale-btn.active');
+          if (active) value = active.dataset.value + ' / 5';
+        } else {
+          value = q.querySelector('textarea').value.trim();
+        }
+
+        questions.push({ label, value: value || '—' });
+      });
+
+      sections.push({ name: sectionName, questions });
     });
 
-    return { name, answers };
+    return { name, sections };
+  }
+
+  function hasAnyAnswer() {
+    let found = false;
+    document.querySelectorAll('.question').forEach(q => {
+      if (q.dataset.type === 'scale') {
+        if (q.querySelector('.scale-btn.active')) found = true;
+      } else {
+        if (q.querySelector('textarea').value.trim()) found = true;
+      }
+    });
+    return found;
   }
 
   function buildMessage() {
-    const { name, answers } = collectAnswers();
-    if (answers.length === 0) return null;
+    if (!hasAnyAnswer()) return null;
+    const { name, sections } = collectAllAnswers();
 
-    let msg = 'שאלון היכרות — נקודת חיבור\n';
-    if (name) msg += 'שם: ' + name + '\n';
-    msg += '─────────────────────\n\n';
+    let msg = '';
+    msg += '╔══════════════════════════════════╗\n';
+    msg += '║   שאלון היכרות · נקודת חיבור    ║\n';
+    msg += '║   גוף · רגש · תודעה · אנרגיה   ║\n';
+    msg += '╚══════════════════════════════════╝\n\n';
 
-    answers.forEach(a => {
-      msg += a.label + '\n' + a.value + '\n\n';
+    if (name) {
+      msg += '👤 שם: ' + name + '\n';
+      msg += '📅 תאריך: ' + new Date().toLocaleDateString('he-IL') + '\n';
+      msg += '\n';
+    }
+
+    sections.forEach(section => {
+      msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+      msg += '📌 ' + section.name + '\n';
+      msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n';
+
+      section.questions.forEach(q => {
+        msg += '❓ ' + q.label + '\n';
+        msg += '💬 ' + q.value + '\n\n';
+      });
     });
+
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
+    msg += '🔒 המידע נשמר בסודיות מלאה ומשמש\n';
+    msg += '   אך ורק להכנה לפגישה הראשונה.\n\n';
+    msg += '   נקודת חיבור · אנה ויעל\n';
+    msg += '   annayael.com | @anna_and_yael\n';
+    msg += '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n';
 
     return msg;
   }
@@ -420,7 +461,10 @@
     hideError();
     const msg = buildMessage();
     if (!msg) { showError(); return; }
-    const subject = encodeURIComponent('שאלון היכרות — נקודת חיבור');
+
+    const { name } = collectAllAnswers();
+    const subjectText = 'שאלון היכרות' + (name ? ' — ' + name : '') + ' · נקודת חיבור';
+    const subject = encodeURIComponent(subjectText);
     const body = encodeURIComponent(msg);
     window.location.href = 'mailto:info@nkhibur.com?subject=' + subject + '&body=' + body;
   }
