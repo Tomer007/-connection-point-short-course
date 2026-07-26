@@ -107,6 +107,24 @@ export default function Home({ onStart, hasProgress, completed = [], onLogout })
           </div>
         </section>
 
+        {/* Internal tools */}
+        <div className="home-tools">
+          <a href="/board-weekly-meeting.html" target="_blank" rel="noopener noreferrer" className="home-tool-link">
+            <span className="home-tool-icon">📋</span>
+            <span className="home-tool-text">
+              <strong>לוח ניהול שבועי</strong>
+              <span>תבנית ישיבת יום ראשון</span>
+            </span>
+          </a>
+          <a href="/board-weekly-meeting.html#section-7" target="_blank" rel="noopener noreferrer" className="home-tool-link">
+            <span className="home-tool-icon">📝</span>
+            <span className="home-tool-text">
+              <strong>סיכום ישיבה</strong>
+              <span>ייצוא ושיתוף</span>
+            </span>
+          </a>
+        </div>
+
         <nav className="footer-legal">
           <a href="/legal/terms">תנאי שימוש</a>
           <a href="/legal/privacy">פרטיות</a>
