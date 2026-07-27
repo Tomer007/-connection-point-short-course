@@ -2144,51 +2144,6 @@ textarea:focus {
 .footer-socials a:hover {
   color: var(--plum);
 }
-/* Internal tools links on home screen */
-.home-tools {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-  animation: heroFadeIn 0.8s ease-out 1.1s both;
-}
-.home-tool-link {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 16px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: var(--ink);
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-  min-width: 170px;
-}
-.home-tool-link:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(58, 43, 60, 0.09);
-  border-color: var(--plum);
-}
-.home-tool-icon {
-  font-size: 1.2rem;
-  flex-shrink: 0;
-}
-.home-tool-text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-.home-tool-text strong {
-  font-size: 0.85rem;
-  color: var(--plum);
-  font-weight: 600;
-}
-.home-tool-text span {
-  font-size: 0.75rem;
-  color: var(--muted);
-}
 
 .footer-legal {
   display: flex;
