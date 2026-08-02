@@ -1000,6 +1000,44 @@
   </style>
 </head>
 <body>
+
+  <!-- Login overlay -->
+  <div id="login-overlay" style="
+    display:none;
+    position:fixed;inset:0;z-index:9999;
+    background:rgba(26,34,68,0.55);
+    backdrop-filter:blur(6px);
+    align-items:center;justify-content:center;
+  ">
+    <div style="
+      background:#fefcf8;border-radius:20px;padding:40px 36px;
+      box-shadow:0 24px 64px rgba(26,34,68,.22);
+      width:100%;max-width:360px;text-align:center;
+    ">
+      <img src="/brand/icon-brown.png" alt="" style="width:52px;margin-bottom:16px">
+      <div style="font-size:1.15rem;font-weight:700;color:#4a3b30;margin-bottom:4px">לוח ניהול שבועי</div>
+      <div style="font-size:0.82rem;color:#72685f;margin-bottom:24px">נקודת חיבור · כניסה פנימית</div>
+      <input id="login-user" type="text" placeholder="שם משתמש" autocomplete="username" style="
+        width:100%;padding:11px 14px;border:1.5px solid #e0d9cf;border-radius:10px;
+        font-size:0.95rem;font-family:inherit;margin-bottom:10px;
+        background:#fff;color:#4a3b30;direction:ltr;text-align:right;
+        outline:none;transition:border-color .15s;
+      ">
+      <input id="login-pass" type="password" placeholder="סיסמה" autocomplete="current-password" style="
+        width:100%;padding:11px 14px;border:1.5px solid #e0d9cf;border-radius:10px;
+        font-size:0.95rem;font-family:inherit;margin-bottom:16px;
+        background:#fff;color:#4a3b30;direction:ltr;text-align:right;
+        outline:none;transition:border-color .15s;
+      ">
+      <div id="login-err" style="font-size:0.82rem;color:#9e4848;min-height:18px;margin-bottom:10px"></div>
+      <button id="login-btn" type="button" style="
+        width:100%;padding:12px;background:#4a3b30;color:#fff;
+        border:none;border-radius:10px;font-size:0.95rem;font-weight:600;
+        font-family:inherit;cursor:pointer;transition:background .15s;
+      ">כניסה</button>
+    </div>
+  </div>
+
   <div class="shell">
     <header class="topbar">
       <div class="brand-lockup">
@@ -2444,6 +2482,46 @@
       }
       window.addEventListener("scroll", updateActive, { passive: true });
       updateActive();
+    })();
+  </script>
+
+  <script>
+    // Simple login guard — credentials stored in sessionStorage so re-opening tab asks again
+    (function() {
+      const USERS = { anna: 'yael' };
+      const KEY = 'board_auth';
+      const overlay = document.getElementById('login-overlay');
+      const userInput = document.getElementById('login-user');
+      const passInput = document.getElementById('login-pass');
+      const errEl    = document.getElementById('login-err');
+      const btn      = document.getElementById('login-btn');
+
+      function isAuthed() { return sessionStorage.getItem(KEY) === '1'; }
+
+      function show() {
+        overlay.style.display = 'flex';
+        setTimeout(() => userInput.focus(), 50);
+      }
+
+      function attempt() {
+        const u = userInput.value.trim().toLowerCase();
+        const p = passInput.value;
+        if (USERS[u] && USERS[u] === p) {
+          sessionStorage.setItem(KEY, '1');
+          overlay.style.display = 'none';
+        } else {
+          errEl.textContent = 'שם משתמש או סיסמה שגויים';
+          passInput.value = '';
+          passInput.focus();
+        }
+      }
+
+      if (!isAuthed()) show();
+
+      btn.addEventListener('click', attempt);
+      [userInput, passInput].forEach(el =>
+        el.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); })
+      );
     })();
   </script>
 </body>
