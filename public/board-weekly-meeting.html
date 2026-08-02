@@ -925,6 +925,8 @@
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
           שמירת ישיבה
         </button>
+        <span id="save-status" class="screen-only" style="font-size:11px;color:var(--muted);white-space:nowrap"></span>
+        <input type="file" id="import-file" accept=".json" style="display:none" aria-label="ייבוא JSON">
       </div>
     </header>
 
@@ -1581,21 +1583,21 @@
         // Also save to server (fire-and-forget)
         apiSaveMeeting(state).then(ok => {
           if (ok) {
-            $("#save-status").textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
+            const el = $("#save-status"); if (el) el.textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
           }
         });
-        $("#save-status").textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
+        const ss = $("#save-status"); if (ss) ss.textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
         if (!silent) toast("הנתונים נשמרו");
         return true;
       } catch {
-        $("#save-status").textContent = "שמירה מקומית אינה זמינה";
+        const ss = $("#save-status"); if (ss) ss.textContent = "שמירה מקומית אינה זמינה";
         if (!silent) toast("לא ניתן לשמור בדפדפן. אפשר לייצא JSON.");
         return false;
       }
     }
 
     function queueSave() {
-      $("#save-status").textContent = "שומר...";
+      const ss = $("#save-status"); if (ss) ss.textContent = "שומר...";
       clearTimeout(saveTimer);
       saveTimer = setTimeout(() => saveLocal(true), 220);
     }
