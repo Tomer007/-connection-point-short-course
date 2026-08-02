@@ -1696,6 +1696,14 @@
       ).join("");
     }
 
+    const MEMBERS = ["","אנה","יעל","עינב","תומר"];
+
+    function ownerOptions(selected) {
+      return MEMBERS.map(value =>
+        `<option value="${value}" ${value === selected ? "selected" : ""}>${value || "— בחר —"}</option>`
+      ).join("");
+    }
+
     function priorityOptions(selected) {
       return ["גבוהה","בינונית","נמוכה"].map(value =>
         `<option value="${value}" ${value === selected ? "selected" : ""}>${value}</option>`
@@ -1717,7 +1725,7 @@
               <span class="progress-number">${number(row.progress)}%</span>
             </div>
           </td>
-          <td><input type="text" value="${escapeHtml(row.owner)}" data-field="owner" placeholder="שם"></td>
+          <td><select data-field="owner">${ownerOptions(row.owner)}</select></td>
           <td><input type="text" value="${escapeHtml(row.update)}" data-field="update" placeholder="מה השתנה?"></td>
           <td><input type="text" value="${escapeHtml(row.blocker)}" data-field="blocker" placeholder="אם יש"></td>
           <td></td>
@@ -1753,7 +1761,7 @@
         `<tr data-row-type="weekReview" data-index="${index}" class="${row.done ? "done-row" : "not-done-row"}">
           <td><input type="checkbox" data-field="done" ${row.done ? "checked" : ""} aria-label="בוצע"></td>
           <td><input type="text" data-field="activity" value="${escapeHtml(row.activity)}" placeholder="שם הפעילות"></td>
-          <td><input type="text" data-field="owner" value="${escapeHtml(row.owner)}" placeholder="אחראי"></td>
+          <td><select data-field="owner">${ownerOptions(row.owner)}</select></td>
           <td><input type="text" data-field="output" value="${escapeHtml(row.output)}" placeholder="תוצאה קונקרטית"></td>
           <td><input type="text" data-field="learning" value="${escapeHtml(row.learning)}" placeholder="מה למדנו ומה הלאה?"></td>
           <td><button class="btn icon-btn danger screen-only" type="button" data-remove="weekReview" data-index="${index}" aria-label="מחיקה">×</button></td>
@@ -1803,6 +1811,9 @@
       $(target).innerHTML = rows.length ? rows.map((row, index) => {
         const cells = fields.map(field => {
           const type = field.type || "text";
+          if (type === "owner") {
+            return `<td><select data-field="${field.key}">${ownerOptions(row[field.key])}</select></td>`;
+          }
           return `<td><input type="${type}" data-field="${field.key}" value="${escapeHtml(row[field.key])}" placeholder="${field.placeholder || ""}"></td>`;
         }).join("");
         return `<tr data-row-type="${key}" data-index="${index}">${cells}<td><button class="btn icon-btn danger screen-only" type="button" data-remove="${key}" data-index="${index}" aria-label="מחיקה">×</button></td></tr>`;
@@ -1814,7 +1825,7 @@
         `<tr data-row-type="tasks" data-index="${index}">
           <td><input type="checkbox" data-field="done" ${row.done ? "checked" : ""} aria-label="בוצע"></td>
           <td><input type="text" data-field="result" value="${escapeHtml(row.result)}" placeholder="תוצאה ברורה"></td>
-          <td><input type="text" data-field="owner" value="${escapeHtml(row.owner)}" placeholder="שם"></td>
+          <td><select data-field="owner">${ownerOptions(row.owner)}</select></td>
           <td><input type="date" data-field="due" value="${escapeHtml(row.due)}"></td>
           <td><select data-field="priority">${priorityOptions(row.priority)}</select></td>
           <td><input type="text" data-field="blocker" value="${escapeHtml(row.blocker)}" placeholder="אם יש"></td>
@@ -1909,12 +1920,12 @@
       renderKpis();
       renderSimpleTable("decisions", "#decision-body", [
         { key:"decision", placeholder:"מה החלטנו?" },
-        { key:"owner", placeholder:"שם" },
+        { key:"owner", type:"owner" },
         { key:"effective", type:"date" }
       ], "עדיין לא הוזנו החלטות");
       renderSimpleTable("openLoops", "#open-loop-body", [
         { key:"topic", placeholder:"מה עדיין פתוח?" },
-        { key:"owner", placeholder:"שם" },
+        { key:"owner", type:"owner" },
         { key:"due", type:"date" }
       ], "אין נושאים פתוחים");
       renderTasks();
