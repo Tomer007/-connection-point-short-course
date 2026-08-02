@@ -1920,8 +1920,13 @@
       const list = $("#history-list");
       list.innerHTML = '<div class="empty">טוען...</div>';
 
-      // Try server first
-      const serverMeetings = await apiListMeetings();
+      let serverMeetings;
+      try {
+        serverMeetings = await apiListMeetings();
+      } catch(e) {
+        list.innerHTML = `<div class="empty">שגיאה: ${e.message}</div>`;
+        return;
+      }
 
       if (serverMeetings === null) {
         // Server unreachable — fall back to localStorage
@@ -1951,19 +1956,24 @@
         return;
       }
 
-      list.innerHTML = serverMeetings.map((item) =>
-        `<div class="history-item">
-          <div>
-            <strong>ישיבה ${shortDate(item.date)}</strong>
-            <div class="history-meta">נשמרה ${new Intl.DateTimeFormat("he-IL", { dateStyle:"short", timeStyle:"short" }).format(new Date(item.savedAt))}</div>
-          </div>
-          <div class="action-row" style="margin:0">
-            <button class="btn small" type="button" data-load-server="${item.date}">פתיחה</button>
-            <button class="btn small" type="button" data-load-review="${item.date}">טען שבוע שעבר</button>
-            <button class="btn small danger" type="button" data-delete-server="${item.date}">מחיקה</button>
-          </div>
-        </div>`
-      ).join("");
+      try {
+        list.innerHTML = serverMeetings.map((item) =>
+          `<div class="history-item">
+            <div>
+              <strong>ישיבה ${shortDate(item.date)}</strong>
+              <div class="history-meta">נשמרה ${new Intl.DateTimeFormat("he-IL", { dateStyle:"short", timeStyle:"short" }).format(new Date(item.savedAt))}</div>
+            </div>
+            <div class="action-row" style="margin:0">
+              <button class="btn small" type="button" data-load-server="${item.date}">פתיחה</button>
+              <button class="btn small" type="button" data-load-review="${item.date}">טען שבוע שעבר</button>
+              <button class="btn small danger" type="button" data-delete-server="${item.date}">מחיקה</button>
+            </div>
+          </div>`
+        ).join("");
+      } catch(e) {
+        list.innerHTML = `<div class="empty">שגיאת רינדור: ${e.message}</div>`;
+        return;
+      }
 
       list.querySelectorAll("[data-load-server]").forEach(btn => {
         btn.addEventListener("click", async () => {
