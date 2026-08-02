@@ -1434,22 +1434,30 @@
       } catch { return false; }
     }
 
-    // Load tasks from the most recent saved meeting into weekReview
+    // Load tasks/decisions from the most recent saved meeting into weekReview
+    // NOTE: must be called after $ and id helpers are defined
     async function loadLastMeetingReview() {
       const meetings = await apiListMeetings();
       if (!meetings || !meetings.length) return false;
-      // Sort descending and skip the current meeting date
-      const past = meetings
-        .filter(m => m.date < state.meta.date)
-        .sort((a, b) => b.date.localeCompare(a.date));
-      const target = past[0] || meetings.sort((a, b) => b.date.localeCompare(a.date))[0];
+      // Sort descending, pick most recent past meeting (or any if none past)
+      const sorted = [...meetings].sort((a, b) => b.date.localeCompare(a.date));
+      const past = sorted.filter(m => m.date < state.meta.date);
+      const target = past[0] || sorted[0];
       if (!target) return false;
       const meeting = await apiLoadMeeting(target.date);
       if (!meeting) return false;
-      const tasks = meeting.tasks || [];
-      if (!tasks.length) return false;
-      state.weekReview = tasks.map(t => ({
-        id: id(), activity: t.result || "", done: false, owner: t.owner || "", output: "", learning: ""
+      // Prefer tasks, fall back to decisions
+      const tasks = (meeting.tasks || []).filter(t => t.result?.trim());
+      const decisions = (meeting.decisions || []).filter(d => d.decision?.trim());
+      const source = tasks.length ? tasks : decisions;
+      if (!source.length) return false;
+      state.weekReview = source.map(t => ({
+        id: `${Date.now().toString(36)}-${Math.random().toString(36).slice(2,8)}`,
+        activity: t.result || t.decision || "",
+        done: false,
+        owner: t.owner || "",
+        output: "",
+        learning: ""
       }));
       return target.date;
     }
