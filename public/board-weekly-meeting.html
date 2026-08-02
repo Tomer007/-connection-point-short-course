@@ -874,7 +874,7 @@
     ">
       <img src="/brand/icon-brown.png" alt="" style="width:52px;margin-bottom:16px">
       <div style="font-size:1.15rem;font-weight:700;color:#4a3b30;margin-bottom:4px">לוח ניהול שבועי</div>
-      <div style="font-size:0.82rem;color:#72685f;margin-bottom:24px">נקודת חיבור · כניסה פנימית</div>
+      <div style="font-size:0.82rem;color:#72685f;margin-bottom:24px">anna / tomer / yael / einav · סיסמה: yael</div>
       <input id="login-user" type="text" placeholder="שם משתמש" autocomplete="username" style="
         width:100%;padding:11px 14px;border:1.5px solid #e0d9cf;border-radius:10px;
         font-size:0.95rem;font-family:inherit;margin-bottom:10px;
@@ -900,7 +900,7 @@
     <header class="topbar">
       <div class="brand-lockup">
         <a href="/hub.html">
-          <img src="/brand/logo-brown.png" alt="נקודת חיבור" style="height:34px;width:auto;display:block;">
+          <img src="/brand/logo-brown.png" alt="נקודת חיבור" style="height:42px;width:auto;display:block;">
         </a>
       </div>
       <nav class="nav" aria-label="ניווט בלוח">
@@ -931,7 +931,7 @@
     <main>
       <section class="hero" aria-labelledby="page-title">
         <div>
-          <img src="/brand/logo-white.png" alt="נקודת חיבור" style="height:36px;width:auto;margin-bottom:14px;display:block;opacity:.92;">
+          <img src="/brand/logo-white.png" alt="נקודת חיבור" style="height:56px;width:auto;margin-bottom:14px;display:block;opacity:.92;">
           <p class="eyebrow">Sunday management board</p>
           <h1 id="page-title">ישיבת יום ראשון</h1>
           <p class="hero-copy">עוצרים, רואים את התמונה המלאה ומסכימים על השבוע הבא: התקדמות מול הגאנט, ביצוע פיננסי, פעילויות, מדדים והתחייבויות ברורות.</p>
@@ -1482,9 +1482,8 @@
     }
 
     function nextSunday() {
-      const date = new Date();
-      date.setHours(12,0,0,0);
-      return iso(date);
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     }
 
     function activityForWeek(weekIso) {
@@ -1538,7 +1537,8 @@
     }
 
     function normalizeState(raw) {
-      const base = createState(raw?.meta?.date || iso(new Date()));
+      const todayLocal = (() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; })();
+      const base = createState(raw?.meta?.date || todayLocal);
       const result = { ...base, ...(raw || {}) };
       result.meta = { ...base.meta, ...(raw?.meta || {}) };
       result.gantt = { ...base.gantt, ...(raw?.gantt || {}) };
@@ -1556,8 +1556,9 @@
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
         const loaded = raw ? normalizeState(JSON.parse(raw)) : createState();
-        // Always reset date to today on page load
-        loaded.meta.date = iso(new Date());
+        // Always reset date to today (local timezone) on page load
+        const now = new Date();
+        loaded.meta.date = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
         return loaded;
       } catch {
         return createState();
@@ -2541,7 +2542,7 @@
   <script>
     // Simple login guard — credentials stored in sessionStorage so re-opening tab asks again
     (function() {
-      const USERS = { anna: 'yael' };
+      const USERS = { anna: 'yael', tomer: 'yael', einav: 'yael', yael: 'yael' };
       const KEY = 'board_auth';
       const overlay = document.getElementById('login-overlay');
       const userInput = document.getElementById('login-user');
