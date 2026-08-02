@@ -2342,7 +2342,10 @@
       if (!action) return;
       const actions = {
         save: saveSnapshot,
-        history: async () => { await renderHistory(); $("#history-modal").classList.add("open"); },
+        history: () => {
+          $("#history-modal").classList.add("open");
+          renderHistory();
+        },
         "close-history": () => $("#history-modal").classList.remove("open"),
         print: () => window.print(),
         "add-review": () => addRow("weekReview"),
