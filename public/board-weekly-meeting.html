@@ -1555,7 +1555,10 @@
     function loadState() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? normalizeState(JSON.parse(raw)) : createState();
+        const loaded = raw ? normalizeState(JSON.parse(raw)) : createState();
+        // Always reset date to today on page load
+        loaded.meta.date = iso(new Date());
+        return loaded;
       } catch {
         return createState();
       }
@@ -2326,7 +2329,7 @@
       if (!action) return;
       const actions = {
         save: saveSnapshot,
-        history: () => { renderHistory(); $("#history-modal").classList.add("open"); },
+        history: async () => { await renderHistory(); $("#history-modal").classList.add("open"); },
         "close-history": () => $("#history-modal").classList.remove("open"),
         print: () => window.print(),
         "add-review": () => addRow("weekReview"),
@@ -2402,7 +2405,9 @@
     });
 
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape") $("#history-modal").classList.remove("open");
+      if (event.key === "Escape") {
+        document.querySelectorAll(".modal.open").forEach(m => m.classList.remove("open"));
+      }
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
         event.preventDefault();
         saveSnapshot();
