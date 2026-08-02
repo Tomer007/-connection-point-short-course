@@ -1084,10 +1084,6 @@
             משתתפים
             <input type="text" data-bind="meta.participants" placeholder="" value="אנה, יעל, עינב, תומר">
           </label>
-          <label class="wide">
-            מטרת הישיבה השבועית
-            <input type="text" data-bind="meta.objective" placeholder="מה חייב להיות ברור עד סוף הישיבה?">
-          </label>
         </div>
       </section>
 
@@ -1563,8 +1559,6 @@
     function nextSunday() {
       const date = new Date();
       date.setHours(12,0,0,0);
-      const delta = (7 - date.getDay()) % 7;
-      date.setDate(date.getDate() + delta);
       return iso(date);
     }
 
