@@ -2337,11 +2337,25 @@
         },
         "new-meeting": () => {
           if (!confirm("ליצור ישיבה חדשה? הטיוטה הנוכחית תישמר בהיסטוריה.")) return;
+          const prevTasks = state.tasks || [];
           if (!saveSnapshot()) return;
-          state = createState(addDays(state.meta.date, 7));
+          const newDate = addDays(state.meta.date, 7);
+          state = createState(newDate);
+          // Pre-fill section 2 (מה נעשה) from previous meeting's tasks
+          if (prevTasks.length) {
+            state.weekReview = prevTasks.map(t => ({
+              id: id(),
+              activity: t.result || "",
+              done: false,
+              owner: t.owner || "",
+              output: "",
+              learning: ""
+            }));
+          }
           saveLocal(true);
           renderAll();
           window.scrollTo({ top:0, behavior:"smooth" });
+          toast("ישיבה חדשה נפתחה — בדוק סטטוס משימות מהשבוע שעבר");
         },
         reset: () => {
           if (!confirm("לאפס את הטופס הנוכחי? היסטוריית הישיבות לא תימחק.")) return;
