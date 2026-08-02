@@ -1133,10 +1133,97 @@
         </div>
       </section>
 
+      <section class="section" id="commitments">
+        <div class="section-head">
+          <div>
+            <h2><span class="section-number">2</span>החלטות והתחייבויות</h2>
+            <p class="section-sub">כל החלטה צריכה בעלים. כל משימה צריכה תאריך יעד.</p>
+          </div>
+        </div>
+
+        <div class="decision-grid">
+          <div class="card">
+            <div class="section-head" style="margin-bottom:12px">
+              <div>
+                <h3>החלטות שהתקבלו</h3>
+                <p class="card-sub">החלטה, בעלים והמשמעות שלה.</p>
+              </div>
+              <button class="btn small screen-only" type="button" data-action="add-decision">הוספה</button>
+            </div>
+            <div class="table-wrap">
+              <table aria-label="החלטות">
+                <thead><tr><th>החלטה</th><th style="width:24%">אחראי יישום</th><th style="width:24%">תאריך יישום</th><th style="width:5%"></th></tr></thead>
+                <tbody id="decision-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="section-head" style="margin-bottom:12px">
+              <div>
+                <h3>נושאים פתוחים</h3>
+                <p class="card-sub">שאלה שעדיין דורשת בירור או החלטה.</p>
+              </div>
+              <button class="btn small screen-only" type="button" data-action="add-open-loop">הוספה</button>
+            </div>
+            <div class="table-wrap">
+              <table aria-label="נושאים פתוחים">
+                <thead><tr><th>נושא</th><th style="width:24%">בעלים</th><th style="width:24%">בדיקה עד</th><th style="width:5%"></th></tr></thead>
+                <tbody id="open-loop-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:16px">
+          <div class="section-head" style="margin-bottom:12px">
+            <div>
+              <h3>משימות לשבוע הקרוב</h3>
+              <p class="card-sub">מנסחים תוצאה ברורה, לא רק פעולה כללית.</p>
+            </div>
+            <button class="btn small screen-only" type="button" data-action="add-task">הוספת משימה</button>
+          </div>
+          <div class="table-wrap">
+            <table aria-label="משימות לשבוע הקרוב">
+              <colgroup>
+                <col style="width:7%">
+                <col style="width:28%">
+                <col style="width:14%">
+                <col style="width:13%">
+                <col style="width:15%">
+                <col style="width:20%">
+                <col style="width:3%">
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>בוצע</th>
+                  <th>תוצאה נדרשת</th>
+                  <th>אחראי</th>
+                  <th>תאריך יעד</th>
+                  <th>עדיפות</th>
+                  <th>תלות / חסם</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="task-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="grid two" style="margin-top:16px">
+          <label class="field">מה לא נעשה השבוע
+            <textarea data-bind="notes.notDoing" placeholder="בחירה מודעת במה לא להתמקד"></textarea>
+          </label>
+          <label class="field">מסר מרכזי לצוות / לקהילה
+            <textarea data-bind="notes.message" placeholder="מה חשוב שכולם ידעו השבוע?"></textarea>
+          </label>
+        </div>
+      </section>
+
       <section class="section" id="gantt">
         <div class="section-head">
           <div>
-            <h2><span class="section-number">2</span>התקדמות מול הגאנט</h2>
+            <h2><span class="section-number">3</span>התקדמות מול הגאנט</h2>
             <p class="section-sub">עוברים רק על שינוי, סיכון או פער. לחיצה כפולה על שורה — פתיחת פרטים.</p>
           </div>
         </div>
@@ -1186,7 +1273,7 @@
       <section class="section" id="activity">
         <div class="section-head">
           <div>
-            <h2><span class="section-number">3</span>מה נעשה בשבוע שעבר</h2>
+            <h2><span class="section-number">4</span>מה נעשה בשבוע שעבר</h2>
             <p class="section-sub">מסמנים ביצוע ומוסיפים תוצאה נראית לעין. לא מסתפקים ב-"עבדנו על".</p>
           </div>
           <button class="btn small screen-only" type="button" data-action="add-review">הוספת פעילות</button>
@@ -1219,7 +1306,7 @@
       <section class="section" id="finance">
         <div class="section-head">
           <div>
-            <h2><span class="section-number">4</span>הכנסות והוצאות</h2>
+            <h2><span class="section-number">5</span>הכנסות והוצאות</h2>
             <p class="section-sub">התוכנית היא נקודת ייחוס. הטבלה למטה מיועדת לתנועות שבוצעו בפועל.</p>
           </div>
           <button class="btn small screen-only" type="button" data-action="add-transaction">הוספת תנועה</button>
@@ -1302,7 +1389,7 @@
       <section class="section" id="kpi">
         <div class="section-head">
           <div>
-            <h2><span class="section-number">5</span>מדדי פעילות</h2>
+            <h2><span class="section-number">6</span>מדדי פעילות</h2>
             <p class="section-sub">היעדים שמופיעים מראש נלקחו מתוכנית יולי עד דצמבר. מדדים ללא יעד נשארו פתוחים בכוונה.</p>
           </div>
           <button class="btn small screen-only" type="button" data-action="add-kpi">הוספת מדד</button>
@@ -1331,93 +1418,6 @@
             </thead>
             <tbody id="kpi-body"></tbody>
           </table>
-        </div>
-      </section>
-
-      <section class="section" id="commitments">
-        <div class="section-head">
-          <div>
-            <h2><span class="section-number">6</span>החלטות והתחייבויות</h2>
-            <p class="section-sub">כל החלטה צריכה בעלים. כל משימה צריכה תאריך יעד.</p>
-          </div>
-        </div>
-
-        <div class="decision-grid">
-          <div class="card">
-            <div class="section-head" style="margin-bottom:12px">
-              <div>
-                <h3>החלטות שהתקבלו</h3>
-                <p class="card-sub">החלטה, בעלים והמשמעות שלה.</p>
-              </div>
-              <button class="btn small screen-only" type="button" data-action="add-decision">הוספה</button>
-            </div>
-            <div class="table-wrap">
-              <table aria-label="החלטות">
-                <thead><tr><th>החלטה</th><th style="width:24%">אחראי יישום</th><th style="width:24%">תאריך יישום</th><th style="width:5%"></th></tr></thead>
-                <tbody id="decision-body"></tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="section-head" style="margin-bottom:12px">
-              <div>
-                <h3>נושאים פתוחים</h3>
-                <p class="card-sub">שאלה שעדיין דורשת בירור או החלטה.</p>
-              </div>
-              <button class="btn small screen-only" type="button" data-action="add-open-loop">הוספה</button>
-            </div>
-            <div class="table-wrap">
-              <table aria-label="נושאים פתוחים">
-                <thead><tr><th>נושא</th><th style="width:24%">בעלים</th><th style="width:24%">בדיקה עד</th><th style="width:5%"></th></tr></thead>
-                <tbody id="open-loop-body"></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:16px">
-          <div class="section-head" style="margin-bottom:12px">
-            <div>
-              <h3>משימות לשבוע הקרוב</h3>
-              <p class="card-sub">מנסחים תוצאה ברורה, לא רק פעולה כללית.</p>
-            </div>
-            <button class="btn small screen-only" type="button" data-action="add-task">הוספת משימה</button>
-          </div>
-          <div class="table-wrap">
-            <table aria-label="משימות לשבוע הקרוב">
-              <colgroup>
-                <col style="width:7%">
-                <col style="width:28%">
-                <col style="width:14%">
-                <col style="width:13%">
-                <col style="width:15%">
-                <col style="width:20%">
-                <col style="width:3%">
-              </colgroup>
-              <thead>
-                <tr>
-                  <th>בוצע</th>
-                  <th>תוצאה נדרשת</th>
-                  <th>אחראי</th>
-                  <th>תאריך יעד</th>
-                  <th>עדיפות</th>
-                  <th>תלות / חסם</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="task-body"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="grid two" style="margin-top:16px">
-          <label class="field">מה לא נעשה השבוע
-            <textarea data-bind="notes.notDoing" placeholder="בחירה מודעת במה לא להתמקד"></textarea>
-          </label>
-          <label class="field">מסר מרכזי לצוות / לקהילה
-            <textarea data-bind="notes.message" placeholder="מה חשוב שכולם ידעו השבוע?"></textarea>
-          </label>
         </div>
       </section>
 
