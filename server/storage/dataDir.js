@@ -14,6 +14,10 @@ export function getUsersDir() {
   return path.join(DATA_DIR, 'users')
 }
 
+export function getMeetingsDir() {
+  return path.join(DATA_DIR, 'meetings')
+}
+
 export function getUserDir(userId) {
   const safe = sanitizeId(userId)
   return path.join(getUsersDir(), safe)
@@ -56,5 +60,6 @@ export function ensureDir(dirPath) {
 export function initDataDir() {
   ensureDir(DATA_DIR)
   ensureDir(getUsersDir())
+  ensureDir(getMeetingsDir())
   console.log(`Data directory initialized: ${DATA_DIR}`)
 }

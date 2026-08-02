@@ -1530,6 +1530,44 @@
     const STORAGE_KEY = "nekudat-hibur-weekly-board-v1";
     const HISTORY_KEY = "nekudat-hibur-weekly-history-v1";
     let saveTimer;
+
+    // ── Server API helpers ──────────────────────────────────
+    async function apiSaveMeeting(meetingState) {
+      const date = meetingState.meta?.date;
+      if (!date) return false;
+      try {
+        const res = await fetch(`/api/meetings/${date}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(meetingState)
+        });
+        return res.ok;
+      } catch { return false; }
+    }
+
+    async function apiListMeetings() {
+      try {
+        const res = await fetch('/api/meetings');
+        if (!res.ok) return null;
+        const data = await res.json();
+        return data.meetings || [];
+      } catch { return null; }
+    }
+
+    async function apiLoadMeeting(date) {
+      try {
+        const res = await fetch(`/api/meetings/${date}`);
+        if (!res.ok) return null;
+        return await res.json();
+      } catch { return null; }
+    }
+
+    async function apiDeleteMeeting(date) {
+      try {
+        const res = await fetch(`/api/meetings/${date}`, { method: 'DELETE' });
+        return res.ok;
+      } catch { return false; }
+    }
     let toastTimer;
 
     const $ = (selector, root = document) => root.querySelector(selector);
@@ -1653,8 +1691,14 @@
       state.updatedAt = new Date().toISOString();
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        // Also save to server (fire-and-forget)
+        apiSaveMeeting(state).then(ok => {
+          if (ok) {
+            $("#save-status").textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
+          }
+        });
         $("#save-status").textContent = `נשמר ${new Intl.DateTimeFormat("he-IL", { hour:"2-digit", minute:"2-digit" }).format(new Date())}`;
-        if (!silent) toast("הנתונים נשמרו בדפדפן");
+        if (!silent) toast("הנתונים נשמרו");
         return true;
       } catch {
         $("#save-status").textContent = "שמירה מקומית אינה זמינה";
@@ -1962,14 +2006,17 @@
 
     function saveSnapshot() {
       if (!saveLocal(false)) return false;
-      const history = getHistory();
       const snapshot = clone(state);
-      snapshot.snapshotId = id();
+      snapshot.snapshotId = snapshot.snapshotId || id();
       snapshot.savedAt = new Date().toISOString();
+      // Save to server as the primary store
+      apiSaveMeeting(snapshot);
+      // Also keep in localStorage history as fallback
+      const history = getHistory();
       history.unshift(snapshot);
       try {
         localStorage.setItem(HISTORY_KEY, JSON.stringify(history.slice(0, 40)));
-        toast("הישיבה נשמרה בהיסטוריה");
+        toast("הישיבה נשמרה");
         return true;
       } catch {
         toast("לא ניתן לשמור את היסטוריית הישיבות");
@@ -1982,9 +2029,52 @@
       catch { return []; }
     }
 
-    function renderHistory() {
+    async function renderHistory() {
+      const list = $("#history-list");
+      list.innerHTML = '<div class="empty">טוען...</div>';
+
+      // Try server first
+      const serverMeetings = await apiListMeetings();
+      if (serverMeetings && serverMeetings.length) {
+        list.innerHTML = serverMeetings.map((item, index) =>
+          `<div class="history-item">
+            <div>
+              <strong>ישיבה ${shortDate(item.date)}</strong>
+              <div class="history-meta">נשמרה ${new Intl.DateTimeFormat("he-IL", { dateStyle:"short", timeStyle:"short" }).format(new Date(item.savedAt))}</div>
+            </div>
+            <div class="action-row" style="margin:0">
+              <button class="btn small" type="button" data-load-server="${item.date}">פתיחה</button>
+              <button class="btn small danger" type="button" data-delete-server="${item.date}">מחיקה</button>
+            </div>
+          </div>`
+        ).join("");
+        // Attach server load/delete handlers
+        list.querySelectorAll("[data-load-server]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            const date = btn.dataset.loadServer;
+            const meeting = await apiLoadMeeting(date);
+            if (!meeting) { toast("לא ניתן לטעון את הישיבה"); return; }
+            state = normalizeState(meeting);
+            saveLocal(true);
+            renderAll();
+            $("#history-modal").classList.remove("open");
+            toast(`ישיבה מ-${shortDate(date)} נטענה`);
+          });
+        });
+        list.querySelectorAll("[data-delete-server]").forEach(btn => {
+          btn.addEventListener("click", async () => {
+            if (!confirm("למחוק ישיבה זו?")) return;
+            const date = btn.dataset.deleteServer;
+            await apiDeleteMeeting(date);
+            renderHistory();
+          });
+        });
+        return;
+      }
+
+      // Fallback: localStorage
       const history = getHistory();
-      $("#history-list").innerHTML = history.length ? history.map((item, index) =>
+      list.innerHTML = history.length ? history.map((item, index) =>
         `<div class="history-item">
           <div>
             <strong>ישיבה ${shortDate(item.meta?.date)}</strong>

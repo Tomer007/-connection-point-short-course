@@ -5,10 +5,11 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 import path from 'path'
+import fs from 'fs'
 import { fileURLToPath } from 'url'
 
-import { initDataDir, getUsersDir, getUserDir, sanitizeId } from './storage/dataDir.js'
-import { readJson, writeJson, listSubdirs } from './storage/jsonStore.js'
+import { initDataDir, getUsersDir, getUserDir, sanitizeId, getMeetingsDir } from './storage/dataDir.js'
+import { readJson, writeJson, listSubdirs, listFiles } from './storage/jsonStore.js'
 import { userStore, courseStatusStore, contentStore, activityLogStore } from './storage/index.js'
 
 dotenv.config()
@@ -535,6 +536,77 @@ app.get('/api/admin/metrics', requireAdmin, (req, res) => {
     })
   } catch (err) {
     console.error('Admin metrics error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+// ─────────────────────────────────────────────────────────────
+// Board Meetings API — one JSON file per meeting date
+// GET  /api/meetings         → list of { date, savedAt, snapshotId }
+// GET  /api/meetings/:date   → full meeting JSON
+// PUT  /api/meetings/:date   → save/overwrite meeting JSON
+// DELETE /api/meetings/:date → delete a meeting
+// ─────────────────────────────────────────────────────────────
+
+app.get('/api/meetings', (req, res) => {
+  try {
+    const dir = getMeetingsDir()
+    const files = listFiles(dir).filter(f => f.endsWith('.json'))
+    const list = files.map(f => {
+      const data = readJson(path.join(dir, f))
+      if (!data) return null
+      return {
+        date: data.meta?.date || f.replace('.json', ''),
+        savedAt: data.savedAt,
+        snapshotId: data.snapshotId,
+      }
+    }).filter(Boolean).sort((a, b) => (b.date > a.date ? 1 : -1))
+    res.json({ meetings: list })
+  } catch (err) {
+    console.error('Meetings list error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+app.get('/api/meetings/:date', (req, res) => {
+  try {
+    const date = req.params.date.replace(/[^0-9-]/g, '').slice(0, 10)
+    const filePath = path.join(getMeetingsDir(), `${date}.json`)
+    const data = readJson(filePath)
+    if (!data) return res.status(404).json({ error: 'Meeting not found' })
+    res.json(data)
+  } catch (err) {
+    console.error('Meeting get error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+app.put('/api/meetings/:date', (req, res) => {
+  try {
+    const date = req.params.date.replace(/[^0-9-]/g, '').slice(0, 10)
+    if (!date || date.length < 8) return res.status(400).json({ error: 'Invalid date' })
+    const meetingData = req.body
+    if (!meetingData || typeof meetingData !== 'object') return res.status(400).json({ error: 'Invalid body' })
+    meetingData.savedAt = new Date().toISOString()
+    const filePath = path.join(getMeetingsDir(), `${date}.json`)
+    const ok = writeJson(filePath, meetingData)
+    if (!ok) return res.status(500).json({ error: 'Write failed' })
+    res.json({ success: true, date, savedAt: meetingData.savedAt })
+  } catch (err) {
+    console.error('Meeting save error:', err)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+})
+
+app.delete('/api/meetings/:date', (req, res) => {
+  try {
+    const date = req.params.date.replace(/[^0-9-]/g, '').slice(0, 10)
+    const filePath = path.join(getMeetingsDir(), `${date}.json`)
+    if (!fs.existsSync(filePath)) return res.status(404).json({ error: 'Meeting not found' })
+    fs.unlinkSync(filePath)
+    res.json({ success: true })
+  } catch (err) {
+    console.error('Meeting delete error:', err)
     res.status(500).json({ error: 'Internal server error' })
   }
 })
