@@ -942,7 +942,7 @@
           </label>
           <label>
             משתתפים
-            <input type="text" data-bind="meta.participants" placeholder="" value="אנה, יעל, עינב, תומר">
+            <input type="text" data-bind="meta.participants" placeholder="אנה, יעל, עינב, תומר">
           </label>
         </div>
       </section>
@@ -1511,7 +1511,7 @@
     }
 
     function normalizeState(raw) {
-      const base = createState(raw?.meta?.date || nextSunday());
+      const base = createState(raw?.meta?.date || iso(new Date()));
       const result = { ...base, ...(raw || {}) };
       result.meta = { ...base.meta, ...(raw?.meta || {}) };
       result.gantt = { ...base.gantt, ...(raw?.gantt || {}) };
