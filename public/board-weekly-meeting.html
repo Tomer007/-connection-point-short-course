@@ -297,26 +297,27 @@
     }
 
     .hero-meta {
-      align-self: stretch;
+      align-self: center;
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px 18px;
       border: 1px solid rgba(255,255,255,.12);
       border-radius: var(--radius-lg);
       background: rgba(255,255,255,.06);
       backdrop-filter: blur(10px);
+      min-width: 220px;
     }
 
     .hero-meta label {
       display: grid;
-      gap: 5px;
-      color: rgba(255,255,255,.55);
-      font-size: 10.5px;
+      gap: 4px;
+      color: rgba(255,255,255,.5);
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: .06em;
+      letter-spacing: .07em;
       text-transform: uppercase;
     }
 
@@ -324,14 +325,14 @@
 
     .hero-meta input, .hero-meta select {
       width: 100%;
-      min-height: 40px;
-      padding: 8px 11px;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 9px;
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 8px;
       color: var(--white);
       background: rgba(255,255,255,.08);
       outline: none;
-      font-size: 13.5px;
+      font-size: 13px;
       transition: border-color .15s, background .15s;
     }
 
@@ -999,7 +1000,13 @@
             <h2><span class="section-number">2</span>מה נעשה בשבוע שעבר</h2>
             <p class="section-sub">מסמנים ביצוע ומוסיפים תוצאה נראית לעין. לא מסתפקים ב-"עבדנו על".</p>
           </div>
-          <button class="btn small screen-only" type="button" data-action="add-review">הוספת פעילות</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn small screen-only" type="button" data-action="load-last-review" title="טען משימות מהישיבה הקודמת">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              טען ישיבה קודמת
+            </button>
+            <button class="btn small screen-only" type="button" data-action="add-review">הוספת פעילות</button>
+          </div>
         </div>
         <div class="table-wrap">
           <table aria-label="סקירת פעילויות השבוע הקודם">
@@ -1423,6 +1430,26 @@
         const res = await fetch(`/api/meetings/${date}`, { method: 'DELETE' });
         return res.ok;
       } catch { return false; }
+    }
+
+    // Load tasks from the most recent saved meeting into weekReview
+    async function loadLastMeetingReview() {
+      const meetings = await apiListMeetings();
+      if (!meetings || !meetings.length) return false;
+      // Sort descending and skip the current meeting date
+      const past = meetings
+        .filter(m => m.date < state.meta.date)
+        .sort((a, b) => b.date.localeCompare(a.date));
+      const target = past[0] || meetings.sort((a, b) => b.date.localeCompare(a.date))[0];
+      if (!target) return false;
+      const meeting = await apiLoadMeeting(target.date);
+      if (!meeting) return false;
+      const tasks = meeting.tasks || [];
+      if (!tasks.length) return false;
+      state.weekReview = tasks.map(t => ({
+        id: id(), activity: t.result || "", done: false, owner: t.owner || "", output: "", learning: ""
+      }));
+      return target.date;
     }
     let toastTimer;
 
@@ -2303,6 +2330,13 @@
         "close-history": () => $("#history-modal").classList.remove("open"),
         print: () => window.print(),
         "add-review": () => addRow("weekReview"),
+        "load-last-review": async () => {
+          const date = await loadLastMeetingReview();
+          if (!date) { toast("לא נמצאו משימות בישיבות קודמות"); return; }
+          saveLocal(true);
+          renderAll();
+          toast(`משימות מישיבה מ-${shortDate(date)} נטענו`);
+        },
         "add-transaction": () => addRow("transactions"),
         "add-kpi": () => addRow("kpis"),
         "add-decision": () => addRow("decisions"),
@@ -2377,6 +2411,13 @@
 
     renderAll();
     saveLocal(true);
+
+    // Auto-load last meeting's tasks into section 2 if it's empty on first load
+    if (!state.weekReview.length) {
+      loadLastMeetingReview().then(date => {
+        if (date) { renderAll(); toast(`משימות מישיבה מ-${shortDate(date)} נטענו אוטומטית`); }
+      });
+    }
 
     // ── Gantt detail modal ────────────────────────────────────────────────
     const ALL_WEEKS = (() => {
