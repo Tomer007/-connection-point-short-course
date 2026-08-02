@@ -1319,7 +1319,7 @@
             </div>
             <div class="table-wrap">
               <table aria-label="החלטות">
-                <thead><tr><th>החלטה</th><th style="width:24%">בעלים</th><th style="width:24%">בתוקף מ</th><th style="width:5%"></th></tr></thead>
+                <thead><tr><th>החלטה</th><th style="width:24%">אחראי יישום</th><th style="width:24%">תאריך יישום</th><th style="width:5%"></th></tr></thead>
                 <tbody id="decision-body"></tbody>
               </table>
             </div>
@@ -1901,7 +1901,7 @@
         weekReview: { id:id(), sourceId:"", activity:"", done:false, owner:"", output:"", learning:"" },
         transactions: { id:id(), date:addDays(state.meta.date, -1), type:"income", category:"", description:"", amount:"", note:"" },
         kpis: { id:id(), name:"", target:"", actual:"", weekly:"", trend:"ללא נתון", note:"" },
-        decisions: { id:id(), decision:"", owner:"", effective:state.meta.date },
+        decisions: { id:id(), decision:"", owner:"", effective:addDays(state.meta.date, 7) },
         openLoops: { id:id(), topic:"", owner:"", due:addDays(state.meta.date, 7) },
         tasks: { id:id(), done:false, result:"", owner:"", due:addDays(state.meta.date, 6), priority:"בינונית", blocker:"" }
       };
