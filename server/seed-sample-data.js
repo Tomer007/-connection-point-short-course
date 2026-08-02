@@ -5,10 +5,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import { initDataDir } from './storage/dataDir.js'
-import { userStore } from './storage/index.js'
-import { courseStatusStore } from './storage/index.js'
-import { contentStore } from './storage/index.js'
-import { activityLogStore } from './storage/index.js'
+import { userStore, courseStatusStore, contentStore, activityLogStore } from './storage/index.js'
 
 initDataDir()
 

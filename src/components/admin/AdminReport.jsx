@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { lessons } from '../../data/course.js'
 
 export default function AdminReport() {
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [copied, setCopied] = useState(false)
+
+  // Stable reference — computed once per mount, before any early return
+  const weekAgo = useMemo(() => new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(), [])
 
   useEffect(() => {
     Promise.all([
@@ -26,7 +29,6 @@ export default function AdminReport() {
   }
 
   const { metrics, users, coupons } = data
-  const totalLessons = lessons.length
 
   // Calculate per-lesson completion
   const lessonStats = lessons.map(lesson => {
@@ -50,8 +52,7 @@ export default function AdminReport() {
     return { ...ls, dropOff: Math.max(0, dropOff) }
   })
 
-  // Active users (last 7 days)
-  const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+  // Active users (last 7 days) — weekAgo computed above before early returns
   const activeThisWeek = users.filter(u => {
     const lastActivity = u.courseStatus?.updatedAt || u.profile?.lastLoginAt
     return lastActivity && lastActivity > weekAgo

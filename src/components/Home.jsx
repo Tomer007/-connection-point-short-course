@@ -14,28 +14,6 @@ const team = [
   },
 ]
 
-function ProgressRing({ completed }) {
-  const total = lessons.length
-  const done = completed.length
-  const size = 100
-  const strokeWidth = 8
-  const radius = (size - strokeWidth) / 2
-  const circumference = 2 * Math.PI * radius
-  const dashOffset = circumference * (1 - done / total)
-
-  return (
-    <div className="progress-ring" aria-label={`השלמת ${done} מתוך ${total} שיעורים`}>
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
-        <circle className="progress-ring-bg" cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="var(--line)" strokeWidth={strokeWidth} />
-        <circle className="progress-ring-fill" cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="var(--plum)" strokeWidth={strokeWidth} strokeLinecap="round" strokeDasharray={circumference} strokeDashoffset={dashOffset} transform={`rotate(-90 ${size / 2} ${size / 2})`} />
-      </svg>
-      <div className="progress-ring-text">
-        <span className="progress-ring-count">{done}/{total}</span>
-      </div>
-    </div>
-  )
-}
-
 export default function Home({ onStart, hasProgress, completed = [], onLogout }) {
   const [showSplash, setShowSplash] = useState(true)
   const [splashFading, setSplashFading] = useState(false)

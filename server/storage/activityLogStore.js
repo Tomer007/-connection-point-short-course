@@ -2,7 +2,6 @@
 // Compact format: short keys, no redundant userId, minimal fields per entry.
 
 import path from 'path'
-import crypto from 'crypto'
 import { getUserDir, ensureDir } from './dataDir.js'
 import { readJson, appendToJsonArray } from './jsonStore.js'
 

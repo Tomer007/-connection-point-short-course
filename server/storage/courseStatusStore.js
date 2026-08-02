@@ -32,7 +32,7 @@ export function createCourseStatus(userId) {
 
 export function updateCourseStatus(userId, updates) {
   const filePath = coursePath(userId)
-  let existing = readJson(filePath) || {}
+  const existing = readJson(filePath) || {}
   const merged = { ...existing, ...updates }
 
   // Clean up empty/default fields

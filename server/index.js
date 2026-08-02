@@ -180,7 +180,7 @@ app.get('/api/admin/coupons', requireAdmin, (req, res) => {
 // POST /api/users/sync — sync user profile, course status, and practice data
 app.post('/api/users/sync', (req, res) => {
   try {
-    const { userId, email, name, completed, practice, source } = req.body
+    const { userId, email, name, completed, practice: _practice, source } = req.body
 
     if (!userId) {
       return res.status(400).json({ error: 'userId is required' })
@@ -219,7 +219,7 @@ app.post('/api/users/sync', (req, res) => {
 app.post('/api/users/:userId/progress', (req, res) => {
   try {
     const { userId } = req.params
-    const { completed, currentPhase, practice } = req.body
+    const { completed, currentPhase, practice: _practice } = req.body
 
     let safeId
     try {
@@ -487,7 +487,7 @@ app.get('/api/admin/metrics', requireAdmin, (req, res) => {
     const userIds = listSubdirs(usersDir)
     const totalPhases = 6
 
-    let total = userIds.length
+    const total = userIds.length
     let active = 0
     let completed = 0
     let notStarted = 0
@@ -644,6 +644,6 @@ app.get('/{*splat}', (req, res) => {
 // Start server
 // ─────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`)
-  console.log(`Data directory: ${process.env.DATA_DIR || './data'}`)
+  console.warn(`Server running on http://localhost:${PORT}`)
+  console.warn(`Data directory: ${process.env.DATA_DIR || './data'}`)
 })
