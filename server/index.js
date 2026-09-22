@@ -619,9 +619,9 @@ app.delete('/api/meetings/:date', (req, res) => {
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const distPath = path.join(__dirname, '..', 'dist')
 
-// Redirect root to hub (must be before static middleware)
+// Redirect root to course (must be before static middleware)
 app.get('/', (req, res) => {
-  res.redirect('/hub.html')
+  res.redirect('/course')
 })
 
 // Course app lives at /course

@@ -51,8 +51,8 @@ export default function App() {
 }
 
 function CourseApp({ onLogout, email }) {
-  // מצב הניווט. ברירת מחדל: מסך פתיחה.
-  const [view, setView] = useState({ name: 'home' })
+  // מצב הניווט. ברירת מחדל: הקורס.
+  const [view, setView] = useState({ name: 'lesson', id: lessons[0]?.id || '' })
   const [menuOpen, setMenuOpen] = useState(false)
 
   // התקדמות ונתוני תרגול נשמרים ב-localStorage בלבד.
